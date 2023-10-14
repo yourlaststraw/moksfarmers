@@ -211,6 +211,28 @@ section #text {
 .sec ul li {
     margin: 2%;
 }
+
+/* Buy Page Styles */
+
+.cropPhoto{
+    width: 250px;
+    height: 200px;
+    float: left;
+}
+
+.button {
+    
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+    background-color: #4CAF50; /* Green */
+    border-top: 1px solid rgba(255, 255, 255, 0.5);
+    border-Left: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 15px;
+    box-shadow: 20px 20px 40px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(4px);
+    padding: 1em;
+    margin-bottom: 2%;
+  }
+
 /* Properties for mobile */
 @media screen and (max-width: 650px) {
 
@@ -273,3 +295,5 @@ section #text {
 
    
 }
+
+
