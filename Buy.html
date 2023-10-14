@@ -14,9 +14,11 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="animation.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body>
+<body id="buy">
     <!-- This is the header/ Nav Bar -->
     <header id="header">
         <a href="index.html" class="logo">Mok's Farmers</a>
@@ -30,10 +32,34 @@
 
     <div class = "sec" id="sec">
         
-            <h2>Buy Seeds<button style = "float:right;margin-top: 3%;" class = "button">Shopping Cart</button></h2>
-            Need Seeds? Buy from us and start farming today!
-        </p>
-        <div class = "glass">
+            <h2>Buy Seeds</h2>
+            <div style="z-index: 5;position:fixed; top: 13%;right:10%">
+                <button style="margin-bottom: 0;" id="miniCartButton" class = "button" onmouseover="refreshCart()">Shopping Cart</button>
+                <div id="miniCart" style = "right:0" class = "glass miniCart">
+                    I am a minicart
+                </div>
+            </div>
+            
+        
+        
+            <div style = "margin-bottom: 5%;">Need Seeds? Buy from us and become a farmer today!</div>
+
+            
+        <div style = "overflow: auto;" class = "glass">
+            <img class = "cropPhoto" src = "images/crops/tomato.webp">
+            <div>
+                <h3>Tomatoes</h3>
+                <div>Low maintainence, easy to grow crop that requires moderate non-direct sunlight</div>
+                <p>
+                    Seeds per packet: 15 <br>
+                    Price: $4.50  
+                    <button v-on:click = addItem("Tomatoes") style = "float: right;" class = "button">Add to Cart</button>  
+                </p>
+                
+            </div>
+
+        </div>
+        <div style = "overflow: auto;" class = "glass">
             <img class = "cropPhoto" src = "images/crops/tomato.webp">
             <div>
                 <h3>Tomato</h3>
@@ -42,10 +68,11 @@
                     Seeds per packet: 15 <br>
                     Price: $4.50    
                 </p>
+                <button  style = "float:right;" class = "button">Add to Cart</button>
             </div>
 
         </div>
-        <div class = "glass">
+        <div style = "overflow: auto;" class = "glass">
             <img class = "cropPhoto" src = "images/crops/tomato.webp">
             <div>
                 <h3>Tomato</h3>
@@ -54,10 +81,11 @@
                     Seeds per packet: 15 <br>
                     Price: $4.50    
                 </p>
+                <button style = "float:right;" class = "button">Add to Cart</button>
             </div>
 
         </div>
-        <div class = "glass">
+        <div style = "overflow: auto;" class = "glass">
             <img class = "cropPhoto" src = "images/crops/tomato.webp">
             <div>
                 <h3>Tomato</h3>
@@ -66,22 +94,50 @@
                     Seeds per packet: 15 <br>
                     Price: $4.50    
                 </p>
-            </div>
-
-        </div>
-        <div class = "glass">
-            <img class = "cropPhoto" src = "images/crops/tomato.webp">
-            <div>
-                <h3>Tomato</h3>
-                <div>Low maintainence, easy to grow crop that requires moderate non-direct sunlight</div>
-                <p>
-                    Seeds per packet: 15 <br>
-                    Price: $4.50    
-                </p>
+                <button style = "float:right;" class = "button">Add to Cart</button>
             </div>
 
         </div>
 
+
+
+        <script>
+            const app = Vue.createApp({
+                data() {
+                return {
+                    cart: {Tomatoes:1,
+                            Cucumbers: 2},
+                };
+                },
+                methods: {
+                addItem(item) {
+                    if (this.cart.hasOwnProperty(item)){
+                        this.cart[item] += 1
+                    }else{
+                        this.cart[item] = 1
+                    }
+                    return
+                },
+                removeItem() {
+                    return
+                }
+                },
+            }).mount("#buy");
+
+            function refreshCart(){
+                if (Object.keys(app.cart).length == 0){
+                    toUse = "Your cart is empty!"
+                }else{
+                    toUse = ""
+                    for (key in app.cart){
+                        toUse += key + ": " + app.cart[key] + "<br>"
+                    }
+                    
+                }
+                document.getElementById("miniCart").innerHTML = toUse
+            }
+        
+        </script>
 
 </body>
 </html>
