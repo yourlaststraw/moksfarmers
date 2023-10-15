@@ -236,9 +236,7 @@ section #text {
 
 .miniCart{
     background: brown;
-    position:absolute;
-    width:30vw;
-    opacity: 1;
+    position: absolute;
     display:none;
     
   }
@@ -247,6 +245,38 @@ section #text {
     display:flex;
     
 }
+
+.changeQtyBtn {
+      background-color: grey;
+      border-radius: 8px;
+      border-width: 0;
+      color: #333333;
+      cursor: pointer;
+      display: block;
+      font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 20px;
+      list-style: none;
+      margin: auto;
+      padding: 5% 10%;
+      /* text-align: left; */
+      transition: all 200ms;
+      white-space: nowrap;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: manipulation;
+}
+
+.myTable td{
+    display:flex;
+  flex-grow:1;
+  /* centering the button */
+  align-items:center;
+  justify-content:center;
+}
+
+
 /* Properties for mobile */
 @media screen and (max-width: 650px) {
 
