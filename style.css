@@ -103,7 +103,7 @@ section #text span {
     font-size: 0.2em;
     letter-spacing: 2px;
     font-weight: 400;
-    color: rgb(255, 236, 174);
+    color: black;
 }
 
 section #text {
@@ -134,7 +134,7 @@ section #text {
 }
 
 #explore:hover {
-    background: beige;
+    background:#002431 ;
     color: white;
 }
 
@@ -171,7 +171,7 @@ section #text {
 .sec {
     position: relative;
     padding: 10%;
-    background: beige;
+    background: #FFF9C1;
     padding-bottom: 15%;
     z-index: 50;
     overflow: hidden;
