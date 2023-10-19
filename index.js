@@ -30,7 +30,7 @@ function display_default() {
                                 <h5 class='title'>` + title + `</h5>
                                 <p class='description'>` + description + `</p>
                               </div>
-                              <a "href="` + url + `" target="_blank">Read more</a>
+                              <a "href="` + url + `" target="_blank" class='url'>Read more</a>
                             </div>
                           </div>`
             }
@@ -42,7 +42,7 @@ function display_default() {
                             <h5 class='title'>` + title + `</h5>
                             <p class='description'>` + description + `</p>
                             </div>
-                              <a href="` + url + `" target="_blank">Read more</a>
+                            <a "href="` + url + `" target="_blank" class='url'>Read more</a>
                             </div>
                           </div>`            
             }
