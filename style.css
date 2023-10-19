@@ -8,6 +8,15 @@
     font-family: 'Poppins', sans-serif;
     color: black;
 }
+.title-box{
+    background-color: #000000;
+    color: white;
+}
+
+.description{
+    background-color: #000000;
+    color: white;
+}
 
 html,
 body {
@@ -351,4 +360,37 @@ section #text {
    
 }
 
+
+/* MyGarden page styles */
+.tab {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    flex-wrap: wrap;
+    font-size: 1.3rem; 
+    font-weight: 500; 
+    text-align: center;
+    color: #718096; 
+  }
+ 
+.tabcontent {
+    display: inline-block;
+    padding: 1rem; 
+    color: #4faa2e;
+    border-top-left-radius: 0.5rem;
+}
+
+.tabcontent.active {
+    display: inline-block;
+    padding: 1rem; 
+    color: #4faa2e;
+    background-color: #f7fafc; 
+    border-top-left-radius: 0.5rem;
+    }
+
+.tabcontent:hover {
+    background-color: #1a202c; 
+    color: #4faa2e; 
+}
 
