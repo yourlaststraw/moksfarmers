@@ -238,6 +238,7 @@ section #text {
     background: brown;
     position: absolute;
     display:none;
+    max-width: 50vw;
     
   }
 
@@ -268,12 +269,22 @@ section #text {
       touch-action: manipulation;
 }
 
+
 .myTable td{
     display:flex;
   flex-grow:1;
   /* centering the button */
   align-items:center;
   justify-content:center;
+}
+
+.about{
+    position:absolute;
+    display:inline-block;
+}
+
+.cart-items{
+    display:inline;
 }
 
 
