@@ -26,9 +26,11 @@ function display_default() {
               content += `<div class="carousel-item active">
                             <img src="` + image + `" class="d-block w-100" alt="..." style="width:50%; height: auto;">
                             <div class="carousel-caption">
-                              <h5 class="title-box">` + title + `</h5>
-                              <p class ="description">` + description + `</p>
-                              <a href="` + url + `" target="_blank">Read more</a>
+                              <div class="title-box">
+                                <h5 class='title'>` + title + `</h5>
+                                <p class='description'>` + description + `</p>
+                              </div>
+                              <a "href="` + url + `" target="_blank">Read more</a>
                             </div>
                           </div>`
             }
@@ -36,8 +38,10 @@ function display_default() {
               content += `<div class="carousel-item">
                             <img src="` + image + `" class="d-block w-100" alt="...">
                             <div class="carousel-caption">
-                              <h5 class="title-box">` + title + `</h5>
-                               <p class ="description">` + description + `</p>
+                            <div class="title-box">
+                            <h5 class='title'>` + title + `</h5>
+                            <p class='description'>` + description + `</p>
+                            </div>
                               <a href="` + url + `" target="_blank">Read more</a>
                             </div>
                           </div>`            
