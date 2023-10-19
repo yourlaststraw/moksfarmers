@@ -8,44 +8,14 @@
     font-family: 'Poppins', sans-serif;
     color: black;
 }
-
-
 .title-box{
     backdrop-filter: blur(10px);
     color: white;
 }
 
-.url{
-    color: #002431;
-    background-color: white;
-    border-radius: 15%;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-}
-
 .description{
     color: white;
 }
-
-
-.icon-container {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    flex-wrap: wrap;
-}
-
-.icon-container img {
-    margin: 0 10px; /* Adjust as needed */
-    width: 250px;
-    height: 230px;
-}
-
 
 .title{
     font-size : 40px;
