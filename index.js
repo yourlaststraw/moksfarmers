@@ -1,58 +1,49 @@
 function display_default() {
-  console.log("===[START] display_default() ===");
-
-  const url =
-    "https://api.nytimes.com/svc/search/v2/articlesearch.json";
-  const query = "edible gardening";
-  const key = "yafiAAAqpFtXALxGbamgw5znq8hEAaW1";
-  const filter = 'news_desk:("Home")';
-
-  const params = {
-    q: query,
-    fq: filter,
-    "api-key": key,
+  // Axios Textbook declaration
+  let url = "https://newsapi.org/v2/everything"; // News API Basic Link. everything is their filter to find all sources.
+  let para = { // Adding in the parameters for the API to filter.
+      q :  "gardening food", // General query/search work is 'Gardening'. Can be changed.
+      language : "en", // Filter by English language.
+      apiKey : "8d18ec19967e4892bbd586aa0d1f76c9" // Insert API Key here. You can use mine for now since I didn't have to pay yet.
   };
-  axios
-  .get(url, { params })
-  .then((response) => {
-    const docs = response.data.response.docs;
-    console.log(docs);
-    const images = docs
-      .filter(doc => doc.multimedia.length > 0) // Filter out objects without multimedia
-      .map(doc => {
-        console.log(doc.multimedia);
-        const imageUrl = "https://www.nytimes.com/" + doc.multimedia[0].url;
-        console.log(imageUrl);
-        
-        return imageUrl;
-      });
-    populateCarousel(images);
+
+  // Axios GET data
+  axios.get(url, {params:para}) // Using the data defined above.
+  .then(response => { // When data present.
+      let articles = response.data.articles; // Specifying that we only want the articles content.
+      let content = '' // Will be used to compile data later for innerHTML indenting.
+
+      // Since there is a lot of different articles, we use a For Loop to extract and append each one to content.
+      for (let i = 10; i < 15; i++) {
+          let title = articles[i].title;
+          let image = articles[i].urlToImage;
+          let description = articles[i].description;
+          let url = articles[i].url;
+
+          // Appending of the specifc article's information into content in a Bootstrap Card Format.
+          if (image !== null) {
+            if (content == '') {
+              content += `<div class="carousel-item active">
+                            <img src="` + image + `" class="d-block w-100" alt="..." style="width:50%; height: auto;">
+                            <div class="carousel-caption">
+                              <h5 class="title-box">` + title + `</h5>
+                              <p class ="description">` + description + `</p>
+                              <a href="` + url + `" target="_blank">Read more</a>
+                            </div>
+                          </div>`
+            }
+            else {
+              content += `<div class="carousel-item">
+                            <img src="` + image + `" class="d-block w-100" alt="...">
+                            <div class="carousel-caption">
+                              <h5 class="title-box">` + title + `</h5>
+                               <p class ="description">` + description + `</p>
+                              <a href="` + url + `" target="_blank">Read more</a>
+                            </div>
+                          </div>`            
+            }
+          }
+      }    
+      document.getElementById('news').innerHTML = content; // Indenting the compiled content onto the HTML at div id='news'.
   })
-  .catch((error) => {
-    console.error(error);
-  });
-
-  console.log("===[END] display_default() ===");
 }
-
-
-function populateCarousel(images) {
-  const carouselInner = document.querySelector('.carousel-inner');
-  carouselInner.innerHTML = ''; // Clear previous carousel items before populating
-
-  images.forEach((image, index) => {
-      const imageUrl = image;
-      const imageDiv = document.createElement('div');
-      imageDiv.classList.add('carousel-item');
-      if (index === 0) {
-          imageDiv.classList.add('block', 'opacity-100');
-      }
-      const img = document.createElement('img');
-      img.src = imageUrl;
-      img.classList.add('object-cover', 'w-full', 'h-full');
-      img.alt = 'carousel image';
-      imageDiv.appendChild(img);
-      carouselInner.appendChild(imageDiv);
-  });
-}
-
