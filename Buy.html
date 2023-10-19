@@ -33,14 +33,18 @@
     <div class = "sec" id="sec">
         
             <h2>Buy Seeds</h2>
-            <div style="z-index: 5;position:fixed; top: 12%;right:10%">
-                <button style="margin-bottom: 0;" id="miniCartButton" class = "button" onmouseover="refreshCart()">Shopping Cart</button>
-                <div id="miniCart" style = "right:0" class = "glass miniCart">
-                    I am a minicart
+            <div>
+                <div style = "position:relative; float:right; bottom: 60px;">
+                    <button style="margin-bottom: 0;" id="miniCartButton" class = "button" onmouseover="refreshCart()">Shopping Cart</button>
+                    <div id="miniCart" class = "glass miniCart">
+                        I am a minicart
+                    </div>
                 </div>
-            </div>
+                <div style = "margin-bottom: 5%;">Need Seeds? Buy from us and become a farmer today!</div>
+                
+             </div>
             
-            <div style = "margin-bottom: 5%;">Need Seeds? Buy from us and become a farmer today!</div>
+            
 
             
         <div style = "overflow: auto;" class = "glass">
@@ -50,53 +54,18 @@
                 <div>Low maintainence, easy to grow crop that requires moderate non-direct sunlight</div>
                 <p>
                     Seeds per packet: 15 <br>
-                    Price: $4.50  
-                    <button v-on:click = addItem("Tomatoes") style = "float: right;" class = "button">Add to Cart</button>  
+                    Price: $4.50
+                    <button v-on:click = addItem("Tomatoes") style = "float: right;" class = "button">Add to Cart</button>
                 </p>
                 
             </div>
 
         </div>
-        <div style = "overflow: auto;" class = "glass">
-            <img class = "cropPhoto" src = "images/crops/tomato.webp">
-            <div>
-                <h3>Tomato</h3>
-                <div>Low maintainence, easy to grow crop that requires moderate non-direct sunlight</div>
-                <p>
-                    Seeds per packet: 15 <br>
-                    Price: $4.50    
-                </p>
-                <button  style = "float:right;" class = "button">Add to Cart</button>
-            </div>
 
-        </div>
-        <div style = "overflow: auto;" class = "glass">
-            <img class = "cropPhoto" src = "images/crops/tomato.webp">
-            <div>
-                <h3>Tomato</h3>
-                <div>Low maintainence, easy to grow crop that requires moderate non-direct sunlight</div>
-                <p>
-                    Seeds per packet: 15 <br>
-                    Price: $4.50    
-                </p>
-                <button style = "float:right;" class = "button">Add to Cart</button>
-            </div>
+        
+</div>
 
-        </div>
-        <div style = "overflow: auto;" class = "glass">
-            <img class = "cropPhoto" src = "images/crops/tomato.webp">
-            <div>
-                <h3>Tomato</h3>
-                <div>Low maintainence, easy to grow crop that requires moderate non-direct sunlight</div>
-                <p>
-                    Seeds per packet: 15 <br>
-                    Price: $4.50    
-                </p>
-                <button style = "float:right;" class = "button">Add to Cart</button>
-            </div>
-
-        </div>
-
+<a id="top" href="#"> <i class="fas fa-arrow-up"></i> </a>
 
 
         <script>
@@ -135,11 +104,12 @@
                 // }
                 toUse = `
             <div class = "image-box">
-                <img src = "images/crops/tomato.webp">
-            </div>
-            <div class = "about">
+                <img src = "images/crops/tomato.webp" style="flex-basis:100px;flex-grow:0">
+                <div class = "about">
                 Tomatoes
+                </div>
             </div>`
+            
                 document.getElementById("miniCart").innerHTML = toUse
             }
         
