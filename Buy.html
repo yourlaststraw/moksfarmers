@@ -123,16 +123,23 @@
             }).mount("#buy");
 
             function refreshCart(){
-                if (Object.keys(app.cart).length == 0){
-                    toUse = "Your cart is empty!"
-                }else{
-                    toUse = ""
-                    toUse += "<table class = 'myTable' style='text-align:center;font-size:30px' ><tr><th>Seed</th><th colspan = '3'>Quantity</th></tr>"
-                    for (key in app.cart){
-                        toUse += "<tr><td>" + key + "</td><td><button class ='changeQtyBtn' >-</button></td><td> " + app.cart[key] + "</td><td><button class ='changeQtyBtn' >+</button></td></tr>"
-                    }
-                    toUse+="</table>"
-                }
+                // if (Object.keys(app.cart).length == 0){
+                //     toUse = "Your cart is empty!"
+                // }else{
+                //     toUse = ""
+                //     toUse += "<table class = 'myTable' style='text-align:center;font-size:30px' ><tr><th>Seed</th><th colspan = '3'>Quantity</th></tr>"
+                //     for (key in app.cart){
+                //         toUse += "<tr><td>" + key + "</td><td><button class ='changeQtyBtn' >-</button></td><td> " + app.cart[key] + "</td><td><button class ='changeQtyBtn' >+</button></td></tr>"
+                //     }
+                //     toUse+="</table>"
+                // }
+                toUse = `
+            <div class = "image-box">
+                <img src = "images/crops/tomato.webp">
+            </div>
+            <div class = "about">
+                Tomatoes
+            </div>`
                 document.getElementById("miniCart").innerHTML = toUse
             }
         
