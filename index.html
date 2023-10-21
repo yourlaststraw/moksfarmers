@@ -34,7 +34,7 @@
             <div v-if="isLogged" onclick="clearSession();window.location.replace('index.html')">Logout</div>
             <div v-else><a href="login.html">Login/Signup</a></div>
         </button>
-        <div style ="text-align: right;" id = "welcome" v-if="isLogged">
+        <div id = "welcome" style ="text-align: right;" v-if="isLogged" >
             Welcome, farmer 
         </div>
         </div>
@@ -76,8 +76,7 @@
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Next</span>
                 </button>
-            </div>
-        </body>     
+            </div> 
         <!-- carousel: end -->
         </div>
         <br>
@@ -128,7 +127,8 @@
     <script src="user.js"></script>
     <script src="index.js"></script>
     <script>
-        if (Object.keys(userData).length >0){
+        console.log(userData)
+        if (userData !=null && Object.keys(userData).length >0){
             document.getElementById("welcome").innerHTML += userData.last_name + "!"
         }
         // Vue app
@@ -138,8 +138,9 @@
                         isLogged:false
                     };
                 },
-                mounted(){
-                    if (Object.keys(userData).length>0){
+                created(){
+                    if (userData!=null && Object.keys(userData).length>0){
+                        
                         this.isLogged = true;
                     }
                 },

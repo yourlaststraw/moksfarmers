@@ -45,8 +45,8 @@
         </div>
     </header>
     
-    <div id="checkLock">
-        <div class = "buy-body">
+    <div id="checkLock" class = "buy-body">
+        <div>
         
             <div class = "layer1">
                 
@@ -122,15 +122,13 @@
 
 <a id="top" href="#"> <i class="fas fa-arrow-up"></i> </a>
 <script>
-    console.log("hi")
-if (Object.keys(userData.length)>0){
+if (userData!=null && Object.keys(userData).length>0){
     document.getElementById("welcome").innerHTML += userData.last_name + "!";
 }
 // Vue app
     const app = Vue.createApp({
         data() {
         return {
-            username:"hi",
             isLogged:false,
             displayCart: false,
             cart: {
@@ -195,16 +193,12 @@ if (Object.keys(userData.length)>0){
                 return
             }
         },
-        mounted(){
-            console.log(userData)
-            if (Object.keys(userData).length>0){
+        created(){
+            if (userData!=null && Object.keys(userData).length>0){
                 this.isLogged = true;
             }
         }
     }).mount("#buy");
-</script>
-
-<script>
 </script>
 </body>
 <!-- Always include javascript at the end of the file, just above the html tag -->
