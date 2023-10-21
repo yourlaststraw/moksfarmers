@@ -219,7 +219,7 @@ section #text {
     padding: 1em;
     margin-bottom: 2%;
 }
-/* Properties for middle section (below water) */
+/* Properties for middle section */
 .sec {
     position: relative;
     padding: 10%;
@@ -437,7 +437,7 @@ section #text {
     opacity: 0;
 }
 
-span {
+.delete {
     width: 150px;
     font-size:11px;
     margin-top:10px;
@@ -460,13 +460,6 @@ span {
     display:inline;
     transition: .3s;
 }
-
-.about{
-    
-}
-
-
-
 
 
 
