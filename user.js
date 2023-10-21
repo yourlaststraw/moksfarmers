@@ -7,11 +7,13 @@ axios.get(dbUserUrl)
     if (session !== null) {
         // sessionStorage cannot store JSON objects, so we need to convert it into a string first.
         sessionStorage.setItem("userData", JSON.stringify(response.data));
+        const lockedOut = false;
     }
     else {
-        sessionStorage.setItem("userData", JSON.stringify({}));
         // document.write('You are not logged in.');
         // window.stop(); // Stops the page from loading any further with this command.
+        document.getElementById('checkLock').innerHTML = '<br><h3 class="buy-body">You are not logged in.</h3>';
+        window.stop();
     }
 });
 // Once we are out of the axios call, we can reconvert it into an object.
