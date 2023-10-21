@@ -8,6 +8,11 @@
     font-family: 'Poppins', sans-serif;
     color: black;
 }
+.text{
+    background-color:#fcf7cc; 
+    color:black; 
+    border-color:#FFF9C1;
+}
 .title-box{
     backdrop-filter: blur(10px);
     color: white;
@@ -562,7 +567,7 @@ section #text {
 
 /* login page styling */
 .login-box{
-    backdrop-filter: blur(50px);
+    backdrop-filter: blur(70px);
     padding: 10px;
     border-radius: 10px;
     margin: 10px;
