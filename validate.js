@@ -63,7 +63,7 @@ function createUser() {
     if (lastName == '') {
         output += `<span>Please enter your last name.</span><br>`;
     }
-    if (email == '') {
+    if (email == '' || !email.includes('@')) {
         output += `<span>Please enter your email address.</span><br>`;
     }
     if (password == '') {
@@ -89,6 +89,7 @@ function createUser() {
                     document.getElementById('errors').innerHTML = output;
                     counter++;
                 }
+                
             }
 
             if (counter == 0) {
@@ -100,7 +101,10 @@ function createUser() {
                     password: encrypted,
                     current_location: ''
                 }
-                axios.post(url, data);
+                axios.post(url, data)
+                .then(() => {
+                    document.getElementById('errors').innerHTML = `<span>Account created successfully.</span>`;
+                });
             }
         })
     }

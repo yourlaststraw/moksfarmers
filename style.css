@@ -93,7 +93,7 @@ html {
     /* Header shld be above everything */
 }
 
-#header .logo {
+.logo {
     color: #002431;
     font-weight: 800;
     font-size: 2.5em;
@@ -560,3 +560,24 @@ section #text {
     color: #4faa2e; 
 }
 
+/* login page styling */
+.login-box{
+    backdrop-filter: blur(50px);
+    padding: 10px;
+    border-radius: 10px;
+    margin: 10px;
+}
+.login-bg {
+    background-image: url('images/bg-image.png');
+
+}
+
+.logo{
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+}
+.login-box {
+    margin: 0 auto;
+    width: 50%;
+}
