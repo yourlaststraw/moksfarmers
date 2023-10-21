@@ -3,45 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js" integrity="sha256-/H4YS+7aYb9kJ5OKhFYPUjSJdrtV6AeyJOtTkw6X72o=" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="text/javascript" src="validate.js"></script>
+    <script type="text/javascript" src="commons.js"></script>
     <title>Register</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
     <style>
-        #errors {
-            color: red;
-        }
         .container {
             display: flex;
             justify-content: center;
-            align-items: center;
-            height: 100vh;
+            margin-top: 10%;
+            margin-bottom: 10%;
         }
-        .form-container {
-            backdrop-filter: blur(50px);
-            padding: 2rem;
-            border-radius: 0.5rem;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-            width: 25rem;
+
+        #errors {
+            color: red;
         }
     </style>
 </head>
-<body class="bg-cover bg-center login-bg">
-    <div class="container">
-        <div class="form-container">
-            <h1 class="text-2xl font-bold mb-6">Register</h1>
-            <label for="firstName" class="text-sm">First name</label>
-            <input type="text" id="firstName" class="w-full px-3 py-2 mb-4 border rounded" required>
-            <label for="lastName" class="text-sm">Last name</label>
-            <input type="text" id="lastName" class="w-full px-3 py-2 mb-4 border rounded" required>
-            <label for="email" class="text-sm">Email address</label>
-            <input type="email" id="email" class="w-full px-3 py-2 mb-4 border rounded" required>
-            <label for="password" class="text-sm">Password</label>
-            <input type="password" id="password" class="w-full px-3 py-2 mb-4 border rounded" required>
-            <label for="confirmPassword" class="text-sm">Confirm password</label>
-            <input type="password" id="confirmPassword" class="w-full px-3 py-2 mb-4 border rounded" required>
-            <button onclick="createUser()" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Register</button>
-            <div id="errors"></div>
-        </div>
+<body class="container">
+    <div>
+        <h1>Register</h1>
+        <label for="firstName">First name</label><br>
+        <input type="text" id="firstName" required>
+        <br><br>
+        <label for="lastName">Last name</label><br>
+        <input type="text" id="lastName" required>
+        <br><br>
+        <label for="email">Email address</label><br>
+        <input type="email" id="email" required>
+        <br><br>
+        <label for="password">Password</label><br>
+        <input type="password" id="password" required>
+        <br><br>
+        <label for="confirmPassword">Confirm password</label><br>
+        <input type="password" id="confirmPassword" required>
+        <br><br>
+        <button onclick="createUser()">Register</button>
+        <div id="errors"></div>
     </div>
 </body>
 </html>
