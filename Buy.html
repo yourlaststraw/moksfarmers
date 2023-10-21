@@ -122,10 +122,11 @@
 
 <a id="top" href="#"> <i class="fas fa-arrow-up"></i> </a>
 <script>
-    if (Object.keys(userData >0)){
-        document.getElementById("welcome").innerHTML += userData.last_name + "!";
-    }
-    // Vue app
+    console.log("hi")
+if (Object.keys(userData.length)>0){
+    document.getElementById("welcome").innerHTML += userData.last_name + "!";
+}
+// Vue app
     const app = Vue.createApp({
         data() {
         return {
