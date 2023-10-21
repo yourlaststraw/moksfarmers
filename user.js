@@ -9,8 +9,9 @@ axios.get(dbUserUrl)
         sessionStorage.setItem("userData", JSON.stringify(response.data));
     }
     else {
-        document.write('You are not logged in.');
-        window.stop(); // Stops the page from loading any further with this command.
+        sessionStorage.setItem("userData", JSON.stringify({}));
+        // document.write('You are not logged in.');
+        // window.stop(); // Stops the page from loading any further with this command.
     }
 });
 // Once we are out of the axios call, we can reconvert it into an object.

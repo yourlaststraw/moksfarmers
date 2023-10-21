@@ -15,9 +15,10 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <script src="https://unpkg.com/vue@next"></script>
 </head>
 
-<body onLoad="display_default()" class="bg-gray-100">
+<body id="home" onLoad="display_default()" class="bg-gray-100">
     <!-- This is the header/ Nav Bar -->
     <header id="header">
         <a href="index.html" class="logo">Mok's Farmers</a>
@@ -27,6 +28,17 @@
             <li><a href="Events.html">Events</a></li>
             <li><a href="Buy.html">Buy</a></li>
         </ul>
+
+        <div class = "user-info">
+        <button class="button-5" role="button">
+            <div v-if="isLogged" onclick="clearSession();window.location.replace('index.html')">Logout</div>
+            <div v-else><a href="login.html">Login/Signup</a></div>
+        </button>
+        <div style ="text-align: right;" id = "welcome" v-if="isLogged">
+            Welcome, farmer 
+        </div>
+        </div>
+
     </header>
 
     <!-- This is the Top Section (Above Water) -->
@@ -110,8 +122,39 @@
 
     <!-- Always include javascript at the end of the file, just above the html tag -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    <script src = "commons.js"></script>
+    <script src = "validate.js"></script>
     <script src="action.js"></script>
+    <script src="user.js"></script>
     <script src="index.js"></script>
+    <script>
+        if (Object.keys(userData >0)){
+            document.getElementById("welcome").innerHTML += userData.last_name + "!"
+        }
+        // Vue app
+        const app = Vue.createApp({
+                data() {
+                    return {
+                        username:"hi",
+                        isLogged:false
+                    };
+                },
+                mounted(){
+                    if (Object.keys(userData).length>0){
+                        this.isLogged = true;
+                    }
+                },
+                methods: {
+                    log(str){
+                        console.log(str);
+                        return
+                    }
+                },
+            }).mount("#home");
+    </script>
+
+    
+    
     
 </body>
 

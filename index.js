@@ -1,3 +1,11 @@
+
+  
+
+
+
+
+
+
 function display_default() {
   // Axios Textbook declaration
   let url = "https://newsapi.org/v2/everything"; // News API Basic Link. everything is their filter to find all sources.
@@ -51,3 +59,5 @@ function display_default() {
       document.getElementById('news').innerHTML = content; // Indenting the compiled content onto the HTML at div id='news'.
   })
 }
+
+
