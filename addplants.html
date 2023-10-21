@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js" integrity="sha256-/H4YS+7aYb9kJ5OKhFYPUjSJdrtV6AeyJOtTkw6X72o=" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="text/javascript" src="commons.js"></script>
+    <script type="text/javascript" src="user.js"></script> <!--Checks if user has logged in-->
+    <script type="text/javascript" src="admin.js"></script> <!--Checks if user is an admin-->
+    <title>Add plants</title>
+    <style>
+        .container {
+            display: flex;
+            justify-content: center;
+            margin-top: 10%;
+            margin-bottom: 10%;
+        }
+        
+        #errors {
+            color: red;
+        }
+    </style>
+</head>
+<body class="container" id="body">
+    <div>
+        <h1>Add a Plant</h1>
+        <label for="name">Name</label><br>
+        <input type="text" id="name" required>
+        <br><br>
+        <label for="size">Size</label><br>
+        <select type="text" id="size" required>
+            <option value="S">Small</option>
+            <option value="M">Medium</option>
+            <option value="L">Large</option>
+        </select>
+        <br><br>
+        <label for="maturity">Maturity (In Days)</label><br>
+        <input type="text" id="maturity" required>
+        <br><br>
+        <label for="difficulity">Difficulity (1-10)</label><br>
+        <input type="number" id="difficulity" required>
+        <br><br>
+        <button onclick="addPlant()">Register</button>
+        <div id="errors"></div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js" integrity="sha256-/H4YS+7aYb9kJ5OKhFYPUjSJdrtV6AeyJOtTkw6X72o=" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="text/javascript" src="commons.js"></script>
+    <script type="text/javascript" src="user.js"></script> <!--Checks if user has logged in-->
+    <title>User Page</title>
+    <style>
+        .container {
+            display: flex;
+            justify-content: center;
+            margin-top: 10%;
+            margin-bottom: 10%;
+        }
+    </style>
+</head>
+<body class="container">
+    <div id="display">
+    </div>
+    <script>
+        document.getElementById('display').innerHTML = `<p>` + userData.email + `</p>
+                                                        <p>` + userData.first_name + ` ` + userData.last_name + `</p>`;
+    </script>
+</body>
+</html>
