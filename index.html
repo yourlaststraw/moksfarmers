@@ -128,14 +128,13 @@
     <script src="user.js"></script>
     <script src="index.js"></script>
     <script>
-        if (Object.keys(userData >0)){
+        if (Object.keys(userData).length >0){
             document.getElementById("welcome").innerHTML += userData.last_name + "!"
         }
         // Vue app
         const app = Vue.createApp({
                 data() {
                     return {
-                        username:"hi",
                         isLogged:false
                     };
                 },
