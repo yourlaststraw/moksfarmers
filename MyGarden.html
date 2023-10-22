@@ -95,6 +95,8 @@
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
     dbPlants();
+    const arrayPlants = JSON.parse(sessionStorage.getItem("arrayPlants"));
+
     const PlantCard = {
         props: ['plant', 'description'],
         template: `
@@ -111,7 +113,7 @@
             return {
             isModalOpen: false,
             myPlantsList: [],
-            plants: plants
+            plants: arrayPlants
             };
         },
         methods: {
