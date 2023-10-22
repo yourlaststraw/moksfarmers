@@ -99,7 +99,14 @@ function createUser() {
                     last_name: lastName,
                     email: email,
                     password: encrypted,
-                    current_location: ''
+                    current_location: '',
+                    user_type: 'common',
+                    my_plants: {
+                        dummy: 'dummy'
+                    },
+                    my_posts: {
+                        dummy: 'dummy'
+                    }
                 }
                 axios.post(url, data)
                 .then(() => {
