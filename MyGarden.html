@@ -14,8 +14,13 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="animation.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <!-- <script src="https://unpkg.com/vue@next"></script>
     <script src="https://cdn.tailwindcss.com"></script> -->
+    <script type="text/javascript" src="commons.js"></script>
+    <script type="text/javascript" src="user.js"></script>
+    <script type="text/javascript" src="validate.js"></script>
+    <script type="text/javascript" src="plants.js"></script>
 </head>
 
 <body class="sec">
@@ -29,162 +34,106 @@
             <li><a href="Buy.html">Buy</a></li>
         </ul>
     </header>
-    <div id="app" >
-
-        <div class="flex justify-between items-center py-3">
-            <!-- Tab links -->
-            <div class="tab">
-                <ul class="flex space-x-4 items-center">
-                    <li>
-                        <a href="MyGarden.html" aria-current="page" class="tabcontent active text-lg">MyGarden</a>
-                    </li>
-                    <li>
-                        <a href="CommunityGarden.html" class="tabcontent text-lg">CommunityGarden</a>
-                    </li>
-                </ul>
+    <div id="checkLock">
+        <div id="app" >
+            <div class="flex justify-between items-center py-3">
+                <!-- Tab links -->
+                <div class="tab">
+                    <ul class="flex space-x-4 items-center">
+                        <li>
+                            <a href="MyGarden.html" aria-current="page" class="tabcontent active text-lg">MyGarden</a>
+                        </li>
+                        <li>
+                            <a href="CommunityGarden.html" class="tabcontent text-lg">CommunityGarden</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- Add Plant button -->
+                <button @click="openModal" id="addPlantButton" class="py-2 px-4 bg-black text-white rounded-lg" >Add Plant</button>
             </div>
-            <!-- Add Plant button -->
-            <button @click="openModal" id="addPlantButton" class="py-2 px-4 bg-black text-white rounded-lg" >Add Plant</button>
-        </div>
-        <div id="myPlantsList" >
-            <h1 class="text-center text-lg" id="noPlantMsg">You have no plants currently. Grow a new one today!</h1>
-            <plant-card
-                v-for="(plantItem, index) in myPlantsList"
-                :key="index"
-                :plant="plantItem.plant"
-                :description="plantItem.description"
-            ></plant-card>
-           
-            <!-- <div id="plantsList" class="flex flex-wrap"> -->
-                <!-- Plant cards go here -->
-                <!-- <div v-for="plant in plants" :key="plant.id" class="w-1/4 p-4">
-                  <div class="bg-white rounded-lg p-4">
-                    <img :src="plant.image" alt="Plant Image" class="w-full h-40 object-cover rounded-md mb-2">
-                    <p class="text-lg">{{ plant.name }}</p>
-                  </div>
-                </div> -->
-        </div>
-
-        
-          
-          <!-- Plant Modal -->
-          <div  v-if="isModalOpen" class="fixed top-0 left-0 h-screen w-screen flex items-center justify-center">
-            <div class="modal-container relative">
-                <button @click="closeModal" class="close-button absolute top-2 right-2">&times;</button>
-              <!-- Modal content and form for adding a plant -->
-              <!-- You can add input fields for plant name, image URL, etc. -->
-              <div id="newPlantsList" class="grid grid-cols-3 gap-4">
-                <!-- Plant cards go here -->
-                <div v-for="plant in plants" :key="plant.id" class="border rounded-lg p-4">
-                    <img :src="plant.image" alt="Plant Image" class="w-full h-40 object-cover rounded-md mb-2">
-                    <p class="text-lg">{{ plant.name }}</p>
-                    <button @click="addToMyPlantsList(plant)" class="bg-lime-600 text-white py-2 px-4 rounded-lg w-full">Add to MyGarden</button>
+            <div id="myPlantsList" >
+                <h1 class="text-center text-lg" id="noPlantMsg">You have no plants currently. Grow a new one today!</h1>
+                <plant-card
+                    v-for="(plantItem, index) in myPlantsList"
+                    :key="index"
+                    :plant="plantItem.plant"
+                    :description="plantItem.description"
+                ></plant-card>
+               
+                <!-- <div id="plantsList" class="flex flex-wrap"> -->
+                    <!-- Plant cards go here -->
+                    <!-- <div v-for="plant in plants" :key="plant.id" class="w-1/4 p-4">
+                        <div class="bg-white rounded-lg p-4">
+                            <img :src="plant.image" alt="Plant Image" class="w-full h-40 object-cover rounded-md mb-2">
+                            <p class="text-lg">{{ plant.name }}</p>
+                        </div>
+                    </div> -->
+            </div>
+    
+              <!-- Plant Modal -->
+            <div  v-if="isModalOpen" class="fixed top-0 left-0 h-screen w-screen flex items-center justify-center">
+                <div class="modal-container relative">
+                    <button @click="closeModal" class="close-button absolute top-2 right-2">&times;</button>
+                  <!-- Modal content and form for adding a plant -->
+                  <!-- You can add input fields for plant name, image URL, etc. -->
+                    <div id="newPlantsList" class="grid grid-cols-3 gap-4">
+                    <!-- Plant cards go here -->
+                        <div v-for="plant in plants" :key="plant.id" class="border rounded-lg p-4">
+                            <img :src="plant.image" alt="Plant Image" class="w-full h-40 object-cover rounded-md mb-2">
+                            <p class="text-lg">{{ plant.name }}</p>
+                            <button @click="addToMyPlantsList(plant)" class="bg-lime-600 text-white py-2 px-4 rounded-lg w-full">Add to MyGarden</button>
+                        </div>
+                    </div>
                 </div>
             </div>
-            </div>
-            </div>
-        
-        
-        
-        
-        
-
-        
-
-         <!-- The button to scroll back to top -->
-    <a id="top" href="#"> <i class="fas fa-arrow-up"></i> </a>
-
-
+             <!-- The button to scroll back to top -->
+            <a id="top" href="#"> <i class="fas fa-arrow-up"></i> </a>
+        </div>
     </div>
 
-    <script src="https://unpkg.com/vue@next"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        const PlantCard = {
-            props: ['plant', 'description'],
-            template: `
-                <div class="glass">
-                <img class="cropPhoto" :src="plant.image" alt="Plant Image">
-                <h3>{{ plant.name }}</h3>
-                <div v-html="description"></div>
-                </div>
-            `,
+<script src="https://unpkg.com/vue@next"></script>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+    dbPlants();
+    const PlantCard = {
+        props: ['plant', 'description'],
+        template: `
+            <div class="glass">
+            <img class="cropPhoto" :src="plant.image" alt="Plant Image">
+            <h3>{{ plant.name }}</h3>
+            <div v-html="description"></div>
+            </div>
+        `,
+        };
+
+    const app = Vue.createApp({
+        data() {
+            return {
+            isModalOpen: false,
+            myPlantsList: [],
+            plants: plants
             };
-
-        const app = Vue.createApp({
-            data() {
-                return {
-                isModalOpen: false,
-                myPlantsList: [],
-                plants: [
-                    {
-                    id: 1,
-                    name: "Plant 1",
-                    image: "./images/crops/tomato.webp",
-                    },
-                    {
-                    id: 2,
-                    name: "Plant 2",
-                    image: "./images/crops/tomato.webp",
-                    },
-                    {
-                    id: 3,
-                    name: "Plant 3",
-                    image: "./images/crops/tomato.webp",
-                    },
-                    {
-                    id: 4,
-                    name: "Plant 4",
-                    image: "./images/crops/tomato.webp",
-                    },
-                    {
-                    id: 5,
-                    name: "Plant 5",
-                    image: "./images/crops/tomato.webp",
-                    },
-                    {
-                    id: 6,
-                    name: "Plant 6",
-                    image: "./images/crops/tomato.webp",
-                    },
-                    {
-                    id: 7,
-                    name: "Plant 7",
-                    image: "./images/crops/tomato.webp",
-                    },
-                    {
-                    id: 8,
-                    name: "Plant 8",
-                    image: "./images/crops/tomato.webp",
-                    },
-                    {
-                    id: 9,
-                    name: "Plant 9",
-                    image: "./images/crops/tomato.webp",
-                    },
-                ],
-                };
+        },
+        methods: {
+            openModal() {
+            this.isModalOpen = true;
             },
-            methods: {
-                openModal() {
-                this.isModalOpen = true;
-                },
-                closeModal() {
-                    this.isModalOpen = false;
-                },
-                addToMyPlantsList(plant) {
-                    this.isModalOpen = false;
-                    document.getElementById("noPlantMsg").style.display = "none";
-                    const description = "Low maintenance, easy to grow crop that requires moderate non-direct sunlight. <br>Water every 2 days.";
-                    this.myPlantsList.push({ plant, description });
-                },
+            closeModal() {
+                this.isModalOpen = false;
             },
-            });
+            addToMyPlantsList(plant) {
+                this.isModalOpen = false;
+                document.getElementById("noPlantMsg").style.display = "none";
+                const description = "Low maintenance, easy to grow crop that requires moderate non-direct sunlight. <br>Water every 2 days.";
+                this.myPlantsList.push({ plant, description });
+            },
+        },
+        });
 
-            app.component('plant-card', PlantCard);
-            app.mount("#app");          
-    </script>
-    <!-- Tailwind CSS styles -->
+        app.component('plant-card', PlantCard);
+        app.mount("#app");          
+</script>
+<!-- Tailwind CSS styles -->
 <style scoped>
     .modal-container {
       background-color: white;

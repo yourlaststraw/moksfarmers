@@ -16,9 +16,12 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <script src="https://unpkg.com/vue@next"></script>
+    <script type="text/javascript" src="commons.js"></script>
+    <script type="text/javascript" src="validate.js"></script>
+    <script type="text/javascript" src="user.js"></script>
 </head>
 
-<body id="home" onLoad="display_default()" class="bg-gray-100">
+<body id="home" onload="displayDefault()" class="bg-gray-100">
     <!-- This is the header/ Nav Bar -->
     <header id="header">
         <a href="index.html" class="logo">Mok's Farmers</a>
@@ -119,17 +122,10 @@
     <!-- The button to scroll back to top -->
     <a id="top" href="#"> <i class="fas fa-arrow-up"></i> </a>
 
-    <!-- Always include javascript at the end of the file, just above the html tag -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-    <script src = "commons.js"></script>
-    <script src = "validate.js"></script>
-    <script src="action.js"></script>
-    <script src="user.js"></script>
-    <script src="index.js"></script>
     <script>
         console.log(userData)
-        if (userData !=null && Object.keys(userData).length >0){
-            document.getElementById("welcome").innerHTML += userData.last_name + "!"
+        if (userData !=null && Object.keys(userData).length >0) {
+            document.getElementById("welcome").innerHTML += userData.last_name + "!";
         }
         // Vue app
         const app = Vue.createApp({
@@ -138,24 +134,21 @@
                         isLogged:false
                     };
                 },
-                created(){
-                    if (userData!=null && Object.keys(userData).length>0){
-                        
+                created() {
+                    if (userData!=null && Object.keys(userData).length>0) {
                         this.isLogged = true;
                     }
                 },
                 methods: {
                     log(str){
                         console.log(str);
-                        return
+                        return;
                     }
                 },
-            }).mount("#home");
+        }).mount("#home");
     </script>
-
-    
-    
-    
 </body>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="action.js"></script>
+    <script type="text/javascript" src="index.js"></script>
 </html>
