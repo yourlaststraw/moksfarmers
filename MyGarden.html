@@ -95,11 +95,13 @@
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
     dbPlants();
+    const arrayPlants = JSON.parse(sessionStorage.getItem("arrayPlants"));
+
     const PlantCard = {
         props: ['plant', 'description'],
         template: `
             <div class="glass">
-            <img class="cropPhoto" :src="plant.image" alt="Plant Image">
+            <img class="cropPhoto" :src="plant.image" alt="Plant Image" style="width: 20%; height: auto;">
             <h3>{{ plant.name }}</h3>
             <div v-html="description"></div>
             </div>
@@ -111,7 +113,7 @@
             return {
             isModalOpen: false,
             myPlantsList: [],
-            plants: plants
+            plants: arrayPlants
             };
         },
         methods: {

@@ -22,7 +22,7 @@ const analytics = getAnalytics(app);`;
 
 document.getElementsByTagName('script')[0].innerHTML = relay;
 
-const dbUrl = 'https://moksfarmers-default-rtdb.asia-southeast1.firebasedatabase.app.json?auth=WeVoR13Scj5QXT9M16uBsXxq48YOdELozmMA50ny';
+const dbUrl = 'https://moksfarmers-default-rtdb.asia-southeast1.firebasedatabase.app/.json?auth=WeVoR13Scj5QXT9M16uBsXxq48YOdELozmMA50ny';
 
 const dbUrlpt1 = 'https://moksfarmers-default-rtdb.asia-southeast1.firebasedatabase.app';
 const dbUrlpt2 = '.json?auth=WeVoR13Scj5QXT9M16uBsXxq48YOdELozmMA50ny';
