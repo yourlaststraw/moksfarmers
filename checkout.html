@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js" integrity="sha256-/H4YS+7aYb9kJ5OKhFYPUjSJdrtV6AeyJOtTkw6X72o=" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="text/javascript" src="commons.js"></script>
+    <script type="text/javascript" src="validate.js"></script>
+    <script type="text/javascript" src="user.js"></script>
+    <script src="https://unpkg.com/vue@next"></script>
+    <title>Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        #errors {
+            color: red;
+        }
+    </style>
+</head>
+<body id = "checkout" class="bg-cover bg-center login-bg">
+        <div class="flex flex-col items-center h-screen">
+                <div class = "checkout">
+                    <a class="logo"></a>
+                    <div class="checkout-box">
+                        <div v-for="(value, key, index) in cart">
+                            <div v-if="value.quantity != 0" class = "checkout-item-box text">
+                                <div>{{key}}</div>
+                                    <div style ="display: flex;justify-content: space-between; width: 80px">
+                                        <div>Qty:</div>
+                                        <div>{{value.quantity}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+</body>
+
+<script>
+    document.getElementsByClassName("logo")[0].innerHTML = "Farmer " + userData.last_name + "'s basket"
+    cart = JSON.parse(sessionStorage.getItem("cart"))
+    // Vue app
+    const app = Vue.createApp({
+        
+        data() {
+        return {
+            cart:cart
+        };
+        },
+        methods: {
+            
+        },
+        created(){
+            
+        }
+    }).mount("#checkout");
+</script>
+</html>
