@@ -11,6 +11,20 @@ function addPlant() {
     let size = document.getElementById('size').value;
     let maturity = document.getElementById('maturity').value;
     let difficulity = document.getElementById('difficulity').value;
+ 
+    let image = null;
+    const extensionsToTry = ["webp", "png", "jpg", "jpeg"];
+    for (const extension of extensionsToTry) {
+        let lowercaseName = name.toLowerCase();
+        let potentialImage = `./images/crops/${lowercaseName}.${extension}`;
+        //fail, don't know how to check for if image file exists in specified folder path
+        //image takes in all extension types, so last defined one is used ie. jpeg in this case
+        if(potentialImage != undefined) {
+            image = potentialImage;
+            console.log(image);
+        }
+    }
+
     let url = dbUrlpt1 + '/plants' +  dbUrlpt2;
 
     if (name == '') {
@@ -29,13 +43,28 @@ function addPlant() {
     if (output !== '') {
         document.getElementById('errors').innerHTML = output;
     }
+
+    // console.log("hello");
+    // console.log(image);
+    // if (image==null) {
+    //     window.alert('Image does not exist. Failed to add plant!');
+    // }
+
     else {
         let data = {
             name: name,
             size: size,
             maturity: maturity,
             difficulity: difficulity,
+            image: image
         }
-        axios.post(url, data);
+        if (axios.post(url, data)){
+        window.alert('Plant added successfully!');
+        window.location.href = 'addplants.html';}
+        else {
+            window.alert('Failed to add plant!');
+        }
     }
+
+
 }
