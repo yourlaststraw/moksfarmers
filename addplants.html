@@ -41,8 +41,61 @@
         <label for="difficulity">Difficulity (1-10)</label><br>
         <input type="number" id="difficulity" required>
         <br><br>
+        <label for="desc">Description</label><br>
+        <input type="text" id="desc" required>
+        <br><br>
+        <label for="steps">Steps</label><br>
+        <input type="text" id="steps" required>
+        <br><br>
+        <label for="image">Image</label><br>
+        <input type="file" id="image" required accept=".webp, .png, .jpg, .jpeg" onchange="encodeImageFileAsURL(this)"> 
+        <br><br>
         <button onclick="addPlant()">Register</button>
-        <div id="errors"></div>
+        <div id="errors"></div><br>
+
+        <div>
+            How to enter the correct steps format: <br>
+            E.g. <br>
+            Rinse bean sprout seeds thoroughly to remove debris; <br>
+            Place seeds in a glass jar or sprouting tray; <br>
+            Soak seeds in water for 8-12 hours;<b>//</b> <br><br>
+
+            Add a semi-colon after each part of the step. <br>
+            Add two slashes after each day's step. <br>
+            There is no need to add slashes on the last step.
+        </div>
     </div>
+
+    <div id="imageCheck"></div>
 </body>
+<!--
+    Sample Steps input format for Bean Sprouts:
+        Rinse bean sprout seeds thoroughly to remove debris;
+        Place seeds in a glass jar or sprouting tray;
+        Soak seeds in water for 8-12 hours;//
+
+        Drain and rinse the seeds;
+        Keep in a well-ventilated area;
+        Ensure even seed distribution for proper aeration;//
+        
+        Rinse the seeds daily;//
+
+        Watch for tiny roots to develop;//
+
+        Continue daily rinsing;
+        Observe longer and greener sprouts;//
+
+        Rinse as usual;
+        Notice the sprouts growing to 2-3 inches;//
+
+        Rinse and remove seed husks;
+        See more leaves developing;//
+
+        Gently rinse to maintain structure;
+        Sprouts should be well-developed;//
+
+        Harvest when they reach your preferred length;//
+
+        Rinse a final time, remove seed husks, and enjoy your bean sprouts.;
+-->
 </html>

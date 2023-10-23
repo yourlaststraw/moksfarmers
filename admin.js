@@ -1,3 +1,5 @@
+var image = '';
+
 // Checking to see if admin account is trying to enter
 if (userData.email !== 'moksfarmers@gmail.com') {
     document.write('You do not have access to this page');
@@ -11,22 +13,18 @@ function addPlant() {
     let size = document.getElementById('size').value;
     let maturity = document.getElementById('maturity').value;
     let difficulity = document.getElementById('difficulity').value;
+    let desc = document.getElementById('desc').value;
+    let steps = document.getElementById('steps').value;
+
+    let stepsArray = steps.split('//');
+    let stepsObj = {};
+
+    for (let i = 0; i < stepsArray.length; i++) {
+        let counter = 'Step ' + String(i + 1);
+        stepsObj[counter] = {'instruction': stepsArray[i], 'day': String(i + 1)}
+    };
  
-    let image = null;
-    const extensionsToTry = ["webp", "png", "jpg", "jpeg"];
-    for (const extension of extensionsToTry) {
-        let lowercaseName = name.toLowerCase();
-        let potentialImage = `./images/crops/${lowercaseName}.${extension}`;
-        //fail, don't know how to check for if image file exists in specified folder path
-        //image takes in all extension types, so last defined one is used ie. jpeg in this case
-        if(potentialImage != undefined) {
-            image = potentialImage;
-            console.log(image);
-        }
-    }
-
     let url = dbUrlpt1 + '/plants' +  dbUrlpt2;
-
     if (name == '') {
         output += `<span>Please enter the plant's name.</span><br>`;
     }
@@ -39,23 +37,28 @@ function addPlant() {
     else if (Number(difficulity) > 10 || Number(difficulity) < 1) {
         output += `<span>Difficulity level not in range.</span><br>`;
     }
-    
+    if (desc == '') {
+        output += `<span>Please enter the description this plant.</span><br>`;
+    }
+    if (steps == '') {
+        output += `<span>Please enter the steps to growing this plant in the correct format.</span><br>`;
+    }
+    if (image == '') {
+        output += `<span>Please insert an image for this plant.</span><br>`;
+    }
+
+
     if (output !== '') {
         document.getElementById('errors').innerHTML = output;
     }
-
-    // console.log("hello");
-    // console.log(image);
-    // if (image==null) {
-    //     window.alert('Image does not exist. Failed to add plant!');
-    // }
-
     else {
         let data = {
             name: name,
             size: size,
             maturity: maturity,
             difficulity: difficulity,
+            description: desc,
+            steps: stepsObj,
             image: image
         }
         if (axios.post(url, data)){
@@ -65,6 +68,14 @@ function addPlant() {
             window.alert('Failed to add plant!');
         }
     }
+};
 
-
-}
+// This function takes the inputted image file, and converts it into base64 string.
+function encodeImageFileAsURL(element) {
+    var file = element.files[0];
+    var reader = new FileReader();
+    reader.onloadend = function() {
+      image = reader.result; // The data here is compatible with any img tag src even if it's base64 as it prefixes with 'data:image/jpeg;base64,'
+    }
+    reader.readAsDataURL(file);
+  }
