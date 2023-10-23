@@ -1,6 +1,3 @@
-
-const description = "Low maintenance, easy to grow crop that requires moderate non-direct sunlight. <br>Water every 2 days.";
-
 function dbPlants() {
     let counter = 1;
     axios.get(dbUrlpt1 + '/plants' + dbUrlpt2)
@@ -10,7 +7,6 @@ function dbPlants() {
             let obj = response.data[i];
             obj['id'] = counter;
             obj['db'] = i;
-            obj['description'] = description;
             obj['day'] = 0;
             list.push(obj);
             counter++;

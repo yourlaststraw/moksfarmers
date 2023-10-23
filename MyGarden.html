@@ -98,12 +98,17 @@
     const arrayPlants = JSON.parse(sessionStorage.getItem("arrayPlants"));
 
     const PlantCard = {
-        props: ['plant', 'description'],
+        props: ['plant'],
         template: `
             <div class="glass">
-            <img class="cropPhoto" :src="plant.image" alt="Plant Image" style="width: 20%; height: auto;">
-            <h3>{{ plant.name }}</h3>
-            <div v-html="description"></div>
+                <img class="cropPhoto" :src="plant.image" alt="Plant Image" style="display: inline-block; height: 100%; width: 30%;">
+                <div style="display: inline-block; width: 70%;">
+                    <h3>{{ plant.name }}</h3>
+                    <span>{{ plant.description }}<span> <br>
+                    <span>Days to Maturity: {{ plant.maturity }}<span> <br>
+                    <span>Size: {{ plant.size }}</span> <br>
+                    <span>Difficulity Level: {{ plant.difficulity }}<span> <br>
+                </div>
             </div>
         `,
         };
@@ -126,8 +131,7 @@
             addToMyPlantsList(plant) {
                 this.isModalOpen = false;
                 document.getElementById("noPlantMsg").style.display = "none";
-                const description = "Low maintenance, easy to grow crop that requires moderate non-direct sunlight. <br>Water every 2 days.";
-                this.myPlantsList.push({ plant, description });
+                this.myPlantsList.push({ plant });
             },
         },
         });
