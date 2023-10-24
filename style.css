@@ -328,6 +328,7 @@ section #text {
 .checkout{
     position:relative;
     top:250px;
+    min-width: 300px;
     width:30%;
     display:flex;
     flex-direction:column;
@@ -341,6 +342,7 @@ section #text {
     font-size: 20px;
     display:flex;
     justify-content: space-between;
+    flex-wrap: wrap;
 }
 .checkout-box{
     width:100%;
