@@ -19,6 +19,7 @@ function displayDefault() {
       let image = articles[i].urlToImage;
       let description = articles[i].description;
       let url = articles[i].url;
+      console.log(url)
 
       // Appending of the specifc article's information into content in a Bootstrap Card Format.
       if (image !== null) {
@@ -30,7 +31,7 @@ function displayDefault() {
                             <h5 class='title'>` + title + `</h5>
                             <p class='description'>` + description + `</p>
                           </div>
-                          <a "href="` + url + `" target="_blank" class='url'>Read more</a>
+                          <a href="` + url + `" target="_blank" class='url'>Read more</a>
                         </div>
                       </div>`
         }
@@ -42,7 +43,7 @@ function displayDefault() {
                         <h5 class='title'>` + title + `</h5>
                         <p class='description'>` + description + `</p>
                         </div>
-                        <a "href="` + url + `" target="_blank" class='url'>Read more</a>
+                        <a href="` + url + `" target="_blank" class='url'>Read more</a>
                         </div>
                       </div>`            
         }

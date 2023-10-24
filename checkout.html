@@ -40,7 +40,7 @@
                         <div style ="display: flex;justify-content: space-between;">
                             <div style="display: flex;flex-wrap: wrap;max-width: 20vw;text-align: left;"class = "logo">Total: ${{total}}</div>
                             <div style = "display: flex;align-items: flex-end;">
-                                <div><button v-on:click="generateQR()" style ="margin-bottom: 5px;"class="checkout-btn" role="button">Pay</button>
+                                <div><button v-on:click="displayQR = true" style ="margin-bottom: 5px;"class="checkout-btn" role="button">Pay</button>
                                 </div>
                             </div>
                         </div>
@@ -67,46 +67,6 @@
         };
         },
         methods: {
-            generateQR(){
-                const months = {'Jan': '01', 'Feb': '01', 'Mar': '03', 'Apr': '04', 'May': '05', 'Jun': '06', 'Jul': '07', 'Aug': '08', 'Sep': '09', 'Oct': '10', 'Nov': '11', 'Dec': '12'}
-                // Determining the date the PayNow QR will expire by through UNIX Timestamps conversion
-                let today = new Date(); // Obtains Current DateTime UNIX Timestamp.
-                let todaySplit = String(new Date(today)).split(' '); // Convert into Standardised DateTime.
-
-                let year = todaySplit[3]; // Obtains Year
-                let month = todaySplit[1]; // Obtains Month Name
-                month = months[month]; // Changes Month Name to Month Number
-                let day = String(Number(todaySplit[2]) + 1); // Obtains Day of Month. +1 to indicate 24 Hours later.
-
-                let time = todaySplit[4].split(':'); // Obtains HH:MM:SS
-                let hour = time[0]; // Obtains Hour of Day
-                let minute = time[1]; // Obtains Minute of Hour
-
-                // Appends all obtained information into QR Generation Link.
-                let qr = 
-                    'https://sgqr.fullstacksys.com/paynow?mobile=90667672&uen=&editable=0&amount=' // Paid to my Phone No.. Can be changed.
-                    + String(this.total) + '&expiry='
-                    + year + '%2F'
-                    + month + '%2F' 
-                    + day + '%20' 
-                    + hour + '%3A' 
-                    + minute + '&ref_id=&company=';
-
-                fetch(qr).then(response => {
-                    return response.json();
-                }).then(data => {
-                    // Work with JSON data here
-                    console.log(data);
-                }).catch(err => {
-                    // Do something for an error here
-                });
-                // Embeds QR Code onto Screen.
-                console.log(qr)
-                this.qrAPI= qr ;
-                this.displayQR = true
-                console.log('hi')
-                return
-            }
         },
         created(){
             
