@@ -137,6 +137,7 @@
                 this.isModalOpen = false;
             },
             addToMyPlantsList(id) {
+                let plant = this.plants[id];
                 this.isModalOpen = false;
                 document.getElementById("noPlantMsg").style.display = "none";
                 this.myPlantsList.push({ plant });

@@ -1,5 +1,5 @@
 function dbPlants() {
-    let counter = 1;
+    let counter = 0;
     axios.get(dbUrlpt1 + '/plants' + dbUrlpt2)
     .then (response => {
         let list = [];
