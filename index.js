@@ -25,7 +25,7 @@ function displayDefault() {
       if (image !== null) {
         if (content == '') {
           content += `<div class="carousel-item active">
-                        <img src="` + image + `" class="d-block w-100" alt="..." style="width:50%; height: auto;">
+                        <img src="` + image + `" class="d-block w-100" alt="...">
                         <div class="carousel-caption">
                           <div class="title-box">
                             <h5 class='title'>` + title + `</h5>
@@ -49,6 +49,7 @@ function displayDefault() {
         }
       }
     };
+    console.log(content)
     document.getElementById('news').innerHTML = content; // Indenting the compiled content onto the HTML at div id='news'.
   });
 }
