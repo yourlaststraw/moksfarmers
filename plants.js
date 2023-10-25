@@ -42,3 +42,17 @@ function callPlants() {
 };
 
 const plantList = JSON.parse(sessionStorage.getItem("plantList"));
+
+function convertProxy(plant) {
+    return {
+        'id': plant.id,
+        'db': plant.db,
+        'day': plant.day,
+        'image': plant.image,
+        'name': plant.name,
+        'description': plant.description,
+        'maturity': plant.maturity,
+        'size': plant.size,
+        'difficulity': plant.difficulity
+    }
+}

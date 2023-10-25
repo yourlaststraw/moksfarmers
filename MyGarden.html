@@ -62,8 +62,24 @@
                 <!-- Add Plant button -->
                 <button @click="openModal" id="addPlantButton" class="py-2 px-4 bg-black text-white rounded-lg" >Add Plant</button>
             </div>
-            <div id="myPlantsList" >
+            <div v-if="myPlantsList.length === 0">
                 <h1 class="text-center text-lg" id="noPlantMsg">You have no plants currently. Grow a new one today!</h1>
+            </div>
+            <div v-else>
+                <div v-for="plantItem in myPlantsList">
+                    <div class="glass">
+                        <img class="cropPhoto" :src="plantItem.image" alt="Plant Image" style="display: inline-block; height: 100%; width: 30%;">
+                        <div style="display: inline-block; width: 70%;">
+                            <h3>{{ plantItem.name }}</h3>
+                            <span>{{ plantItem.description }}<span> <br>
+                            <span>Days to Maturity: {{ plantItem.maturity }}<span> <br>
+                            <span>Size: {{ plantItem.size }}</span> <br>
+                            <span>Difficulity Level: {{ plantItem.difficulity }}<span> <br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--
                 <plant-card
                     v-for="(plantItem, index) in myPlantsList"
                     :key="index"
@@ -71,9 +87,8 @@
                     :description="plantItem.description"
                 >
                 </plant-card>
-               
-            </div>
-    
+            -->
+                
               <!-- Plant Modal -->
             <div  v-if="isModalOpen" class="fixed top-0 left-0 h-screen w-screen flex items-center justify-center">
                 <div class="modal-container relative">
@@ -139,8 +154,9 @@
             addToMyPlantsList(id) {
                 let plant = this.plants[id];
                 this.isModalOpen = false;
-                document.getElementById("noPlantMsg").style.display = "none";
-                this.myPlantsList.push({ plant });
+                plant = convertProxy(plant);
+                this.myPlantsList.push(plant);
+                postPlant(id);
             },
         },
         created(){
