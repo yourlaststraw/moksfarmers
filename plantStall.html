@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js" integrity="sha256-/H4YS+7aYb9kJ5OKhFYPUjSJdrtV6AeyJOtTkw6X72o=" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="text/javascript" src="commons.js"></script>
+    <script type="text/javascript" src="user.js"></script> <!--Checks if user has logged in-->
+    <script type="text/javascript" src="plants.js"></script>
+
+    <title>Redirecting</title>
+    <style>
+        .container {
+            display: flex;
+            justify-content: center;
+            margin-top: 10%;
+            margin-bottom: 10%;
+        }
+    </style>
+</head>
+<!--
+    This page solely serves to delay time for the necessary data to be saved correctly. It takes about a second for the 
+    localStorage and sessionStorage data to be parsed and allocaetd to their respective variables. Thus, the redirect page,
+    stalls the user for 2 seconds to prevent any errors when they are moved to the logged in version of the webpage.
+-->
+<body class="container">
+    <div>
+        Creating your plant... Give us a moment!
+    </div>
+    <script>
+        dbPlants();
+        callPlants();
+        // Delay function
+        setTimeout(function(){
+            window.location.replace("MyGarden.html");
+        }, 2000); // 2000 = 2s
+        
+    </script>
+</body>
+</html>

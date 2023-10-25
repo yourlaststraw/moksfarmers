@@ -23,7 +23,7 @@
     <script type="text/javascript" src="plants.js"></script>
 </head>
 
-<body id="app">
+<body id="app" onload="loadData()">
     <!-- This is the header/ Nav Bar -->
     <header id="header">
         <a href="index.html" class="logo">Mok's Farmers</a>
@@ -115,9 +115,11 @@
         document.getElementById("welcome").innerHTML += userData.last_name + "!";
         }
 
-    dbPlants();
-    const arrayPlants = JSON.parse(sessionStorage.getItem("arrayPlants"));
+    const arrayPlants = JSON.parse(localStorage.getItem("arrayPlants"));
+    const userPlants = JSON.parse(localStorage.getItem("userPlants"));
     console.log(arrayPlants);
+    console.log(userPlants);
+    console.log(localStorage.getItem("userPlantCount").length)
 
     const PlantCard = {
         props: ['plant'],
@@ -140,7 +142,7 @@
             return {
                 isLogged: false,
                 isModalOpen: false,
-                myPlantsList: [],
+                myPlantsList: userPlants,
                 plants: arrayPlants
                 };
         },
@@ -156,7 +158,12 @@
                 this.isModalOpen = false;
                 plant = convertProxy(plant);
                 this.myPlantsList.push(plant);
-                postPlant(id);
+                postPlant(plant);
+                localStorage.setItem("userPlantCount", this.myPlantsList);
+                console.log(this.myPlantsList.length);
+                callPlants();
+                const userPlants = JSON.parse(localStorage.getItem("userPlants"));
+                checkCountTally(userPlants, this.myPlantsList);
             },
         },
         created(){

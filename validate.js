@@ -120,6 +120,8 @@ function createUser() {
 
 function clearSession() {
     localStorage.removeItem("user");
+    localStorage.removeItem("userPlants");
+    localStorage.removeItem("userPlantCount");
     sessionStorage.removeItem("userData");
 };
 

@@ -11,14 +11,15 @@ function dbPlants() {
             list.push(obj);
             counter++;
         }
-        sessionStorage.setItem("arrayPlants", JSON.stringify(list));
+        localStorage.setItem("arrayPlants", JSON.stringify(list));
     });
 };
 
-function postPlant(id) {
+function postPlant(plant) {
+    let id = plant.db;
     let data = {
         id: id,
-        day: 0
+        day: plant.day
     }
     axios.post(dbUrlpt1 + '/users/' + localStorage.getItem("user") + '/my_plants' + dbUrlpt2, data);
 };
@@ -31,21 +32,17 @@ function callPlants() {
         let user = response.data.users[session].my_plants;
         for (i in user) {
             if (user[i] !== 'dummy') {
-                let day = user[i].day;
                 let userDb = user[i].id;
-                let plant = {'image': plants[userDb].image, 'name': plants[userDb].name, 'day': String(day), 'description': description};
+                let plant = convertProxy(plants[userDb]);
                 list.push(plant);
             }
         }
-        sessionStorage.setItem("plantList", JSON.stringify(list));
+        localStorage.setItem("userPlants", JSON.stringify(list));
     });
 };
 
-const plantList = JSON.parse(sessionStorage.getItem("plantList"));
-
 function convertProxy(plant) {
     return {
-        'id': plant.id,
         'db': plant.db,
         'day': plant.day,
         'image': plant.image,
@@ -55,4 +52,30 @@ function convertProxy(plant) {
         'size': plant.size,
         'difficulity': plant.difficulity
     }
-}
+};
+
+function checkCountTally(userPlants, myPlantsList) {
+    if (localStorage.getItem("userPlantCount") !== null && localStorage.getItem("userPlantCount") !== 'null') {
+        let count = 0;
+        let arr;
+        if (myPlantsList !== '') {
+            arr = myPlantsList.split(',');
+            count = arr.length;
+        }
+
+        let user = userPlants.length;
+        if (count !== user) {
+            console.log(count, user)
+            window.location.replace("plantStall.html");
+        }
+    }
+    else {
+        localStorage.setItem("userPlantCount", userPlants);
+    }
+};
+
+function loadData() {
+    dbPlants();
+    callPlants();
+    checkCountTally(JSON.parse(localStorage.getItem("userPlants")), localStorage.getItem("userPlantCount"));
+};
