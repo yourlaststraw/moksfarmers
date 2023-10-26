@@ -93,13 +93,20 @@ html {
     display: flex;
     /* To get elements in row */
     justify-content: space-between;
-    align-items:center;
+    align-items:baseline;
     z-index: 99999;
-    /* border: red solid 2px; */
+    flex-wrap:wrap;
+    
     /* Header shld be above everything */
 }
+/* @media (max-width: 660px){
+    #header{
+        height:200px;
+    }
+} */
 
 .logo {
+
     color: #002431;
     font-weight: 800;
     font-size: 2.5em;
@@ -109,12 +116,32 @@ html {
 }
 
 .user-info{
-    align-self: flex-end;
     /* border:red 2px solid; */
     display:flex;
     flex-direction: column;
     align-items:flex-end;
+    justify-content: flex-end;
+    height:80px;
 }
+
+@media(max-width:929px){
+    .user-info{
+        align-items: flex-start;
+    }
+}
+
+@media(max-width:733px){
+    .user-info{
+        align-items: flex-end;
+    }
+}
+
+@media(max-width:650px){
+    .user-info{
+        align-items: flex-start;
+    }
+}
+
 
 .button-5{
   align-items: center;
@@ -159,22 +186,25 @@ html {
   box-shadow: rgba(0, 0, 0, .06) 0 2px 4px;
   transform: translateY(0);
 }
+#header .links .wrapper{
+    width:fit-content;
+    display: flex;
+    justify-content: space-between;
 
-#header ul {
+}
+#header .links {
+    min-height:50px;
     display: flex;
     /* To get elements in row */
-    justify-content: space-around;
+    justify-content: flex-start;
+    flex-wrap: wrap;
     align-items: center;
 
 }
 
-#header ul li {
-    list-style: none;
-    /* To Remove dot */
-    margin: 0px 10px;
-}
 
-#header ul li a {
+
+#header .links .wrapper a {
     text-decoration: none;
     /* To prevent Underline */
     padding: 6px 15px;
@@ -182,8 +212,8 @@ html {
     border-radius: 20px;
 }
 
-#header ul li a:hover,
-#header ul li a.active {
+#header .links .wrapper a:hover,
+#header .links .wrapper a.active {
     background: #002431;
     color: white;
 }
@@ -478,7 +508,7 @@ section #text {
     padding-left: 5%;
 }
 
-.slide{
+.to-slide{
     position:absolute;
     top:0;
     width:120px;
@@ -491,15 +521,15 @@ section #text {
 
 }
 .slide-updown{
-    animation-name: slide-up;
+    animation-name: slide-updown;
     animation-duration:1s;
-    animation-timing-function: ease-in-out;
+
 }
 
-@keyframes slide-up {
+@keyframes slide-updown {
     0% {transform: translateY(0);}
-    20% {transform: translateY(-60px)}
-    80% {transform: translateY(-60px)}
+    10% {transform: translateY(-60px)}
+    90% {transform: translateY(-60px)}
     100% {transform: translateY(0px)}
   }
 
@@ -650,6 +680,7 @@ section #text {
 /* Properties for mobile */
 @media screen and (max-width: 650px) {
 
+
     #header {
         padding: 1em 2em;
         display: flex;
@@ -766,3 +797,29 @@ section #text {
     margin: 0 auto;
     width: 50%;
 } */
+
+/* carousel caption responsiveness */
+
+@media (max-width: 1068px) {
+    .carousel-caption h5{
+        font-size:20px
+    }
+    .carousel-caption{
+        font-size:10px
+    }
+    .url{
+        font-size:10px
+    }
+}
+
+@media (max-width: 740px) {
+    .carousel-caption h5{
+        font-size:10px
+    }
+    .carousel-caption{
+        font-size:5px
+    }
+    .url{
+        font-size:5px
+    }
+}

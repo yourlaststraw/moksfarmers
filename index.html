@@ -27,13 +27,20 @@
 <body id="home" onload="displayDefault()" class="bg-gray-100">
     <!-- This is the header/ Nav Bar -->
     <header id="header">
-        <a href="index.html" class="logo">Mok's Farmers</a>
-        <ul>
-            <li><a href="index.html" class="active">Home</a></li>
-            <li><a href="MyGarden.html">MyGarden</a></li>
-            <li><a href="Events.html">Events</a></li>
-            <li><a href="Buy.html">Buy</a></li>
-        </ul>
+        <div class = "wrapper">
+            <a href="index.html" class="logo">Mok's Farmers</a>
+        </div>
+
+        <div class ="links">
+            <div class = "wrapper">
+                <a href="index.html" class="active">Home</a>
+                <a href="MyGarden.html">MyGarden</a>
+            </div>
+            <div class = "wrapper">
+                <a href="Events.html">Events</a>
+                <a href="Buy.html">Buy</a>
+            </div>
+        </div>
 
         <div class = "user-info">
         <button class="button-5" role="button">
@@ -69,9 +76,9 @@
         <!-- Text Content here -->
         <h2>Gardening News</h2>
         <br>
-        <div style = "display:flex;align-items:center;aspect-ratio: 8/5;" class="glass">
+        <div style = "display:flex;align-items:center;aspect-ratio: 7/5;" class="glass">
                 <!--  carousel: start --> 
-                <div style = "width:100%;display: flex;align-items: center;" id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+                <div style = "width:100%;display: flex;align-items: center" id="carouselExample" class="carousel slide" data-bs-ride="carousel">
                     <div style="display:flex;align-items:center;" class="carousel-inner" id="news"></div>
 
                 </div>

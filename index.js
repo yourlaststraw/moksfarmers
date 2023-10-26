@@ -26,7 +26,7 @@ function displayDefault() {
         if (content == '') {
           content += `<div class="carousel-item active">
                         <img src="` + image + `" class="d-block w-100" alt="...">
-                        <div class="carousel-caption">
+                        <div class = "carousel-caption">
                           <div class="title-box">
                             <h5 class='title'>` + title + `</h5>
                             <p class='description'>` + description + `</p>

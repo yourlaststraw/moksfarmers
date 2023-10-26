@@ -25,23 +25,31 @@
 <body class="sec" id="app">
     <!-- This is the header/ Nav Bar -->
     <header id="header">
-        <a href="index.html" class="logo">Mok's Farmers</a>
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="MyGarden.html" class="active">MyGarden</a></li>
-            <li><a href="Events.html">Events</a></li>
-            <li><a href="Buy.html">Buy</a></li>
-        </ul>
+        <div class = "wrapper">
+            <a href="index.html" class="logo">Mok's Farmers</a>
+        </div>
 
-        <div class = "user-info">
-            <button class="button-5" role="button">
-                <div v-if="isLogged" onclick="clearSession();window.location.replace('index.html')">Logout</div>
-                <div v-else><a href="login.html">Login/Signup</a></div>
-            </button>
-            <div style = "text-align: right;" id = "welcome" v-if="isLogged">
-                Welcome, farmer 
+        <div class ="links">
+            <div class = "wrapper">
+                <a href="index.html" class="active">Home</a>
+                <a href="MyGarden.html">MyGarden</a>
+            </div>
+            <div class = "wrapper">
+                <a href="Events.html">Events</a>
+                <a href="Buy.html">Buy</a>
             </div>
         </div>
+
+        <div class = "user-info">
+        <button class="button-5" role="button">
+            <div v-if="isLogged" onclick="clearSession();window.location.replace('index.html')">Logout</div>
+            <div v-else><a href="login.html">Login/Signup</a></div>
+        </button>
+        <div id = "welcome" style ="text-align: right;" v-if="isLogged" >
+            Welcome, farmer 
+        </div>
+        </div>
+
     </header>
     <div class="flex justify-between items-center py-3">
         <!-- Tab links -->

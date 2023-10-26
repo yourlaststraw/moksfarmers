@@ -27,23 +27,31 @@
 <body id="buy">
     <!-- This is the header/ Nav Bar -->
     <header id="header">
-        <a href="index.html" class="logo">Mok's Farmers</a>
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="MyGarden.html">MyGarden</a></li>
-            <li><a href="Events.html">Events</a></li>
-            <li><a href="Buy.html" class="active">Buy</a></li>
-        </ul>
+        <div class = "wrapper">
+            <a href="index.html" class="logo">Mok's Farmers</a>
+        </div>
 
-        <div class = "user-info">
-            <button class="button-5" role="button">
-                <div v-if="isLogged" onclick="clearSession();window.location.replace('index.html')">Logout</div>
-                <div v-else><a href="login.html">Login/Signup</a></div>
-            </button>
-            <div style = "text-align: right;" id = "welcome" v-if="isLogged">
-                Welcome, farmer 
+        <div class ="links">
+            <div class = "wrapper">
+                <a href="index.html" >Home</a>
+                <a href="MyGarden.html">MyGarden</a>
+            </div>
+            <div class = "wrapper">
+                <a href="Events.html">Events</a>
+                <a href="Buy.html" class="active">Buy</a>
             </div>
         </div>
+
+        <div class = "user-info">
+        <button class="button-5" role="button">
+            <div v-if="isLogged" onclick="clearSession();window.location.replace('index.html')">Logout</div>
+            <div v-else><a href="login.html">Login/Signup</a></div>
+        </button>
+        <div id = "welcome" style ="text-align: right;" v-if="isLogged" >
+            Welcome, farmer 
+        </div>
+        </div>
+
     </header>
     
     <div v-if="isLogged" class = "buy-body">
@@ -51,7 +59,7 @@
         
             <div class = "layer1">
                 
-                <h2 style = "text-align: center;">Buy Seeds</h2>
+                <h2 style = "text-align: left;">Buy Seeds</h2>
     
                 <div>
                     <div style = "position:relative; float:right;">
@@ -119,10 +127,10 @@
                     </div>
                     <div class = "btn-box">
                         <button style = "overflow: hidden;" v-on:click = "addItem(key)" class = "button">
-                                <div class = "slide">
+                                <div class = "to-slide">
                                     <div>Add to Cart</div>
 
-                                    <div style="font-size:larger" >ADDED!</div>
+                                    <div style="font-size:larger;font-weight: bold;color:green" >ADDED!</div>
                                 </div>
                         
                         </button>
@@ -238,7 +246,7 @@ if (userData!=null && Object.keys(userData).length>0){
         }
     }).mount("#buy");
     
-for (ele of document.getElementsByClassName('slide')){
+for (ele of document.getElementsByClassName('to-slide')){
     ele.addEventListener("click", function() {
         target = event.currentTarget
 
