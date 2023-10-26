@@ -21,9 +21,18 @@
     <script type="text/javascript" src="user.js"></script>
     <script type="text/javascript" src="validate.js"></script>
     <script type="text/javascript" src="plants.js"></script>
+    <script>
+
+        callPlants()
+        const arrayPlants = JSON.parse(localStorage.getItem("arrayPlants"));
+        const userPlants = JSON.parse(localStorage.getItem("userPlants"));
+
+        console.log(userPlants);
+        console.log(localStorage.getItem("userPlantCount").length)
+    </script>
 </head>
 
-<body id="app" onload="loadData()">
+<body id="mygarden" onload="loadData()">
     <!-- This is the header/ Nav Bar -->
     <header id="header">
         <a href="index.html" class="logo">Mok's Farmers</a>
@@ -45,8 +54,8 @@
         </div>
     </header>
     
-    <div class="sec">
-        <div >
+    <div v-if="isLogged" class="sec">
+        <div>
             <div class="flex justify-between items-center py-3">
                 <!-- Tab links -->
                 <div class="tab">
@@ -116,18 +125,16 @@
             <a id="top" href="#"> <i class="fas fa-arrow-up"></i> </a>
         </div>
     </div>
+    <div v-else>
+        <br><h3 class="buy-body">You are not logged in.</h3>
+    </div>
+
 <script>
+    
     // display name if user is logged in
     if (userData!=null && Object.keys(userData).length>0){
-        document.getElementById("welcome").innerHTML += userData.last_name + "!";
-        }
-
-    const arrayPlants = JSON.parse(localStorage.getItem("arrayPlants"));
-    const userPlants = JSON.parse(localStorage.getItem("userPlants"));
-    console.log(arrayPlants);
-    console.log(userPlants);
-    console.log(localStorage.getItem("userPlantCount").length)
-
+            document.getElementById("welcome").innerHTML += userData.last_name + "!";
+            }
     const PlantCard = {
         props: ['plant'],
         template: `
@@ -184,7 +191,7 @@
         });
 
         app.component('plant-card', PlantCard);
-        app.mount("#app");          
+        app.mount("#mygarden");          
 </script>
 <!-- Tailwind CSS styles -->
 <style scoped>

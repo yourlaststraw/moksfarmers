@@ -9,12 +9,6 @@ axios.get(dbUserUrl)
         sessionStorage.setItem("userData", JSON.stringify(response.data));
         const lockedOut = false;
     }
-    else {
-        // document.write('You are not logged in.');
-        // window.stop(); // Stops the page from loading any further with this command.
-        document.getElementById('checkLock').innerHTML = '<br><h3 class="buy-body">You are not logged in.</h3>';
-        window.stop();
-    }
 });
 // Once we are out of the axios call, we can reconvert it into an object.
 const userData = JSON.parse(sessionStorage.getItem("userData"));

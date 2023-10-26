@@ -46,7 +46,7 @@
         </div>
     </header>
     
-    <div id="checkLock" class = "buy-body">
+    <div v-if="isLogged" class = "buy-body">
         <div>
         
             <div class = "layer1">
@@ -129,7 +129,10 @@
                     </div>
                 </div>
             </div>
-        </div>     
+        </div>  
+        <div v-else>
+            <br><h3 class="buy-body">You are not logged in.</h3>
+        </div>   
     </div>
 
 <a id="top" href="#"> <i class="fas fa-arrow-up"></i> </a>

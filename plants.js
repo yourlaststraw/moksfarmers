@@ -36,6 +36,7 @@ function postPlant(plant) {
 };
 
 function callPlants() {
+    console.log('hi')
     let list = [];
     axios.get(dbUrl)
     .then(response => {
@@ -49,8 +50,9 @@ function callPlants() {
                 list.push(plant);
             }
         }
-        localStorage.setItem("userPlants", JSON.stringify(list));
+        
     });
+    localStorage.setItem("userPlants", JSON.stringify(list));
 };
 
 function convertProxy(plant) {

@@ -409,7 +409,7 @@ section #text {
     height: 48px;
   }
 }
-#buy #header{
+#buy #header, #mygarden #header{
     position:static;
 }
 #buy h2{
@@ -756,6 +756,11 @@ section #text {
 
 }
 
+#mygarden h3{
+    font-size: 1.8em;
+    margin: 2%;
+    font-weight: bold;
+}
 /* not sure if this is intentional but i commented it out and the page looks fine so */
 /* .login-box {
     margin: 0 auto;
