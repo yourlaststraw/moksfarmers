@@ -15,11 +15,22 @@ function dbPlants() {
     });
 };
 
+// function getCurrentDate() {
+//     const today = new Date();
+//     const year = today.getFullYear();
+//     const month = String(today.getMonth() + 1).padStart(2, '0');
+//     const day = String(today.getDate()).padStart(2, '0');
+//     return `${year}-${month}-${day}`;
+//   }
+  
+
 function postPlant(plant) {
     let id = plant.db;
     let data = {
         id: id,
-        day: plant.day
+        day: plant.day,
+        // loggedDate: getCurrentDate(),
+        loggedDate: "",
     }
     axios.post(dbUrlpt1 + '/users/' + localStorage.getItem("user") + '/my_plants' + dbUrlpt2, data);
 };
@@ -33,7 +44,8 @@ function callPlants() {
         for (i in user) {
             if (user[i] !== 'dummy') {
                 let userDb = user[i].id;
-                let plant = convertProxy(plants[userDb]);
+                let dayTrack = user[i].day;
+                let plant = modifyPlant(plants[userDb], dayTrack);
                 list.push(plant);
             }
         }
@@ -53,6 +65,37 @@ function convertProxy(plant) {
         'difficulity': plant.difficulity
     }
 };
+
+function modifyPlant(plant, dayTrack) {
+    dayTrack = String(dayTrack);
+    console.log(dayTrack);
+    return {
+        'db': plant.db,
+        'dayTrack': dayTrack,
+        'image': plant.image,
+        'name': plant.name,
+        'description': plant.description,
+        'maturity': plant.maturity,
+        'size': plant.size,
+        'difficulity': plant.difficulty,
+        'instructions':getInstructions(plant.steps[`Step ${dayTrack}`].instruction),
+        //'loggedDate':
+    
+    }
+};
+
+function getInstructions(instructions) {
+    let output = [];
+    let arrInstruction = instructions.split(';');
+    for (num in arrInstruction) {
+        ins = arrInstruction[num].trim();
+        if(ins!==""){
+        output.push(ins);
+    }}
+    // console.log(output);
+    return output;
+} 
+
 
 function checkCountTally(userPlants, myPlantsList) {
     if (localStorage.getItem("userPlantCount") !== null && localStorage.getItem("userPlantCount") !== 'null') {
@@ -78,4 +121,9 @@ function loadData() {
     dbPlants();
     callPlants();
     checkCountTally(JSON.parse(localStorage.getItem("userPlants")), localStorage.getItem("userPlantCount"));
+};
+
+
+function logTracker(plant){
+    
 };
