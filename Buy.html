@@ -55,7 +55,7 @@
     
                 <div>
                     <div style = "position:relative; float:right;">
-                        <button v-on:click="toggleCart()" style="width: 150px;" id="miniCartButton" class = "button">Shopping Cart</button>
+                        <button v-on:click="toggleCart()" id="miniCartButton" class = "button">View Cart</button>
                         <div v-if="displayCart" id="miniCart" class = "glass miniCart">
                             <div v-if="isCartEmpty">
                                 <h1>Oh no! Your cart is empty!</h1>
@@ -118,7 +118,14 @@
                         </p> 
                     </div>
                     <div class = "btn-box">
-                        <button style = "width:130px;" v-on:click = "addItem(key)" style = "justify-content: end;" class = "button">Add to Cart</button>
+                        <button style = "overflow: hidden;" v-on:click = "addItem(key)" class = "button">
+                                <div class = "slide">
+                                    <div>Add to Cart</div>
+
+                                    <div style="font-size:larger" >ADDED!</div>
+                                </div>
+                        
+                        </button>
                     </div>
                 </div>
             </div>
@@ -127,10 +134,11 @@
 
 <a id="top" href="#"> <i class="fas fa-arrow-up"></i> </a>
 <script>
-
 if (userData!=null && Object.keys(userData).length>0){
     document.getElementById("welcome").innerHTML += userData.last_name + "!";
 }
+
+
 // Vue app
     const app = Vue.createApp({
         
@@ -203,14 +211,21 @@ if (userData!=null && Object.keys(userData).length>0){
             },
             toggleCart(){
                 this.displayCart = !this.displayCart;
+                ele = document.getElementById("miniCartButton")
+                if (ele.classList.contains("active")){
+                    ele.classList.remove("active")
+                }else{
+                    ele.classList.add("active")
+                }
                 return
             },
             checkout(){
 
                 sessionStorage.setItem("cart", JSON.stringify(this.cart));
-                sessionStorage.setItem("total", JSON.stringify(this.total))
+                sessionStorage.setItem("total", JSON.stringify(this.total));
                 window.location.replace('checkout.html');
             },
+
         },
         created(){
             
@@ -220,6 +235,15 @@ if (userData!=null && Object.keys(userData).length>0){
         }
     }).mount("#buy");
     
+for (ele of document.getElementsByClassName('slide')){
+    ele.addEventListener("click", function() {
+        target = event.currentTarget
+
+        target.classList.add('slide-updown')
+        setTimeout("target.classList.remove('slide-updown')", 1000);
+
+    });
+}
 </script>
 </body>
 <!-- Always include javascript at the end of the file, just above the html tag -->
