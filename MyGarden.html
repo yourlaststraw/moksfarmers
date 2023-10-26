@@ -67,14 +67,21 @@
             </div>
             <div v-else>
                 <div v-for="plantItem in myPlantsList">
-                    <div class="glass">
+                    <div class="glass relative">
                         <img class="cropPhoto" :src="plantItem.image" alt="Plant Image" style="display: inline-block; height: 100%; width: 30%;">
                         <div style="display: inline-block; width: 70%;">
                             <h3>{{ plantItem.name }}</h3>
-                            <span>{{ plantItem.description }}<span> <br>
+                            Instructions:<br><ul>
+                            <li v-for="ins of plantItem.instructions">{{ins}}<br></li>
+                            </ul>
+                            <div class="absolute bottom-10 right-10">
+                            <span class="font-bold">Day {{plantItem.dayTrack}}</span>
+                            <button @click="logTracker(plantItem)" style="right:10px" class="bg-lime-600 text-white py-2 px-4 rounded-lg ml-10" >Log Tracker</button>
+                            </div>
+                            <!-- <span>{{ plantItem.description }}<span> <br>
                             <span>Days to Maturity: {{ plantItem.maturity }}<span> <br>
                             <span>Size: {{ plantItem.size }}</span> <br>
-                            <span>Difficulity Level: {{ plantItem.difficulity }}<span> <br>
+                            <span>Difficulity Level: {{ plantItem.difficulity }}<span> <br> -->
                         </div>
                     </div>
                 </div>
@@ -156,6 +163,8 @@
             addToMyPlantsList(id) {
                 let plant = this.plants[id];
                 this.isModalOpen = false;
+                //set day to 1 when plant added so instructions for day1 shows
+                plant.day = 1;
                 plant = convertProxy(plant);
                 this.myPlantsList.push(plant);
                 postPlant(plant);
