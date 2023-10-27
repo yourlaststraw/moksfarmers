@@ -21,15 +21,6 @@
     <script type="text/javascript" src="user.js"></script>
     <script type="text/javascript" src="validate.js"></script>
     <script type="text/javascript" src="plants.js"></script>
-    <script>
-
-        callPlants()
-        const arrayPlants = JSON.parse(localStorage.getItem("arrayPlants"));
-        const userPlants = JSON.parse(localStorage.getItem("userPlants"));
-
-        console.log(userPlants);
-        console.log(localStorage.getItem("userPlantCount").length)
-    </script>
 </head>
 
 <body id="mygarden" onload="loadData()">
@@ -138,7 +129,13 @@
     </div>
 
 <script>
-    
+    callPlants()
+    const arrayPlants = JSON.parse(localStorage.getItem("arrayPlants"));
+    const userPlants = JSON.parse(localStorage.getItem("userPlants"));
+
+    console.log(userPlants);
+    console.log(localStorage.getItem("userPlantCount").length)
+
     // display name if user is logged in
     if (userData!=null && Object.keys(userData).length>0){
             document.getElementById("welcome").innerHTML += userData.last_name + "!";

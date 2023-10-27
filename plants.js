@@ -23,7 +23,6 @@ function dbPlants() {
 //     return `${year}-${month}-${day}`;
 //   }
   
-
 function postPlant(plant) {
     let id = plant.db;
     let data = {
@@ -36,7 +35,6 @@ function postPlant(plant) {
 };
 
 function callPlants() {
-    console.log('hi')
     let list = [];
     axios.get(dbUrl)
     .then(response => {
@@ -50,9 +48,8 @@ function callPlants() {
                 list.push(plant);
             }
         }
-        
+        localStorage.setItem("userPlants", JSON.stringify(list));
     });
-    localStorage.setItem("userPlants", JSON.stringify(list));
 };
 
 function convertProxy(plant) {
@@ -82,7 +79,6 @@ function modifyPlant(plant, dayTrack) {
         'difficulity': plant.difficulty,
         'instructions':getInstructions(plant.steps[`Step ${dayTrack}`].instruction),
         //'loggedDate':
-    
     }
 };
 
