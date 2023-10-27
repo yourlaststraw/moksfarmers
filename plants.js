@@ -45,11 +45,11 @@ function callPlants() {
             if (user[i] !== 'dummy') {
                 let userDb = user[i].id;
                 let dayTrack = user[i].day;
-                let plant = modifyPlant(plants[userDb], dayTrack);
+                let plant = modifyPlant(plants[userDb], dayTrack, userDb);
                 list.push(plant);
             }
+            localStorage.setItem("userPlants", JSON.stringify(list));
         }
-        localStorage.setItem("userPlants", JSON.stringify(list));
     });
 };
 
@@ -62,22 +62,22 @@ function convertProxy(plant) {
         'description': plant.description,
         'maturity': plant.maturity,
         'size': plant.size,
-        'difficulity': plant.difficulity
+        'difficulty': plant.difficulty
+        
     }
 };
 
-function modifyPlant(plant, dayTrack) {
+function modifyPlant(plant, dayTrack, userDb) {
     dayTrack = String(dayTrack);
-    console.log(dayTrack);
     return {
-        'db': plant.db,
+        'db': userDb,
         'dayTrack': dayTrack,
         'image': plant.image,
         'name': plant.name,
         'description': plant.description,
         'maturity': plant.maturity,
         'size': plant.size,
-        'difficulity': plant.difficulty,
+        'difficulty': plant.difficulty,
         'instructions':getInstructions(plant.steps[`Step ${dayTrack}`].instruction),
         //'loggedDate':
     }

@@ -25,6 +25,8 @@
 </head>
 
 <body id="mygarden" onload="loadData()">
+    <script>
+    </script>
     <!-- This is the header/ Nav Bar -->
     <header id="header">
         <div class = "wrapper">
@@ -129,7 +131,8 @@
         <br><h3 class="buy-body">You are not logged in.</h3>
     </div>
 <script>
-    callPlants()
+    dbPlants();
+    callPlants();
     const arrayPlants = JSON.parse(localStorage.getItem("arrayPlants"));
     const userPlants = JSON.parse(localStorage.getItem("userPlants"));
     console.log(userPlants);
