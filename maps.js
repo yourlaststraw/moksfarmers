@@ -12,34 +12,31 @@ function showPosition(position) {
 
 function euclideanDistance(lati, long) {
     let data = [];
-    let output = '';
-    let hougang = {
-        lat: 1.3798,
-        lng: 103.8882
-    };
-    let bishan = {
-        lat: 1.350986,
-        lng: 103.848255
-    };
-    let euclidHougang = Math.sqrt(((long - hougang.lng) ** 2) - ((lati - hougang.lat) ** 2)) * 100;
-    let euclidBishan = Math.sqrt(((long - bishan.lng) ** 2) - ((lati - bishan.lat) ** 2)) * 100;
-    data.push({
-        location: 'Hougang',
-        euclidDist: euclidHougang
-    })
-    data.push({
-        location: 'Bishan',
-        euclidDist: euclidBishan
-    })
+    let plants, euclid, current, lat, lon;
+    getLocation();
+    current = localStorage.getItem("latlon");
+    current = current.split(',');
+    lat = current[0];
+    lon = current[1];
 
-    // Determine if the User is nearby enough to the set locations based on a fixed parameter.
-    for (i in data) {
-        if (data[i].euclidDist < 2) {
-            output += data[i].location + ' is close enough.<br>';
+    axios.get(dbUserUrl)
+    .then(response => {
+        for (i in response.data) {
+            if (i !== session) {
+                plants = response.data.my_plants;
+                for (n in plants) {
+                    let location = plants[n].location;
+                    let plantLoc = location.split(',');
+                    let postLat = plantLoc[0];
+                    let postLon = plantLoc[1];
+                    euclid = Math.sqrt(((lon - postLon) ** 2) - ((lat - postLat) ** 2)) * 100;
+
+                    if (euclid < 0.2) {
+                        data.push(plants[n]);
+                    }
+                }
+            }
         }
-        else {
-            output += data[i].location + ' is too far.<br>';
-        }
-    }
-    document.getElementById('insight').innerHTML = output;
+        localStorage.setItem("nearbyPlants", JSON.stringify(data));
+    });
 }

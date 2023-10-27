@@ -99,7 +99,6 @@ function createUser() {
                     last_name: lastName,
                     email: email,
                     password: encrypted,
-                    current_location: '',
                     user_type: 'common',
                     my_plants: {
                         dummy: 'dummy'
@@ -122,6 +121,8 @@ function clearSession() {
     localStorage.removeItem("user");
     localStorage.removeItem("userPlants");
     localStorage.removeItem("userPlantCount");
+    localStorage.removeItem("latlon");
+    localStorage.removeItem("nearbyPlants");
     sessionStorage.removeItem("userData");
 };
 

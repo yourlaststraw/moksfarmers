@@ -20,6 +20,7 @@
     <script type="text/javascript" src="commons.js"></script>
     <script type="text/javascript" src="user.js"></script>
     <script type="text/javascript" src="validate.js"></script>
+    <script type="text/javascript" src="maps.js"></script>
 </head>
 
 <body class="sec" id="app">
@@ -68,6 +69,9 @@
 
 
     <script>
+        euclideanDistance();
+        const nearbyPlants = JSON.parse(localStorage.getItem("nearbyPlants"));
+        console.log(nearbyPlants);
         // display name if user is logged in
         if (userData!=null && Object.keys(userData).length>0){
             document.getElementById("welcome").innerHTML += userData.last_name + "!";
