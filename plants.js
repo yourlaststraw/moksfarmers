@@ -22,7 +22,7 @@ function dbPlants() {
 //     const day = String(today.getDate()).padStart(2, '0');
 //     return `${year}-${month}-${day}`;
 //   }
-  
+
 function postPlant(plant) {
     let id = plant.db;
     let data = {
@@ -30,6 +30,7 @@ function postPlant(plant) {
         day: plant.day,
         // loggedDate: getCurrentDate(),
         loggedDate: "",
+        location: localStorage.getItem("latlon")
     }
     axios.post(dbUrlpt1 + '/users/' + localStorage.getItem("user") + '/my_plants' + dbUrlpt2, data);
 };

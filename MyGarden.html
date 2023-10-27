@@ -21,6 +21,7 @@
     <script type="text/javascript" src="user.js"></script>
     <script type="text/javascript" src="validate.js"></script>
     <script type="text/javascript" src="plants.js"></script>
+    <script type="text/javascript" src="maps.js"></script>
 </head>
 
 <body id="mygarden" onload="loadData()">
@@ -127,16 +128,12 @@
     <div v-else>
         <br><h3 class="buy-body">You are not logged in.</h3>
     </div>
-
 <script>
     callPlants()
     const arrayPlants = JSON.parse(localStorage.getItem("arrayPlants"));
     const userPlants = JSON.parse(localStorage.getItem("userPlants"));
-
     console.log(userPlants);
     console.log(localStorage.getItem("userPlantCount").length)
-
-    // display name if user is logged in
     if (userData!=null && Object.keys(userData).length>0){
             document.getElementById("welcome").innerHTML += userData.last_name + "!";
             }
@@ -155,7 +152,6 @@
             </div>
         `,
         };
-
     const app = Vue.createApp({
         data() {
             return {
@@ -185,16 +181,15 @@
                 callPlants();
                 const userPlants = JSON.parse(localStorage.getItem("userPlants"));
                 checkCountTally(userPlants, this.myPlantsList);
+                getLocation();
             },
         },
         created(){
-            
             if (userData!=null && Object.keys(userData).length>0){
                 this.isLogged = true;
             }
         }
         });
-
         app.component('plant-card', PlantCard);
         app.mount("#mygarden");          
 </script>
