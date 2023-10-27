@@ -32,7 +32,12 @@ function postPlant(plant) {
         loggedDate: "",
         location: localStorage.getItem("latlon")
     }
-    axios.post(dbUrlpt1 + '/users/' + localStorage.getItem("user") + '/my_plants' + dbUrlpt2, data);
+    axios.post(dbUrlpt1 + '/users/' + localStorage.getItem("user") + '/my_plants' + dbUrlpt2, data)
+    .then(response => {
+        let select = response.data.name;
+        localStorage.setItem("newPlant", select);
+        axios.patch(dbUrlpt1 + '/users/' + localStorage.getItem("user") + '/my_plants/' + select + dbUrlpt2, {user_plant_id: select});
+    });
 };
 
 function callPlants() {
@@ -45,8 +50,10 @@ function callPlants() {
             if (user[i] !== 'dummy') {
                 let userDb = user[i].id;
                 let dayTrack = user[i].day;
-                let plant = modifyPlant(plants[userDb], dayTrack, userDb);
+                let userPlantId = user[i].user_plant_id;
+                let plant = modifyPlant(plants[userDb], dayTrack, userDb, userPlantId);
                 list.push(plant);
+                console.log(plant);
             }
             localStorage.setItem("userPlants", JSON.stringify(list));
         }
@@ -63,11 +70,10 @@ function convertProxy(plant) {
         'maturity': plant.maturity,
         'size': plant.size,
         'difficulty': plant.difficulty
-        
     }
 };
 
-function modifyPlant(plant, dayTrack, userDb) {
+function modifyPlant(plant, dayTrack, userDb, userPlantId) {
     dayTrack = String(dayTrack);
     return {
         'db': userDb,
@@ -78,8 +84,8 @@ function modifyPlant(plant, dayTrack, userDb) {
         'maturity': plant.maturity,
         'size': plant.size,
         'difficulty': plant.difficulty,
+        'userPlantId': userPlantId,
         'instructions':getInstructions(plant.steps[`Step ${dayTrack}`].instruction),
-        //'loggedDate':
     }
 };
 
@@ -120,9 +126,4 @@ function loadData() {
     dbPlants();
     callPlants();
     checkCountTally(JSON.parse(localStorage.getItem("userPlants")), localStorage.getItem("userPlantCount"));
-};
-
-
-function logTracker(plant){
-    
 };

@@ -87,8 +87,8 @@
                             </ul>
                             <div class="absolute bottom-10 right-10">
                             <span class="font-bold">Day {{plantItem.dayTrack}}</span>
-                            <button @click="logTracker(plantItem)" style="right:10px" class="bg-lime-600 text-white py-2 px-4 rounded-lg ml-10" >Log Tracker</button>
-                            </div>
+                            <button @click="logTracker(plantItem)" style="right:10px" class="bg-lime-600 text-white py-2 px-4 rounded-lg ml-10" :value="plantItem.userPlantId">Log Tracker</button>
+                        </div>
                             <!-- <span>{{ plantItem.description }}<span> <br>
                             <span>Days to Maturity: {{ plantItem.maturity }}<span> <br>
                             <span>Size: {{ plantItem.size }}</span> <br>
@@ -136,7 +136,6 @@
     const arrayPlants = JSON.parse(localStorage.getItem("arrayPlants"));
     const userPlants = JSON.parse(localStorage.getItem("userPlants"));
     console.log(userPlants);
-    console.log(localStorage.getItem("userPlantCount").length)
     if (userData!=null && Object.keys(userData).length>0){
             document.getElementById("welcome").innerHTML += userData.last_name + "!";
             }
@@ -180,12 +179,19 @@
                 this.myPlantsList.push(plant);
                 postPlant(plant);
                 localStorage.setItem("userPlantCount", this.myPlantsList);
-                console.log(this.myPlantsList.length);
                 callPlants();
                 const userPlants = JSON.parse(localStorage.getItem("userPlants"));
                 checkCountTally(userPlants, this.myPlantsList);
                 getLocation();
             },
+            logTracker(plantItem){
+                let userPlantId = plantItem.userPlantId;
+                let data = {
+                    loggedDate: String(new Date())
+                }
+                axios.patch(dbUrlpt1 + '/users/' + localStorage.getItem("user") + '/my_plants/' + userPlantId + dbUrlpt2, data);
+                console.log('Successfully logged progress');
+            }
         },
         created(){
             if (userData!=null && Object.keys(userData).length>0){
