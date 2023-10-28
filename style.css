@@ -8,29 +8,32 @@
     font-family: 'Poppins', sans-serif;
     color: black;
 }
-.text{
-    background-color:#fcf7cc; 
-    color:black; 
-    border-color:#FFF9C1;
+
+.text {
+    background-color: #fcf7cc;
+    color: black;
+    border-color: #FFF9C1;
 }
-.title-box{
+
+.title-box {
     backdrop-filter: blur(10px);
     color: white;
 }
 
-.description{
+.description {
     color: white;
 }
 
-.title{
-    font-size : 40px;
-    color:white;
-    font-family: 'Poppins', sans-serif;;
+.title {
+    font-size: 40px;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    ;
 }
 
 html,
 body {
-    background-color: #FFF9C1; 
+    background-color: #FFF9C1;
     overflow-x: hidden;
     /* To prevent Horizontal scroll */
 }
@@ -39,7 +42,8 @@ html {
     scroll-behavior: smooth;
     /* To scrolling animation */
 }
-.url{
+
+.url {
     color: #002431;
     background-color: white;
     border-radius: 15%;
@@ -51,7 +55,8 @@ html {
     border: none;
     cursor: pointer;
 }
-.features{
+
+.features {
     padding: 8px 25px;
     background: white;
     color: #002431;
@@ -61,6 +66,7 @@ html {
     border-radius: 40px;
     margin-top: 45px;
 }
+
 .icon-container {
     display: flex;
     justify-content: space-around;
@@ -69,11 +75,13 @@ html {
 }
 
 .icon-container img {
-    margin: 0 10px; /* Adjust as needed */
+    margin: 0 10px;
+    /* Adjust as needed */
     width: 250px;
     height: 230px;
 }
-#footer{
+
+#footer {
     background-color: #002431;
     color: white;
     padding: 2%;
@@ -82,6 +90,7 @@ html {
     font-weight: 500;
     letter-spacing: 2px;
 }
+
 #header {
     position: absolute;
     /* To Overlap with background */
@@ -89,16 +98,17 @@ html {
     left: 0;
     width: 100%;
     min-height: 100px;
-    padding:0 5%;
+    padding: 0 5%;
     display: flex;
     /* To get elements in row */
     justify-content: space-between;
-    align-items:baseline;
+    align-items: baseline;
     z-index: 99999;
-    flex-wrap:wrap;
-    
+    flex-wrap: wrap;
+
     /* Header shld be above everything */
 }
+
 /* @media (max-width: 660px){
     #header{
         height:200px;
@@ -115,85 +125,87 @@ html {
     /* To prevent Underline */
 }
 
-.user-info{
+.user-info {
     /* border:red 2px solid; */
-    display:flex;
+    display: flex;
     flex-direction: column;
-    align-items:flex-end;
+    align-items: flex-end;
     justify-content: flex-end;
-    height:80px;
+    height: 80px;
 }
 
-@media(max-width:929px){
-    .user-info{
+@media(max-width:929px) {
+    .user-info {
         align-items: flex-start;
     }
 }
 
-@media(max-width:733px){
-    .user-info{
+@media(max-width:733px) {
+    .user-info {
         align-items: flex-end;
     }
 }
 
-@media(max-width:650px){
-    .user-info{
+@media(max-width:650px) {
+    .user-info {
         align-items: flex-start;
     }
 }
 
 
-.button-5{
-  align-items: center;
-  background-clip:padding-box;
-  background-color: #fa6400;
-  border: 1px solid transparent;
-  border-radius: .25rem;
-  box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
-  color: #fff;
-  cursor: pointer;
-  display: inline-flex;
-  font-family: system-ui,-apple-system,system-ui,"Helvetica Neue",Helvetica,Arial,sans-serif;
-  font-size: 16px;
-  font-weight: 600;
-  justify-content: center;
-  line-height: 1.25;
-  margin: 0;
-  min-height: 3rem;
-  padding: calc(.875rem - 1px) calc(1.5rem - 1px);
-  position: relative;
-  text-decoration: none;
-  transition: all 250ms;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  vertical-align: baseline;
-  width:130px;
+.button-5 {
+    align-items: center;
+    background-clip: padding-box;
+    background-color: #fa6400;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+    box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+    color: #fff;
+    cursor: pointer;
+    display: inline-flex;
+    font-family: system-ui, -apple-system, system-ui, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    justify-content: center;
+    line-height: 1.25;
+    margin: 0;
+    min-height: 3rem;
+    padding: calc(.875rem - 1px) calc(1.5rem - 1px);
+    position: relative;
+    text-decoration: none;
+    transition: all 250ms;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: baseline;
+    width: 130px;
 }
 
 .button-5:hover,
 .button-5:focus {
-  background-color: #fb8332;
-  box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+    background-color: #fb8332;
+    box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
 }
 
 .button-5:hover {
-  transform: translateY(-1px);
+    transform: translateY(-1px);
 }
 
 .button-5:active {
-  background-color: #c85000;
-  box-shadow: rgba(0, 0, 0, .06) 0 2px 4px;
-  transform: translateY(0);
+    background-color: #c85000;
+    box-shadow: rgba(0, 0, 0, .06) 0 2px 4px;
+    transform: translateY(0);
 }
-#header .links .wrapper{
-    width:fit-content;
+
+#header .links .wrapper {
+    width: fit-content;
     display: flex;
     justify-content: space-between;
 
 }
+
 #header .links {
-    min-height:50px;
+    min-height: 50px;
     display: flex;
     /* To get elements in row */
     justify-content: flex-start;
@@ -227,6 +239,7 @@ section {
     justify-content: center;
     align-items: center;
 }
+
 /* Make all images absolute and cover whole screen */
 section img {
     position: absolute;
@@ -274,7 +287,7 @@ section #text {
 }
 
 #explore:hover {
-    background:#002431 ;
+    background: #002431;
     color: white;
 }
 
@@ -307,6 +320,7 @@ section #text {
     padding: 1em;
     margin-bottom: 2%;
 }
+
 /* Properties for middle section */
 .sec {
     position: relative;
@@ -316,6 +330,7 @@ section #text {
     z-index: 50;
     overflow: hidden;
 }
+
 /* Properties for text content */
 .sec h2 {
     font-size: 3.5em;
@@ -355,109 +370,122 @@ section #text {
 
 /* Buy Page Styles */
 
-.checkout{
-    position:relative;
-    top:250px;
+.checkout {
+    position: relative;
+    top: 250px;
     min-width: 300px;
-    width:30%;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
-.checkout-item-box{
+
+.checkout-item-box {
     border: black solid 2px;
     border-radius: 10px;
     margin-bottom: 10px;
-    padding:5px 15px;
+    padding: 5px 15px;
     font-size: 20px;
-    display:flex;
+    display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
 }
-.checkout-box{
-    width:100%;
+
+.checkout-box {
+    width: 100%;
     backdrop-filter: blur(70px);
     border-radius: 10px;
-    padding:5%;
+    padding: 5%;
     display: flex;
     flex-direction: column;
 
 }
-.checkout-btn-box{
+
+.checkout-btn-box {
     display: flex;
     justify-content: flex-end;
     padding-top: 20px;
 }
-.checkout-btn{
-  align-items: center;
-  background-color: initial;
-  background-image: linear-gradient(#464d55, #25292e);
-  border-radius: 8px;
-  border-width: 0;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, .1),0 3px 6px rgba(0, 0, 0, .05);
-  box-sizing: border-box;
-  color: #fff;
-  cursor: pointer;
-  display: inline-flex;
-  flex-direction: column;
-  font-family: expo-brand-demi,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
-  font-size: 18px;
-  height: 52px;
-  justify-content: center;
-  line-height: 1;
-  margin: 0;
-  outline: none;
-  overflow: hidden;
-  padding: 0 32px;
-  text-align: center;
-  text-decoration: none;
-  transform: translate3d(0, 0, 0);
-  transition: all 150ms;
-  vertical-align: baseline;
-  white-space: nowrap;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  text-align: right;
+
+.checkout-btn {
+    align-items: center;
+    background-color: initial;
+    background-image: linear-gradient(#464d55, #25292e);
+    border-radius: 8px;
+    border-width: 0;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, .1), 0 3px 6px rgba(0, 0, 0, .05);
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    display: inline-flex;
+    flex-direction: column;
+    font-family: expo-brand-demi, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-size: 18px;
+    height: 52px;
+    justify-content: center;
+    line-height: 1;
+    margin: 0;
+    outline: none;
+    overflow: hidden;
+    padding: 0 32px;
+    text-align: center;
+    text-decoration: none;
+    transform: translate3d(0, 0, 0);
+    transition: all 150ms;
+    vertical-align: baseline;
+    white-space: nowrap;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    text-align: right;
 }
 
 .checkout-btn:hover {
-  box-shadow: rgba(0, 1, 0, .2) 0 2px 8px;
-  opacity: .85;
+    box-shadow: rgba(0, 1, 0, .2) 0 2px 8px;
+    opacity: .85;
 }
 
 .checkout-btn:active {
-  outline: 0;
+    outline: 0;
 }
 
 .checkout-btn:focus {
-  box-shadow: rgba(0, 0, 0, .5) 0 0 0 3px;
+    box-shadow: rgba(0, 0, 0, .5) 0 0 0 3px;
 }
 
 @media (max-width: 420px) {
-  .checkout-btn {
-    height: 48px;
-  }
+    .checkout-btn {
+        height: 48px;
+    }
 }
-#buy #header, #mygarden #header{
-    position:static;
+
+#buy #header,
+#mygarden #header,
+#events #header {
+    position: static;
 }
-#buy h2{
+
+#buy h2,
+#events h2 {
     font-size: 3.5em;
+    font-weight: inherit;
 }
+
 #buy h3 {
     font-size: 1.8em;
     margin: 2%;
     font-weight: bold;
 }
-#buy .layer1{
+
+#buy .layer1 {
     display: flex;
     /* border: 2px red solid; */
     justify-content: space-between;
     align-items: center;
 }
-#buy .sale-box{
-    overflow:visible;
+
+#buy .sale-box {
+    overflow: visible;
     display: flex;
     /* border: blue solid 2px; */
     flex-wrap: wrap;
@@ -466,88 +494,108 @@ section #text {
     flex-shrink: 0;
     justify-content: flex-start;
 }
-#buy .layer2{
+
+#buy .layer2,
+#events .layer2 {
 
     display: flex;
     /* border: red solid 2px; */
     flex-direction: column;
 
 }
-#buy .layer2 .sale-box .image-box{
+
+#buy .layer2 .sale-box .image-box {
     /* border: green solid 2px; */
     align-items: center;
     text-align: center;
     flex-basis: 250px;
     flex-shrink: 0;
-    flex-grow:0;
-    
+    flex-grow: 0;
+
 }
-#buy .layer2 .sale-box .text-box{
+
+#buy .layer2 .sale-box .text-box {
     /* border:2px solid orange; */
     padding-left: 15px;
-    flex-grow:1;
+    flex-grow: 1;
     flex-basis: 250px;
-    display:flex;
+    display: flex;
     justify-content: space-between;
     flex-direction: column;
 }
-#buy .layer2 .sale-box .btn-box{
+
+.btn-box {
     /* border:2px solid black; */
-    width:100%;
+    width: 100%;
     display: flex;
     align-items: flex-end;
     justify-content: end;
-    margin-top:5px;
-    
-    
+    margin-top: 5px;
+
+
 }
 
-.buy-body{
+.buy-body,
+.events-body {
     z-index: 50;
     padding-right: 5%;
     padding-left: 5%;
 }
 
-.to-slide{
-    position:absolute;
-    top:0;
-    width:120px;
-    height:120px;
-    display:flex;
+.to-slide {
+    position: absolute;
+    top: 0;
+    width: 120px;
+    height: 120px;
+    display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
 
 
 }
-.slide-updown{
+
+.slide-updown {
     animation-name: slide-updown;
-    animation-duration:1s;
+    animation-duration: 1s;
 
 }
 
 @keyframes slide-updown {
-    0% {transform: translateY(0);}
-    10% {transform: translateY(-60px)}
-    90% {transform: translateY(-60px)}
-    100% {transform: translateY(0px)}
-  }
+    0% {
+        transform: translateY(0);
+    }
 
-.button.active{
-    background-color: #002431;
-    color:beige;
+    10% {
+        transform: translateY(-60px)
+    }
+
+    90% {
+        transform: translateY(-60px)
+    }
+
+    100% {
+        transform: translateY(0px)
+    }
 }
 
-.button:active{
-    transform: scale(0.96)
+.button.active {
+    background-color: #002431;
+    color: beige;
+}
+
+.button:active {
+    transform: scale(0.96);
+    background-color: #002431;
+    color: beige;
 }
 
 .button {
-    display:flex;
+    display: flex;
     align-items: baseline;
     justify-content: center;
     width: 120px;
-    height:60px;
+    height: 60px;
     background-color: #005270;
     color: 002431;
     border-top: 1px solid rgba(255, 255, 255, 0.5);
@@ -556,22 +604,23 @@ section #text {
     box-shadow: 20px 20px 40px rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(4px);
     padding: 1em;
-  }
+}
 
-.miniCart{
+.miniCart {
     background-color: rgb(212, 252, 204);
     position: absolute;
-    right:0;
-    display:block;
+    right: 0;
+    display: block;
     z-index: 5;
     max-width: 100vw;
-    min-width:325px;
-    
-  }
-.cart-item .image-box{
+    min-width: 325px;
+
+}
+
+.cart-item .image-box {
     width: 100px;
     display: flex;
-    flex-direction: column ;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     flex-basis: 30%;
@@ -579,34 +628,38 @@ section #text {
     flex-shrink: 0;
     /* border:2px black solid; */
 }
-.cart-item .text-box{
+
+.cart-item .text-box {
     flex-basis: 70%;
     padding-left: 5%;
     /* border:2px black solid; */
-    
+
 }
-.cart-item{
-    display:flex;
+
+.cart-item {
+    display: flex;
     justify-content: flex-start;
     /* border:2px red solid; */
 
 }
-.qty-box{
-    display:flex;
+
+.qty-box {
+    display: flex;
     justify-content: flex-end;
     align-items: center;
-    overflow:visible;
+    overflow: visible;
     margin-top: 7px;
     /* border:2px black solid; */
 }
-.qty{
-    font-size:15px;
-    margin-left:5px;
-    margin-right:5px;
-    
+
+.qty {
+    font-size: 15px;
+    margin-left: 5px;
+    margin-right: 5px;
+
 }
 
-.qty-change-btn{
+.qty-change-btn {
     position: relative;
     width: 25px;
     height: 25px;
@@ -618,7 +671,8 @@ section #text {
     overflow: hidden;
     transition: .3s;
 }
-.qty-change-btn:hover{
+
+.qty-change-btn:hover {
     background-color: rgb(245, 207, 207);
     transform: scale(1.2);
     box-shadow: 0 0 4px #111;
@@ -626,7 +680,7 @@ section #text {
 }
 
 
-.delete-btn{
+.delete-btn {
     position: relative;
     width: 35px;
     height: 35px;
@@ -640,7 +694,7 @@ section #text {
 
 }
 
-.delete-btn:hover{
+.delete-btn:hover {
     background-color: rgb(245, 207, 207);
     transform: scale(1.2);
     box-shadow: 0 0 4px #111;
@@ -653,16 +707,17 @@ section #text {
 
 .delete {
     width: 150px;
-    font-size:11px;
-    margin-top:10px;
+    font-size: 11px;
+    margin-top: 10px;
     position: absolute;
-    display:none;
+    display: none;
     transform: translate(-50%, -50%);
     color: rgb(231, 50, 50);
     font-weight: 600;
     transition: .3s;
 }
-.delete-btn:focus{
+
+.delete-btn:focus {
     width: 105px;
     height: 35px;
     /* position:absolute; */
@@ -670,8 +725,8 @@ section #text {
 }
 
 
-.delete-btn:focus span{
-    display:inline;
+.delete-btn:focus span {
+    display: inline;
     transition: .3s;
 }
 
@@ -734,11 +789,12 @@ section #text {
     .sec p {
         margin: 1% 4%;
     }
+
     .glass {
         backdrop-filter: blur(1px);
     }
 
-   
+
 }
 
 
@@ -749,49 +805,51 @@ section #text {
     align-items: center;
     align-content: center;
     flex-wrap: wrap;
-    font-size: 1.3rem; 
-    font-weight: 500; 
+    font-size: 1.3rem;
+    font-weight: 500;
     text-align: center;
-    color: #718096; 
-  }
- 
+    color: #718096;
+}
+
 .tabcontent {
     display: inline-block;
-    padding: 1rem; 
+    padding: 1rem;
     color: #4faa2e;
     border-top-left-radius: 0.5rem;
 }
 
 .tabcontent.active {
     display: inline-block;
-    padding: 1rem; 
+    padding: 1rem;
     color: #4faa2e;
-    background-color: #f7fafc; 
+    background-color: #f7fafc;
     border-top-left-radius: 0.5rem;
-    }
+}
 
 .tabcontent:hover {
-    background-color: #1a202c; 
-    color: #4faa2e; 
+    background-color: #1a202c;
+    color: #4faa2e;
 }
 
 /* login page styling */
-.login-box{
+.login-box {
     backdrop-filter: blur(70px);
     padding: 10px;
     border-radius: 10px;
     margin: 10px;
 }
+
 .login-bg {
     background-image: url('images/bg-image.png');
 
 }
 
-#mygarden h3{
+#mygarden h3 {
     font-size: 1.8em;
     margin: 2%;
     font-weight: bold;
 }
+
 /* not sure if this is intentional but i commented it out and the page looks fine so */
 /* .login-box {
     margin: 0 auto;
@@ -801,25 +859,69 @@ section #text {
 /* carousel caption responsiveness */
 
 @media (max-width: 1068px) {
-    .carousel-caption h5{
-        font-size:20px
+    .carousel-caption h5 {
+        font-size: 20px
     }
-    .carousel-caption{
-        font-size:10px
+
+    .carousel-caption {
+        font-size: 10px
     }
-    .url{
-        font-size:10px
+
+    .url {
+        font-size: 10px
     }
 }
 
 @media (max-width: 740px) {
-    .carousel-caption h5{
-        font-size:10px
+    .carousel-caption h5 {
+        font-size: 10px
     }
-    .carousel-caption{
-        font-size:5px
+
+    .carousel-caption {
+        font-size: 5px
     }
-    .url{
-        font-size:5px
+
+    .url {
+        font-size: 5px
     }
+}
+
+
+/* events page styles */
+
+.cal-header{
+    font-size: 4vw;
+    width:100%;
+    display: flex;
+    justify-content: center;
+    border:2px red solid;
+}
+
+.month-year-box{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    border:2px red solid;
+}
+
+.cal-container div{
+    color: white;
+}
+
+.month-year-box{
+    font-size:3vw;
+    border:2px red solid;
+}
+
+.month-year-box button{
+    color:white;
+    font-size: 3vw;
+    background-color: rgba(255, 255, 255, 0);
+    border:none;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.month-year-box button:active{
+    color:black;
 }
