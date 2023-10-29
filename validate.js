@@ -102,9 +102,6 @@ function createUser() {
                     user_type: 'common',
                     my_plants: {
                         dummy: 'dummy'
-                    },
-                    my_posts: {
-                        dummy: 'dummy'
                     }
                 }
                 axios.post(url, data)
