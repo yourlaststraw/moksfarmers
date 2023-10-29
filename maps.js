@@ -38,7 +38,7 @@ function storeCurrentLocation() {
 
 function euclideanDistance() {
     let list = [];
-    let plants, euclid, location, plantLoc, postLat, postLon;
+    let output, plants, euclid, location, plantLoc, postLat, postLon;
 
     axios.get(dbUrlpt1 + '/users' + dbUrlpt2)
     .then(response => {
@@ -55,11 +55,18 @@ function euclideanDistance() {
                         postLon = plantLoc[1];
                         euclid = Math.sqrt(((Number(userLon) - Number(postLon)) ** 2) - ((Number(userLat) - Number(postLat)) ** 2)) * 100;
                         if (euclid < 0.2 || Number.isNaN(euclid)) { // NaN means that the distance is so miniscule that it is not readable.
-                            list.push(plants[n]);                   // aka. basically right next to you.
-                            console.log(euclid);
+                            output = {                              // aka. basically right next to you.
+                                user: i,
+                                id: plants[n].id,
+                                location: location,
+                                day: plants[n].day,
+                                loggedDate: plants[n].loggedDate,
+                                user_plant_id: plants[n].user_plant_id
+                            }
+                            list.push(output);
                         }
                     }
-                    console.log(euclid, plants[n]);
+                    console.log(euclid, output);
                     localStorage.setItem("nearbyPlants", JSON.stringify(list));
                 }
             }
