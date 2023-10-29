@@ -102,7 +102,9 @@ function createUser() {
                     user_type: 'common',
                     my_plants: {
                         dummy: 'dummy'
-                    }
+                    },
+                    current_lat: '',
+                    current_lon: ''
                 }
                 axios.post(url, data)
                 .then(() => {
@@ -120,7 +122,8 @@ function clearSession() {
     localStorage.removeItem("userPlantCount");
     localStorage.removeItem("latlon");
     localStorage.removeItem("nearbyPlants");
-    sessionStorage.removeItem("userData");
+    localStorage.removeItem("userData");
+    sessionStorage.removeItem("checkLocation");
 };
 
 function checkSession() {

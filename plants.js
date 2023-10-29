@@ -24,6 +24,7 @@ function dbPlants() {
 //   }
 
 function postPlant(plant) {
+    getLocation();
     let id = plant.db;
     let data = {
         id: id,
