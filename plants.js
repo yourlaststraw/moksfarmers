@@ -15,22 +15,21 @@ function dbPlants() {
     });
 };
 
-// function getCurrentDate() {
-//     const today = new Date();
-//     const year = today.getFullYear();
-//     const month = String(today.getMonth() + 1).padStart(2, '0');
-//     const day = String(today.getDate()).padStart(2, '0');
-//     return `${year}-${month}-${day}`;
-//   }
+function convertDateFormat(date) {
+    // const today = new Date();
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  }
 
 function postPlant(plant) {
-    getLocation();
     let id = plant.db;
     let data = {
         id: id,
         day: plant.day,
-        // loggedDate: getCurrentDate(),
-        loggedDate: "",
+        loggedDate: convertDateFormat(new Date()),
+        // loggedDate: "2023-10-30", //to test 
         location: localStorage.getItem("latlon")
     }
     axios.post(dbUrlpt1 + '/users/' + localStorage.getItem("user") + '/my_plants' + dbUrlpt2, data)
@@ -52,9 +51,10 @@ function callPlants() {
                 let userDb = user[i].id;
                 let dayTrack = user[i].day;
                 let userPlantId = user[i].user_plant_id;
-                let plant = modifyPlant(plants[userDb], dayTrack, userDb, userPlantId);
+                let loggedDate = user[i].loggedDate;
+                let plant = modifyPlant(plants[userDb], dayTrack, userDb, userPlantId, loggedDate);
                 list.push(plant);
-                console.log(plant);
+                // console.log(plant);
             }
             localStorage.setItem("userPlants", JSON.stringify(list));
         }
@@ -74,8 +74,8 @@ function convertProxy(plant) {
     }
 };
 
-function modifyPlant(plant, dayTrack, userDb, userPlantId) {
-    dayTrack = String(dayTrack);
+function modifyPlant(plant, dayTrack, userDb, userPlantId, loggedDate) {
+    // dayTrack = String(dayTrack);
     return {
         'db': userDb,
         'dayTrack': dayTrack,
@@ -87,8 +87,18 @@ function modifyPlant(plant, dayTrack, userDb, userPlantId) {
         'difficulty': plant.difficulty,
         'userPlantId': userPlantId,
         'instructions':getInstructions(plant.steps[`Step ${dayTrack}`].instruction),
+        'logToday': statusLog(loggedDate),
     }
 };
+
+function statusLog(loggedDate){
+    let logToday = false;
+    let today = convertDateFormat(new Date());
+    if(loggedDate==today) { 
+        logToday = true;
+    }
+    return logToday;
+}
 
 function getInstructions(instructions) {
     let output = [];
@@ -124,6 +134,7 @@ function checkCountTally(userPlants, myPlantsList) {
 };
 
 function loadData() {
+    storeCurrentLocation();
     dbPlants();
     callPlants();
     checkCountTally(JSON.parse(localStorage.getItem("userPlants")), localStorage.getItem("userPlantCount"));

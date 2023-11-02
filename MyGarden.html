@@ -118,7 +118,7 @@
                         <div v-for="plant in plants" :key="plant.id" class="border rounded-lg p-4">
                             <img :src="plant.image" alt="Plant Image" class="w-full h-40 object-cover rounded-md mb-2">
                             <p class="text-lg">{{ plant.name }}</p>
-                            <button @click="addToMyPlantsList(plant.id)" class="bg-lime-600 text-white py-2 px-4 rounded-lg w-full">Add to MyGarden</button>
+                            <button  @click="addToMyPlantsList(plant.id)" class="bg-lime-600 text-white py-2 px-4 rounded-lg w-full">Add to MyGarden</button>
                         </div>
                     </div>
                 </div>
@@ -136,6 +136,7 @@
     const arrayPlants = JSON.parse(localStorage.getItem("arrayPlants"));
     const userPlants = JSON.parse(localStorage.getItem("userPlants"));
     console.log(userPlants);
+    console.log(arrayPlants);
     if (userData!=null && Object.keys(userData).length>0){
             document.getElementById("welcome").innerHTML += userData.last_name + "!";
             }
@@ -160,7 +161,7 @@
                 isLogged: false,
                 isModalOpen: false,
                 myPlantsList: userPlants,
-                plants: arrayPlants
+                plants: arrayPlants,
                 };
         },
         methods: {
@@ -182,15 +183,26 @@
                 callPlants();
                 const userPlants = JSON.parse(localStorage.getItem("userPlants"));
                 checkCountTally(userPlants, this.myPlantsList);
+                windows.location.replace("plantStall.html");
             },
             logTracker(plantItem){
-                let userPlantId = plantItem.userPlantId;
-                let data = {
-                    loggedDate: String(new Date())
-                }
-                axios.patch(dbUrlpt1 + '/users/' + localStorage.getItem("user") + '/my_plants/' + userPlantId + dbUrlpt2, data);
-                console.log('Successfully logged progress');
+                const matchingPlantItem = this.myPlantsList.find(item => item.userPlantId === plantItem.userPlantId);
+                const logToday = matchingPlantItem.logToday;
+                console.log(logToday);
+                if(!logToday){
+                    let userPlantId = plantItem.userPlantId;
+                    let data = {
+                        // loggedDate: String(new Date())
+                        loggedDate: convertDateFormat(new Date()),
+                        day: matchingPlantItem.dayTrack + 1,
+                    }
+                    axios.patch(dbUrlpt1 + '/users/' + localStorage.getItem("user") + '/my_plants/' + userPlantId + dbUrlpt2, data);
+                    console.log('Successfully logged progress');
+                    callPlants();
             }
+                else{
+                    alert("You have already logged today's progress!");
+            }}
         },
         created(){
             if (userData!=null && Object.keys(userData).length>0){
