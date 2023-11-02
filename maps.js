@@ -42,7 +42,7 @@ function storeCurrentLocation() {
 
 function euclideanDistance() {
     let list = [];
-    let output, plants, euclid, location, plantLoc, postLat, postLon;
+    let output, plants, euclid, location, plantLoc, postLat, postLon, lonResult, latResult, result;
 
     axios.get(dbUrlpt1 + '/users' + dbUrlpt2)
     .then(response => {
@@ -54,26 +54,41 @@ function euclideanDistance() {
                 for (n in plants) {
                     if (plants[n] !== 'dummy') {
                         location = plants[n].location;
-                        plantLoc = location.split(",");
-                        postLat = plantLoc[0];
-                        postLon = plantLoc[1];
-                        euclid = Math.sqrt(((Number(userLon) - Number(postLon)) ** 2) - ((Number(userLat) - Number(postLat)) ** 2)) * 100;
-                        if (euclid < 0.2 || Number.isNaN(euclid)) { // NaN means that the distance is so miniscule that it is not readable.
-                            output = {                              // aka. basically right next to you.
-                                user: i,
-                                id: plants[n].id,
-                                location: location,
-                                day: plants[n].day,
-                                loggedDate: plants[n].loggedDate,
-                                user_plant_id: plants[n].user_plant_id
+                        if (location === undefined) {
+                            console.log('test');
+                        }
+                        else {
+                            console.log(response.data[i].first_name, location)
+                            plantLoc = location.split(",");
+                            userLat = Number(userLat);
+                            userLon = Number(userLon);
+                            postLat = Number(plantLoc[0]);
+                            postLon = Number(plantLoc[1]);
+                            lonResult = Math.pow(userLon - postLon, 2).toFixed(5);
+                            latResult = Math.pow(userLat - postLat, 2).toFixed(5);
+                            euclid = Math.sqrt(Number(lonResult) + Number(latResult)).toFixed(5);
+                            if (euclid < 0.2) {
+                                output = {
+                                    user: i,
+                                    id: plants[n].id,
+                                    location: location,
+                                    day: plants[n].day,
+                                    loggedDate: plants[n].loggedDate,
+                                    user_plant_id: plants[n].user_plant_id
+                                }
+                                list.push(output);
                             }
-                            list.push(output);
                         }
                     }
-                    console.log(euclid, output);
+                    //console.log(euclid, output);
                     localStorage.setItem("nearbyPlants", JSON.stringify(list));
                 }
             }
         }
     });
+};
+
+function communityLoad() {
+    storeCurrentLocation();
+    euclideanDistance();
 }
