@@ -62,34 +62,61 @@
 
         <div class = "layer 2">
             <div style = "background-color:#002431" class="glass cal-container">
+                
                 <div class="cal-header">
                   <h3 style ="color:white">UPCOMING EVENTS</h3>
                 </div>
+
                 <div class = "month-year-box">
-                    <button><</button>October 2023<button>></button>
+                    <button style = "cursor:pointer" v-on:click = "monthPrev()"><</button>
+                    <div style = "min-width:40%;text-align: center;">{{months[displayMonth]}} {{displayYear}}</div>
+                    <button style = "cursor:pointer" v-on:click = "monthNext()">></button>
                 </div>
-              </div>
-        </div>
-        <div class = "layer3">
-            <div style = "max-width:900px" class = "event-list">
-                <div class = "glass" v-for="event in events">
-                    <h3>{{event.name}}</h3>
-                    <p style = "color:grey;" >{{event.desc}}</p>
-                    <p>
-                        Location: {{event.location}}<br>
-                        Time: {{event.startTime}} - {{event.endTime}}
-                    </p>
-                    <div class = "btn-box">
-                        <button style = "font-size:100%;width:130px" class = "button" role = "button">Learn more</button>
+
+                <div class = "cal-row">
+                    <div class = "cal-row-wrapper">
+                    <div v-for="weekday in weekdays" class = "date-box">{{weekday[0]}}</div>
                     </div>
                 </div>
-            </div>
-            <div class = "event-tracker">
+                
+                <div v-for="row,rowNum in cal" class = "cal-row">
+                    <div class = "cal-row-wrapper">
+                    <date-btn ref = "dateBtn" v-for="date,idx in row" v-bind:month = "displayMonth" v-bind:year = "displayYear" v-bind:date = "date" v-bind:cal-len = "cal.length" v-bind:row-num="rowNum" v-bind:row="row" v-bind:idx = "idx">{{date}}</date-btn>
+                    </div>
+                </div>
+                
+                </div>
+                
+              </div>
 
+              <div class = "layer3">
+                <div style = "max-width:900px" class = "event-list">
+                    <div class = "glass" v-for="event in events">
+                        <h3>{{event.name}}</h3>
+                        <p style = "color:grey;" >{{event.desc}}</p>
+                        <p>
+                            Location: {{event.location}}<br>
+                            Time: {{event.startTime}} - {{event.endTime}}
+                        </p>
+                        <div class = "btn-box">
+                            <button style = "font-size:100%;width:130px" class = "button" role = "button">Learn more</button>
+                        </div>
+                    </div>
+                </div>
+                <div class = "event-tracker">
+    
+                </div>
             </div>
+            
         </div>
+        </div>
+
+
+
+
+
+
         
-    </div>
     <div v-else>
         <br><h3 class="buy-body">You are not logged in.</h3>
     </div>   
@@ -104,6 +131,7 @@
         const app = Vue.createApp({
                 data() {
                     return {
+                        cal:[],
                         months:{0:'January',1:'February',2:"March",3:"April",4:"May",5:"June",6:"July",7:"August",8:"September",9:"October",10:"November",11:"December"},
                         weekdays:{0:"Sunday",1:"Monday",2:"Tuesday",3:"Wednesday",4:"Thursday",5:"Friday",6:"Saturday"},
                         cur_date:{
@@ -112,6 +140,8 @@
                             date: d.getDate(),
                             day: d.getDay()
                         },
+                        displayMonth: d.getMonth(),
+                        displayYear: d.getFullYear(),
                         eventCounter:0,
                         pageCounter:0,
                         isLogged:false,
@@ -131,15 +161,103 @@
                     if (userData!=null && Object.keys(userData).length>0) {
                         this.isLogged = true;
                     }
-                    console.log(this.year)
+  
+                    
+                },
+                mounted(){
+                    this.populateCal()
+                    console.log(this.cal)
                 },
                 methods: {
                     log(str){
                         console.log(str);
                         return;
+                    },
+                    monthPrev(){
+                        
+                        if (this.displayMonth == 0){
+                            this.displayMonth = 11
+                            this.displayYear -= 1
+                        }else{
+                            this.displayMonth -= 1
+                        }
+                        this.populateCal()
+                    },
+                    monthNext(){                        
+                        if (this.displayMonth == 11){
+                            this.displayMonth = 0
+                            this.displayYear += 1
+                        }else{
+                            this.displayMonth += 1
+                        }
+                        this.populateCal()
+                    },
+                    populateCal(){
+
+                        this.cal =[]
+                        cur = new Date(this.displayYear,this.displayMonth,1)
+                        end = new Date(this.displayYear,this.displayMonth+1)
+                        cur.setDate(-cur.getDay()+1)
+                        while (cur.getMonth() != end.getMonth()){
+                            temp = []
+                            for (let i = 0; i < 7; i++){
+                                temp.push(cur.getDate())
+                                cur.setDate(cur.getDate()+1)
+                            }
+                            this.cal.push(temp)
+                        }
+                        
                     }
                 },
-        }).mount("#events");
+        })
+
+        app.component('date-btn', {
+            data() {
+                return {
+                    isGrey: false,
+                    d: new Date(),
+                    isGreen: false,
+                }
+            },
+            props: ['idx','row','rowNum','calLen','date','year','month'],
+            template: `<div class = "date-box" v-bind:class = "{grey:isGrey,green:isGreen}"><slot></slot></div>`,
+            methods: {
+                refresh(){
+                    console.log(this.month == this.d.getMonth() && this.year == this.d.getFullYear() && this.date == this.d.getDate())
+                    if (this.month == this.d.getMonth() && this.year == this.d.getFullYear() && this.date == this.d.getDate()){
+                        this.isGreen = true
+                    }else{
+                        this.isGreen = false
+                    }
+                    if (this.rowNum == 0){
+                        if(this.date>7){
+                            this.isGrey = true
+                        }else{
+                            this.isGrey = false
+                        }
+                    }else if(this.rowNum == this.calLen-1){
+
+                        if (this.date < 7){
+                            this.isGrey = true
+                        }else{
+                            this.isGrey = false
+                        }
+                    }else{
+                        this.isGrey = false
+                    }
+                }
+            },
+            created(){
+                this.refresh()
+            },
+            watch:{
+                date(){
+                    this.refresh()
+                }
+            }
+        })
+
+        app.mount("#events")
     </script>
 </body>
 </html>

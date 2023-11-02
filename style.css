@@ -894,14 +894,14 @@ section #text {
     width:100%;
     display: flex;
     justify-content: center;
-    border:2px red solid;
+    /* border:2px red solid; */
 }
 
 .month-year-box{
     display: flex;
     width: 100%;
     justify-content: center;
-    border:2px red solid;
+    /* border:2px red solid; */
 }
 
 .cal-container div{
@@ -910,7 +910,7 @@ section #text {
 
 .month-year-box{
     font-size:3vw;
-    border:2px red solid;
+    /* border:2px red solid; */
 }
 
 .month-year-box button{
@@ -924,4 +924,34 @@ section #text {
 
 .month-year-box button:active{
     color:black;
+}
+
+.cal-row{
+    font-size: 2vw;
+    display: flex;
+    justify-content: center;
+    /* border: 2px red solid; */
+}
+
+.date-box{
+    width: 8%;
+    display: flex;
+    justify-content: center;
+    border-radius: 100%;
+}
+
+.grey{
+    color: grey !important;
+    opacity: 50%;
+}
+
+.green{
+    background-color: green;
+
+}
+
+.cal-row-wrapper{
+    display: flex;
+    width:50%;
+    justify-content: space-between;
 }
