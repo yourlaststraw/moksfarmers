@@ -183,6 +183,7 @@
                 callPlants();
                 const userPlants = JSON.parse(localStorage.getItem("userPlants"));
                 checkCountTally(userPlants, this.myPlantsList);
+                windows.location.replace("plantStall.html");
             },
             logTracker(plantItem){
                 const matchingPlantItem = this.myPlantsList.find(item => item.userPlantId === plantItem.userPlantId);

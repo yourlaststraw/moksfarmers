@@ -3,6 +3,10 @@ function getLocation() {
     navigator.geolocation.getCurrentPosition(showPosition);
     localStorage.setItem("locationPermission", navigator.geolocation.getCurrentPosition(showPosition));
     }
+    else {
+        localStorage.removeItem("checkLocation");
+        alert('Location Services needed to load this page. Please enable it.');
+    }
 }
 
 function showPosition(position) {

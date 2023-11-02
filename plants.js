@@ -24,7 +24,6 @@ function convertDateFormat(date) {
   }
 
 function postPlant(plant) {
-    getLocation();
     let id = plant.db;
     let data = {
         id: id,
@@ -135,6 +134,7 @@ function checkCountTally(userPlants, myPlantsList) {
 };
 
 function loadData() {
+    storeCurrentLocation();
     dbPlants();
     callPlants();
     checkCountTally(JSON.parse(localStorage.getItem("userPlants")), localStorage.getItem("userPlantCount"));
