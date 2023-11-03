@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="text">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/logo.png">
+    <!-- Page Title -->
+    <title></title>
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="animation.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!-- other Files -->
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="text/javascript" src="commons.js"></script>
+    <script type="text/javascript" src="user.js"></script>
+    <script type="text/javascript" src="proxyevent.js"></script>
+    <style>
+        .container {
+            display: flex;
+            justify-content: center;
+            margin-top: 10%;
+            margin-bottom: 10%;
+        }
+        
+        #errors {
+            color: red;
+        }
+    </style>
+</head>
+
+<body class="container">
+    <div>
+        <h1>Add an Event</h1>
+        <label for="name">Event Name</label><br>
+        <input type="text" id="name" required>
+        <br><br>
+        <label for="description">Event Description</label><br>
+        <input type="text" id="description" required>
+        <br><br>
+        <label for="location">Event Location</label><br>
+        <input type="text" id="location" required>
+        <br><br>
+        <label for="size">Event Size</label><br>
+        <input type="number" id="size" required>
+        <br><br>
+        <label for="from">Event Start:</label><br>
+        <input type="date" id="from" required>
+        <br><br>
+        <label for="to">Event End:</label><br>
+        <input type="date" id="to" required>
+        <br><br>
+        <label for="signup">Sign Ups End On:</label><br>
+        <input type="date" id="signup" required>
+        <br><br>
+        <label for="image">Event Poster</label><br>
+        <input type="file" id="image" required accept=".webp, .png, .jpg, .jpeg" onchange="encodeImageFileAsURL(this)"> 
+        <br><br>
+        <button onclick="addEvent()">Register</button>
+        <div id="errors"></div><br>
+    </div>
+</body>
+</html>
