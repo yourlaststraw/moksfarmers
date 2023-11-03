@@ -20,8 +20,19 @@
     <script type="text/javascript" src="commons.js"></script>
     <script type="text/javascript" src="user.js"></script>
     <script type="text/javascript" src="Events.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-    
+    <script type="text/javascript" src="proxyevent.js"></script>
+    <style>
+        .container {
+            display: flex;
+            justify-content: center;
+            margin-top: 10%;
+            margin-bottom: 10%;
+        }
+        
+        #errors {
+            color: red;
+        }
+    </style>
 </head>
 
 <body id="events">
@@ -51,113 +62,39 @@
             Welcome, farmer 
         </div>
         </div>
-
+        <div style = "width:100%; display: flex;justify-content: flex-start;">
+            <button onclick="window.location.replace('Events.html')" style = "font-size:1rem;width:130px" class = "button" role = "button">Back</button>
+        </div>
     </header>
 
-    <div v-if="isLogged" class = "sec" style = "padding-top: 0;">
-        <br>
-        <div class = "layer 2">
-            <div style = "background-color:#002431" class="glass cal-container">
-                
-                <div class="cal-header">
-                  <h3 style ="color:white">UPCOMING EVENTS</h3>
-                </div>
-
-                <div class = "month-year-box">
-                    <button style = "cursor:pointer" v-on:click = "monthPrev()"><</button>
-                    <div style = "min-width:40%;text-align: center;">{{months[displayMonth]}} {{displayYear}}</div>
-                    <button style = "cursor:pointer" v-on:click = "monthNext()">></button>
-                </div>
-
-                <div class = "cal-row">
-                    <div class = "cal-row-wrapper">
-                    <div v-for="weekday in weekdays" class = "date-box">{{weekday[0]}}</div>
-                    </div>
-                </div>
-                
-                <div v-for="row,rowNum in cal" class = "cal-row">
-                    <div class = "cal-row-wrapper">
-                    <date-btn 
-                        v-on:select="onSelect"
-                        ref = "dateBtn"
-                        v-for="date,idx in row"
-                        v-bind:event-date-list="eventDates"
-                        v-bind:cur-date="cur_date.date"
-                        v-bind:cur-month="cur_date.month"
-                        v-bind:cur-year="cur_date.year"
-                        v-bind:month = "date[2]"
-                        v-bind:year = "date[3]"
-                        v-bind:date = "date[1]"
-                        v-bind:cal-len = "cal.length"
-                        v-bind:row-num="rowNum"
-                        v-bind:row="row"
-                        v-bind:idx = "idx"
-                        >{{date[1]}}</date-btn>
-                    </div>
-                </div>
-                
-                <hr style = "margin-top: 10px;opacity: 50%;">
-                <div class = "my-event-list-header">
-                    {{weekdays[cur_date.day]}}, {{cur_date.date}} {{months[cur_date.month]}}
-                </div>
-                <div v-if="!userEvents.registered.hasOwnProperty(cur_date_str) && !userEvents.created.hasOwnProperty(cur_date_str)" class = "my-event-list">
-                    You have no events on this day! Register one now... or create your own!
-                </div>
-                <div v-else class="my-event-list">
-                    <event  v-for="event in userEvents.registered" v-bind:event="event"></event>
-                    <event v-for="event in userEvents.created" v-bind:event="event"></event>
-                </div>
-
-                
-                </div>
-                
-              </div>
-
-              <div class = "layer3">
-                <div style = "width:100%;display: flex;justify-content: flex-start;">
-                    <button style = "width:150px;font-size:1rem;" class = "button" role = "button"><a style = "text-decoration: none;" href="CreateEvent.html">Create Event</a></button>
-                </div>
-                <br>
-                <div class = "event-list">
-                    <div class = "glass event" v-for="event,idx in events">
-                        <img style="width: 100%" v-bind:src="event.image">
-                        
-                            <div class ="event-name">{{event.name}}</div>
-                            <p style = "color:grey;" >{{event.desc}}</p>
-                            <p>
-                                Location: {{event.location}}<br>
-                                Date(s): {{eventDuration(event.from,event.to)}}
-                            </p>
-                            <div class = "btn-box">
-                                <learn-btn v-bind:event="event">Learn more</learn-btn>
-                            </div>
-                        
-                    </div>
-                </div>
-                <div class = "event-tracker">
-    
-                </div>
-            </div>
-            
-        </div>
-        </div>
-
-
-
-
-
-
+    <div class = "sec" style = "padding-top: 0;">
         
-    <div v-else>
-        <br><h3 class="buy-body">You are not logged in.</h3>
-    </div>   
+        <div class = "layer1">
+            <div>
+                In progress
+            </div>
+
+        </div>  
+
+        <div class = "layer 2">
+            
+                
+        </div>
+
+        <div class = "layer3">
+                
+        </div>
+            
+    </div>
+
+  
     
     <script>
-        
         if (userData !=null && Object.keys(userData).length >0) {
             document.getElementById("welcome").innerHTML += userData.last_name + "!";
+        }else{
+            window.location.replace("index.html")
         }
-        console.log(userData)
         d = new Date()
         // Vue app
         const app = Vue.createApp({
@@ -178,49 +115,13 @@
                         pageCounter:0,
                         isLogged:false,
                         userEvents: {
-                            registered:{'11/5/2023':{name:'Edible Gardening',location:'Toa Payoh Hub'}},
+                            registered:{'5/10/2023':{name:'Edible Gardening',location:'Toa Payoh Hub'}},
                             created:{}
                         },
                         events: [{
                             name:"EdibleGardening101 @ToaPayoh",
                             desc: "Bring your family down to Toa Payoh for a fun-filled morning learning how to grow, harvest and cook your own vegetables!",
-                            size: 5,
-                            from: new Date("10/23/2023"),
-                            to: new Date("10/23/2023"),
-                            signup: new Date("10/23/2023"),
-                            image: "images/crops/tomato.webp",
-                            host:'',
-                            participants:{dum :'dum'},
-                            startTime: "08:00",
-                            endTime: "12:00",
-                            location: "Toa Payoh Hub #03-23",
-                            fee: "15",
-
-                        },{
-                            name:"EdibleGardening101 @ToaPayoh",
-                            desc: "Bring your family down to Toa Payoh for a fun-filled morning learning how to grow, harvest and cook your own vegetables!",
-                            size: 5,
-                            from: new Date("10/23/2023"),
-                            to: new Date("10/23/2023"),
-                            signup: new Date("10/23/2023"),
-                            image: "images/crops/tomato.webp",
-                            host:'',
-                            participants:{dum :'dum'},
-                            startTime: "08:00",
-                            endTime: "12:00",
-                            location: "Toa Payoh Hub #03-23",
-                            fee: "15",
-
-                        },{
-                            name:"EdibleGardening101 @ToaPayoh",
-                            desc: "Bring your family down to Toa Payoh for a fun-filled morning learning how to grow, harvest and cook your own vegetables!",
-                            size: 5,
-                            from: new Date("10/23/2023"),
-                            to: new Date("10/23/2023"),
-                            signup: new Date("10/23/2023"),
-                            image: "images/crops/tomato.webp",
-                            host:'',
-                            participants:{dum :'dum'},
+                            date: Date("23/10/2023"),
                             startTime: "08:00",
                             endTime: "12:00",
                             location: "Toa Payoh Hub #03-23",
@@ -234,6 +135,7 @@
                         this.isLogged = true;
                         
                     }
+  
                     
                 },
                 mounted(){
@@ -285,36 +187,12 @@
                         this.cur_date.date = date[1]
                         this.cur_date.month = date[2]
                         this.cur_date.year = date[3]
-                    },
-                    eventDuration(from,to){
-                        d = new Date(from)
-                        d2 = new Date(to)
-                        start = [d.getMonth()+1,d.getDate(),d.getFullYear()]
-                        end = [d2.getMonth()+1,d2.getDate(),d2.getFullYear()]
-
-                        if (start[0] == end[0] && start[1] == end[1] && start[2] == end[2]){
-                            return start[0] + "/" + start[1] + "/" + start[2]
-                        }else{
-                            return start[0] + "/" +start[1] + "/" + start[2] + " - " + end[0] + "/" + end[1] + "/" + end[2]
-                        }
                     }
                     
                 },
                 computed: {
                     cur_date_str(){
                         return this.cur_date.date + "/"+ this.cur_date.month + "/" + this.cur_date.year
-                    },
-                    eventDates(){
-                        temp =[]
-                        for (date in this.userEvents.registered){
-                            d = new Date(date)
-                            temp.push(d)
-                        }
-                        for (date in this.userEvents.created){
-                            d = new Date(date)
-                            temp.push(d)
-                        }
-                        return temp
                     }
                 }
         })
@@ -326,7 +204,7 @@
                 }
             },
             props: ['event'],
-            template: `<div class = "my-event"><span>{{event.name}}, {{event.location}}</span></div>`,
+            template: `<div class = "event"><span>{{event.name}}, {{event.location}}</span></div>`,
             
             methods: {
                 
@@ -343,35 +221,20 @@
                     isGrey: false,
                     d: new Date(),
                     isGreen: false,
-                    hasEvent: false
                 }
             },
-            props: ['idx','row','rowNum','calLen','date','year','month','curDate','curMonth','curYear','eventDateList'],
-            template: `<div @click= "select()" class = "date-box" v-bind:class = "{grey:isGrey,white:hasEvent,green:isGreen}"><slot></slot></div>`,
+            props: ['idx','row','rowNum','calLen','date','year','month','curDate','curMonth','curYear'],
+            template: `<div @click= "select()" class = "date-box" v-bind:class = "{grey:isGrey,green:isGreen}"><slot></slot></div>`,
             
             methods: {
                 refresh(){
-                    
-                    flag = false
-                    for (date of this.eventDateList){
-
-                        if (date.getDate() == this.date && date.getMonth() == this.month && date.getFullYear() == this.year){
-                            this.hasEvent = true
-                            flag = true
-                            break
-                        }
-                    }
-                    if (!flag){
-                        this.hasEvent= false
-                    }
-
                     if (this.month == this.curMonth && this.year == this.curYear && this.date == this.curDate){
+                        // if(this.rowNum == 0 &&){
                             this.isGreen = true
+                        // }
                     }else{
                         this.isGreen = false
                     }
-                    
-
                     if (this.rowNum == 0){
                         if(this.date>7){
                             this.isGrey = true
@@ -421,10 +284,15 @@
                 }
             },
             created(){
-                
+                this.refresh()
             },
             watch:{
-
+                date(){
+                    this.refresh()
+                },
+                curDate(){
+                    this.refresh()
+                }
             }
         })
 

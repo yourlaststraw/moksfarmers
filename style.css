@@ -950,8 +950,54 @@ section #text {
 
 }
 
+.white{
+    background-color: white;
+    color: #002431:
+}
+
 .cal-row-wrapper{
     display: flex;
     width:50%;
     justify-content: space-between;
+}
+
+.my-event-list-header{
+    font-size: 3vw;
+    text-align: center;
+}
+
+.my-event-list{
+    font-size: 2vw;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.my-event{
+    width:fit-content;
+    cursor: pointer;
+}
+.my-event:hover span{
+    display:none
+}
+
+.my-event:hover:before{
+    content: "View details"
+}
+
+.event-list{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.event{
+    width: 47%;
+    min-width: 300px;
+    display: flex;
+    flex-direction: column;
+}
+
+.event-name{
+    font-size: 150%;
 }

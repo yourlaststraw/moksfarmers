@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="text">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/logo.png">
+    <!-- Page Title -->
+    <title></title>
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="animation.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!-- other Files -->
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="text/javascript" src="commons.js"></script>
+    <script type="text/javascript" src="user.js"></script>
+    <script type="text/javascript" src="Events.js"></script>
+    <script type="text/javascript" src="proxyevent.js"></script>
+    <style>
+        .container {
+            display: flex;
+            justify-content: center;
+            margin-top: 10%;
+            margin-bottom: 10%;
+            font-size: 2vw;
+        }
+        
+        #errors {
+            color: red;
+        }
+        input{
+            width:30vw;
+        }
+    </style>
+</head>
+
+<body id="events">
+    <!-- This is the header/ Nav Bar -->
+    <header id="header">
+        <div class = "wrapper">
+            <a href="index.html" class="logo">Mok's Farmers</a>
+        </div>
+
+        <div class ="links">
+            <div class = "wrapper">
+                <a href="index.html" >Home</a>
+                <a href="MyGarden.html" >MyGarden</a>
+            </div>
+            <div class = "wrapper">
+                <a href="Events.html" class="active">Events</a>
+                <a href="Buy.html">Buy</a>
+            </div>
+        </div>
+
+        <div class = "user-info">
+        <button class="button-5" role="button">
+            <div v-if="isLogged" onclick="clearSession();window.location.replace('index.html')">Logout</div>
+            <div v-else><a href="login.html">Login/Signup</a></div>
+        </button>
+        <div id = "welcome" style ="text-align: right;" v-if="isLogged" >
+            Welcome, farmer 
+        </div>
+        </div>
+        <div style = "width:100%; display: flex;justify-content: flex-start;">
+            <button onclick="window.location.replace('Events.html')" style = "font-size:1rem;width:130px" class = "button" role = "button">Back</button>
+        </div>
+    </header>
+
+    <div class = "sec" style = "padding-top: 0;">
+        
+        <div class = "layer1 container">
+            <div>
+                <div>
+                    <h1>Add an Event</h1>
+                    <label for="name">Event Name</label><br>
+                    <input type="text" id="name" required>
+                    <br><br>
+                    <label for="description">Event Description</label><br>
+                    <input type="text" id="description" required>
+                    <br><br>
+                    <label for="location">Event Location</label><br>
+                    <input type="text" id="location" required>
+                    <br><br>
+                    <label for="size">Event Size</label><br>
+                    <input type="number" id="size" required>
+                    <br><br>
+                    <label for="from">Event Start:</label><br>
+                    <input type="date" id="from" required>
+                    <br><br>
+                    <label for="to">Event End:</label><br>
+                    <input type="date" id="to" required>
+                    <br><br>
+                    <label for="signup">Sign Ups End On:</label><br>
+                    <input type="date" id="signup" required>
+                    <br><br>
+                    <label for="image">Event Poster</label><br>
+                    <input type="file" id="image" required accept=".webp, .png, .jpg, .jpeg" onchange="encodeImageFileAsURL(this)"> 
+                    <br><br>
+                    <button onclick="addEvent()">Register</button>
+                    <div id="errors"></div><br>
+                </div>
+            </div>
+
+        </div>  
+
+        <div class = "layer 2">
+            
+                
+        </div>
+
+        <div class = "layer3">
+                
+        </div>
+            
+    </div>
+
+  
+    
+    <script>
+        if (userData !=null && Object.keys(userData).length >0) {
+            document.getElementById("welcome").innerHTML += userData.last_name + "!";
+        }else{
+            window.location.replace("index.html")
+        }
+        d = new Date()
+        // Vue app
+        const app = Vue.createApp({
+                data() {
+                    return {
+                        cal:[],
+                        months:{0:'January',1:'February',2:"March",3:"April",4:"May",5:"June",6:"July",7:"August",8:"September",9:"October",10:"November",11:"December"},
+                        weekdays:{0:"Sunday",1:"Monday",2:"Tuesday",3:"Wednesday",4:"Thursday",5:"Friday",6:"Saturday"},
+                        cur_date:{
+                            year: d.getFullYear(),
+                            month: d.getMonth(),
+                            date: d.getDate(),
+                            day: d.getDay()
+                        },
+                        displayMonth: d.getMonth(),
+                        displayYear: d.getFullYear(),
+                        eventCounter:0,
+                        pageCounter:0,
+                        isLogged:false,
+                        userEvents: {
+                            registered:{'5/10/2023':{name:'Edible Gardening',location:'Toa Payoh Hub'}},
+                            created:{}
+                        },
+                        events: [{
+                            name:"EdibleGardening101 @ToaPayoh",
+                            desc: "Bring your family down to Toa Payoh for a fun-filled morning learning how to grow, harvest and cook your own vegetables!",
+                            date: Date("23/10/2023"),
+                            startTime: "08:00",
+                            endTime: "12:00",
+                            location: "Toa Payoh Hub #03-23",
+                            fee: "15",
+
+                        }]
+                    };
+                },
+                created() {
+                    if (userData!=null && Object.keys(userData).length>0) {
+                        this.isLogged = true;
+                        
+                    }
+  
+                    
+                },
+=
+                methods: {
+
+                },
+                    
+                computed: {
+                }
+        })
+
+        app.mount("#events")
+    </script>
+</body>
+</html>

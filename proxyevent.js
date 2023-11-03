@@ -67,6 +67,7 @@ function addEvent(){
         axios.post(url, data)
         .then(() => {
             alert('Event Successfully Registered!')
+            window.location.replace('Events.html')
         });
     }
 }
