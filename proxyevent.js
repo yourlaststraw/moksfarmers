@@ -58,7 +58,10 @@ function addEvent(){
             to: to,
             signup: signup,
             image: image,
-            host: session
+            host: session,
+            participants: {
+                dummy: 'dummy'
+            }
         };
 
         axios.post(url, data)
