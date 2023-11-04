@@ -611,7 +611,7 @@ section #text {
 
 .button {
     display: flex;
-    align-items: baseline;
+    align-items: center;
     justify-content: center;
     width: 120px;
     height: 60px;
@@ -926,6 +926,7 @@ section #text {
 }
 
 .date-box{
+    cursor: pointer;
     width: 8%;
     display: flex;
     justify-content: center;
@@ -975,7 +976,8 @@ section #text {
 }
 
 .my-event:hover:before{
-    content: "View details"
+    content: "View details";
+    color:#4faa2e;
 }
 
 .event-list{
@@ -993,4 +995,12 @@ section #text {
 
 .event-name{
     font-size: 150%;
+}
+
+.sign-up-field{
+    width:250px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
 }

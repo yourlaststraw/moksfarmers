@@ -17,6 +17,7 @@
     <!-- other Files -->
     <script src="https://unpkg.com/vue@next"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
     <script type="text/javascript" src="commons.js"></script>
     <script type="text/javascript" src="user.js"></script>
     <script type="text/javascript" src="Events.js"></script>
@@ -63,22 +64,41 @@
         </div>
         </div>
         <div style = "width:100%; display: flex;justify-content: flex-start;">
-            <button onclick="window.location.replace('Events.html')" style = "font-size:1rem;width:130px" class = "button" role = "button">Back</button>
+            <button onclick="window.location.replace('Events.html')" style = "font-size:1rem;width:130px;margin-bottom: 50px;" class = "button" role = "button">Back</button>
         </div>
+
+        
     </header>
 
-    <div class = "sec" style = "padding-top: 0;">
+    <div class = "sec" style = "margin-top: 40px;padding-top: 25px;">
         
-        <div class = "layer1">
-            <div>
-                In progress
-            </div>
+        <div class = "layer1 glass">
+
+                Event details
+
 
         </div>  
 
-        <div class = "layer 2">
+        <div class = "layer 2 glass">
+            <h2>Sign up now!</h2>
+
+            <div class = "sign-up-field">
+                <div>Name:</div>
+                <div><input type = "text"></div>
+            </div>
+
+            <div class = "sign-up-field">
+                <div>Email:</div>
+                <div><input type = "text"></div>
+            </div>
             
-                
+            <div class = "sign-up-field">
+                <div>Phone:</div>
+                <div><input type = "text"></div>
+            </div>
+
+            <div style = "width:100%;display:flex;justify-content: flex-end;"><button class = "button" role="button">Sign Up</button></div>
+
         </div>
 
         <div class = "layer3">

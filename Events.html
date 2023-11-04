@@ -20,6 +20,7 @@
     <script type="text/javascript" src="commons.js"></script>
     <script type="text/javascript" src="user.js"></script>
     <script type="text/javascript" src="Events.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
     
 </head>
@@ -118,7 +119,7 @@
 
               <div class = "layer3">
                 <div style = "width:100%;display: flex;justify-content: flex-start;">
-                    <button style = "width:150px;font-size:1rem;" class = "button" role = "button"><a style = "text-decoration: none;" href="CreateEvent.html">Create Event</a></button>
+                    <button style = "width:150px;font-size:1rem;" class = "button" role = "button"><a style = "text-decoration: none;color:black" href="CreateEvent.html">Create Event</a></button>
                 </div>
                 <br>
                 <div class = "event-list">
@@ -171,7 +172,7 @@
                         weekdays:{0:"Sunday",1:"Monday",2:"Tuesday",3:"Wednesday",4:"Thursday",5:"Friday",6:"Saturday"},
                         cur_date:{
                             year: d.getFullYear(),
-                            month: d.getMonth(),
+                            month: d.getMonth()+1,
                             date: d.getDate(),
                             day: d.getDay()
                         },
@@ -276,11 +277,10 @@
                         while (cur.getMonth() != end.getMonth()){
                             temp = []
                             for (let i = 0; i < 7; i++){
-                                temp.push([cur.getDay(),cur.getDate(),cur.getMonth(),cur.getFullYear()])
+                                temp.push([cur.getDay(),cur.getDate(),cur.getMonth()+1,cur.getFullYear()])
                                 cur.setDate(cur.getDate()+1)
                             }
                             this.cal.push(temp)
-                            console.log(this.userEvents.registered.hasOwnProperty(this.cur_date_str))
                         }
                         
                     },
@@ -306,7 +306,7 @@
                 },
                 computed: {
                     cur_date_str(){
-                        return this.cur_date.date + "/"+ this.cur_date.month + "/" + this.cur_date.year
+                        return  this.cur_date.month + "/" + this.cur_date.date + "/"+ this.cur_date.year
                     },
                     eventDates(){
                         temp =[]
@@ -330,10 +330,13 @@
                 }
             },
             props: ['event'],
-            template: `<div class = "my-event"><span>{{event.name}}, {{event.location}}</span></div>`,
+            template: `<div @click="viewDetails()" class = "my-event"><span>{{event.name}}, {{event.location}}</span></div>`,
             
             methods: {
-                
+                viewDetails(){
+                    localStorage.setItem("event", JSON.stringify(this.event))
+                    window.location.replace("EventDetails.html")
+                }
             },
             created(){
             },
@@ -359,7 +362,7 @@
                     flag = false
                     for (date of this.eventDateList){
 
-                        if (date.getDate() == this.date && date.getMonth() == this.month && date.getFullYear() == this.year){
+                        if (date.getDate() == this.date && date.getMonth()+1 == this.month && date.getFullYear() == this.year){
                             this.hasEvent = true
                             flag = true
                             break
@@ -368,7 +371,6 @@
                     if (!flag){
                         this.hasEvent= false
                     }
-
                     if (this.month == this.curMonth && this.year == this.curYear && this.date == this.curDate){
                             this.isGreen = true
                     }else{
