@@ -53,7 +53,6 @@
             Welcome, farmer 
         </div>
         </div>
-
     </header>
 
     <!-- This is the Top Section (Above Sand) -->
@@ -127,20 +126,16 @@
 
     <!-- Code for the footer -->
     <div class="footer" id="footer">
-        Placeholder
+        © 2023 Mok's Farmers. All rights reserved.
     </div>
 
     <!-- The button to scroll back to top -->
     <a id="top" href="#"> <i class="fas fa-arrow-up"></i> </a>
 
     <script>
-        if (session !== null && session !== 'null') {
-            storeCurrentLocation();
-        }
-        console.log(userData)
-        if (userData !=null && Object.keys(userData).length >0) {
+        if (userData!=null && Object.keys(userData).length>0){
             document.getElementById("welcome").innerHTML += userData.last_name + "!";
-        }
+            }
         // Vue app
         const app = Vue.createApp({
                 data() {
@@ -157,6 +152,9 @@
                     log(str){
                         console.log(str);
                         return;
+                    },
+                    clearSession(){
+                        clearSession();
                     }
                 },
         }).mount("#home");
