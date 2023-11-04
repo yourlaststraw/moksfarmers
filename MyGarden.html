@@ -178,12 +178,13 @@
                 plant.day = 1;
                 plant = convertProxy(plant);
                 this.myPlantsList.push(plant);
+                console.log(typeof plant, plant);
                 postPlant(plant);
-                localStorage.setItem("userPlantCount", this.myPlantsList);
+                localStorage.setItem("userPlantCount", JSON.stringify(this.myPlantsList));
                 callPlants();
                 const userPlants = JSON.parse(localStorage.getItem("userPlants"));
-                checkCountTally(userPlants, this.myPlantsList);
-                windows.location.replace("plantStall.html");
+                checkCountTally(userPlants, JSON.parse(JSON.stringify(this.myPlantsList)));
+                // windows.location.replace("plantStall.html");
             },
             logTracker(plantItem){
                 const matchingPlantItem = this.myPlantsList.find(item => item.userPlantId === plantItem.userPlantId);

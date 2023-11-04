@@ -24,6 +24,7 @@ function convertDateFormat(date) {
   }
 
 function postPlant(plant) {
+    console.log(plant);
     let id = plant.db;
     let data = {
         id: id,
@@ -116,21 +117,26 @@ function getInstructions(instructions) {
 function checkCountTally(userPlants, myPlantsList) {
     if (localStorage.getItem("userPlantCount") !== null && localStorage.getItem("userPlantCount") !== 'null') {
         let count = 0;
-        let arr;
+
+        console.log(userPlants, myPlantsList);
+        userPlants = JSON.parse(JSON.stringify(userPlants));
+        myPlantsList = JSON.parse(JSON.stringify(myPlantsList));
+        console.log(userPlants, myPlantsList);
         if (myPlantsList !== '') {
-            arr = myPlantsList.split(',');
-            count = arr.length;
+            count = myPlantsList.length;
         }
 
         let user = userPlants.length;
         if (count !== user) {
             console.log(count, user)
+            userPlants = JSON.stringify(userPlants);
+            myPlantsList = JSON.stringify(myPlantsList);
             window.location.replace("plantStall.html");
         }
         console.log(count, user);
     }
     else {
-        localStorage.setItem("userPlantCount", userPlants);
+        localStorage.setItem("userPlantCount", JSON.stringify(userPlants));
     }
 };
 
@@ -138,5 +144,5 @@ function loadData() {
     storeCurrentLocation();
     dbPlants();
     callPlants();
-    checkCountTally(JSON.parse(localStorage.getItem("userPlants")), localStorage.getItem("userPlantCount"));
+    checkCountTally(JSON.parse(localStorage.getItem("userPlants")), JSON.parse(localStorage.getItem("userPlantCount")));
 };
