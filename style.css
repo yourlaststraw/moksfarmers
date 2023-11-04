@@ -946,13 +946,13 @@ section #text {
 }
 
 .green{
-    background-color: green;
+    background-color: green !important;
 
 }
 
 .white{
     background-color: white;
-    color: #002431:
+    color: #002431 !important;
 }
 
 .cal-row-wrapper{
