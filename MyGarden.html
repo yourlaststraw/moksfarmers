@@ -183,8 +183,8 @@
                 localStorage.setItem("userPlantCount", JSON.stringify(this.myPlantsList));
                 callPlants();
                 const userPlants = JSON.parse(localStorage.getItem("userPlants"));
-                checkCountTally(userPlants, JSON.parse(JSON.stringify(this.myPlantsList)));
-                // windows.location.replace("plantStall.html");
+                // JSON.parse(JSON.strngify(value)) is used to clean out Proxy(array) values, so that it becomes normal.
+                checkCountTally(userPlants, JSON.parse(JSON.stringify(this.myPlantsList))); 
             },
             logTracker(plantItem){
                 const matchingPlantItem = this.myPlantsList.find(item => item.userPlantId === plantItem.userPlantId);

@@ -118,10 +118,9 @@ function checkCountTally(userPlants, myPlantsList) {
     if (localStorage.getItem("userPlantCount") !== null && localStorage.getItem("userPlantCount") !== 'null') {
         let count = 0;
 
-        console.log(userPlants, myPlantsList);
+        // JSON.parse(JSON.strngify(value)) is used to clean out Proxy(array) values, so that it becomes normal.
         userPlants = JSON.parse(JSON.stringify(userPlants));
         myPlantsList = JSON.parse(JSON.stringify(myPlantsList));
-        console.log(userPlants, myPlantsList);
         if (myPlantsList !== '') {
             count = myPlantsList.length;
         }
@@ -133,7 +132,7 @@ function checkCountTally(userPlants, myPlantsList) {
             myPlantsList = JSON.stringify(myPlantsList);
             window.location.replace("plantStall.html");
         }
-        console.log(count, user);
+        //console.log(userPLants, myPlantsList);
     }
     else {
         localStorage.setItem("userPlantCount", JSON.stringify(userPlants));
