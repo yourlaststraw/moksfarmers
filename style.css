@@ -969,10 +969,7 @@ section #text {
 
 }
 
-.white{
-    background-color: white;
-    color: #002431;
-}
+
 
 .cal-row-wrapper{
     display: flex;
@@ -1019,4 +1016,9 @@ section #text {
 
 .event-name{
     font-size: 150%;
+}
+
+.events-btn{
+    background-color:#002431;
+    color: white;
 }
