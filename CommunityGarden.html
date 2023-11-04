@@ -76,6 +76,12 @@
 
     <script>
         euclideanDistance();
+        window.onload = function() {
+            if(!window.location.hash) {
+                window.location = window.location + '#loaded';
+                window.location.reload();
+            }
+        }
         const nearbyPlants = JSON.parse(localStorage.getItem("nearbyPlants"));
         console.log(JSON.parse(localStorage.getItem("nearbyPlants")));
         // display name if user is logged in

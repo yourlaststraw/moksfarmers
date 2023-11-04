@@ -64,10 +64,11 @@ function euclideanDistance() {
                             userLon = Number(userLon);
                             postLat = Number(plantLoc[0]);
                             postLon = Number(plantLoc[1]);
-                            lonResult = Math.pow(userLon - postLon, 2).toFixed(5);
-                            latResult = Math.pow(userLat - postLat, 2).toFixed(5);
-                            euclid = Math.sqrt(Number(lonResult) + Number(latResult)).toFixed(5);
-                            if (euclid < 0.2) {
+                            lonResult = Math.pow(userLon - postLon, 2);
+                            latResult = Math.pow(userLat - postLat, 2);
+                            euclid = Math.sqrt(lonResult + latResult).toFixed(3);
+                            console.log(userLat, userLon, euclid);
+                            if (euclid < 0.03) {
                                 output = {
                                     user: i,
                                     id: plants[n].id,

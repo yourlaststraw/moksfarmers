@@ -6,9 +6,11 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
-    color: black;
 }
-
+.carousel-control-prev-icon,
+        .carousel-control-next-icon {
+            filter: invert(1);
+        }
 .text {
     background-color: #fcf7cc;
     color: black;
@@ -16,7 +18,7 @@
 }
 
 .title-box {
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(100px);
     color: white;
 }
 
@@ -156,21 +158,21 @@ html {
 .button-5 {
     align-items: center;
     background-clip: padding-box;
-    background-color: #fa6400;
+    background-color: #002431;
     border: 1px solid transparent;
     border-radius: .25rem;
-    box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
-    color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.2) 0 4px 6px 0; /* Updated box-shadow */
+    color: #ffffff;
     cursor: pointer;
     display: inline-flex;
     font-family: system-ui, -apple-system, system-ui, "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 16px;
+    font-size: 13px;
     font-weight: 600;
     justify-content: center;
     line-height: 1.25;
     margin: 0;
     min-height: 3rem;
-    padding: calc(.875rem - 1px) calc(1.5rem - 1px);
+    padding: calc(0.875rem - 1px) calc(1.5rem - 1px);
     position: relative;
     text-decoration: none;
     transition: all 250ms;
@@ -179,29 +181,35 @@ html {
     touch-action: manipulation;
     vertical-align: baseline;
     width: 130px;
+    /* Additional fancy styling */
+    text-transform: uppercase; /* Convert text to uppercase */
+    letter-spacing: 1px; /* Add some letter spacing */
+    border: 2px solid #002431; /* Update border style */
+    
 }
-
 .button-5:hover,
 .button-5:focus {
-    background-color: #fb8332;
+    background-color: #002431;
     box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
 }
 
 .button-5:hover {
-    transform: translateY(-1px);
+    background-color:#002431; /* Darken the background color on hover */
+    box-shadow: rgba(0, 0, 0, 0.4) 0 6px 12px 0; /* Adjust box-shadow on hover */
+    color:white;
 }
 
 .button-5:active {
-    background-color: #c85000;
-    box-shadow: rgba(0, 0, 0, .06) 0 2px 4px;
-    transform: translateY(0);
+    background-color: #002431; /* Darken the background color when active */
+    box-shadow: rgba(0, 0, 0, 0.6) 0 3px 6px 0; /* Adjust box-shadow when active */
+    transform: translateY(1px); /* Push the button down slightly when active */
 }
+
 
 #header .links .wrapper {
     width: fit-content;
     display: flex;
     justify-content: space-between;
-
 }
 
 #header .links {
@@ -209,9 +217,20 @@ html {
     display: flex;
     /* To get elements in row */
     justify-content: flex-start;
-    flex-wrap: wrap;
     align-items: center;
+}
 
+/* Responsive CSS */
+@media (max-width: 768px) {
+    #header .links {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+    }
+
+    #header .links .wrapper {
+        width: auto;
+        margin-right: 10px;
+    }
 }
 
 
@@ -737,7 +756,7 @@ section #text {
 
 
     #header {
-        padding: 1em 2em;
+        padding: 1em 1em;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -953,6 +972,7 @@ section #text {
 .white{
     background-color: white;
     color: #002431 !important;
+
 }
 
 .cal-row-wrapper{

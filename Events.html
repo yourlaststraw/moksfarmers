@@ -43,13 +43,16 @@
         </div>
 
         <div class = "user-info">
-        <button class="button-5" role="button">
-            <div v-if="isLogged" onclick="clearSession();window.location.replace('index.html')">Logout</div>
-            <div v-else><a href="login.html">Login/Signup</a></div>
-        </button>
-        <div id = "welcome" style ="text-align: right;" v-if="isLogged" >
-            Welcome, farmer 
-        </div>
+            <button class="button-5" role="button">
+                <div v-if="isLogged" onclick="clearSession();window.location.replace('index.html')">Logout</div>
+                <div v-else><a href="login.html" style="
+                    color: white;
+                    text-decoration: none;
+                ">Login/Signup</a></div>
+            </button>
+            <div id = "welcome" style ="text-align: right;" v-if="isLogged" >
+                Welcome, farmer 
+            </div>
         </div>
 
     </header>
