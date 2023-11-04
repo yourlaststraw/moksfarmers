@@ -866,6 +866,13 @@ section #text {
     font-weight: bold;
 }
 
+.carousel-caption .title{
+    font-size: 2.5vw;
+}
+
+.carousel-caption .description{
+    font-size: 1vw;
+}
 /* not sure if this is intentional but i commented it out and the page looks fine so */
 /* .login-box {
     margin: 0 auto;
@@ -874,33 +881,6 @@ section #text {
 
 /* carousel caption responsiveness */
 
-@media (max-width: 1068px) {
-    .carousel-caption h5 {
-        font-size: 20px
-    }
-
-    .carousel-caption {
-        font-size: 10px
-    }
-
-    .url {
-        font-size: 10px
-    }
-}
-
-@media (max-width: 740px) {
-    .carousel-caption h5 {
-        font-size: 10px
-    }
-
-    .carousel-caption {
-        font-size: 5px
-    }
-
-    .url {
-        font-size: 5px
-    }
-}
 
 
 /* events page styles */
