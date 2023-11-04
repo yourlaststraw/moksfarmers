@@ -204,7 +204,6 @@ html {
     width: fit-content;
     display: flex;
     justify-content: space-between;
-
 }
 
 #header .links {
@@ -212,9 +211,20 @@ html {
     display: flex;
     /* To get elements in row */
     justify-content: flex-start;
-    flex-wrap: wrap;
     align-items: center;
+}
 
+/* Responsive CSS */
+@media (max-width: 768px) {
+    #header .links {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+    }
+
+    #header .links .wrapper {
+        width: auto;
+        margin-right: 10px;
+    }
 }
 
 
@@ -740,7 +750,7 @@ section #text {
 
 
     #header {
-        padding: 1em 2em;
+        padding: 1em 1em;
         display: flex;
         flex-direction: column;
         justify-content: center;
