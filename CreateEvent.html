@@ -11,12 +11,14 @@
     <!-- Page Title -->
     <title></title>
     <!-- CSS Files -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="animation.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <!-- other Files -->
     <script src="https://unpkg.com/vue@next"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
     <script type="text/javascript" src="commons.js"></script>
     <script type="text/javascript" src="user.js"></script>
     <script type="text/javascript" src="Events.js"></script>
@@ -57,7 +59,7 @@
             </div>
         </div>
 
-        < <div class = "user-info">
+        <div class = "user-info">
             <button class="button-5" role="button">
                 <div v-if="isLogged" onclick="clearSession();window.location.replace('index.html')">Logout</div>
                 <div v-else><a href="login.html">Login/Signup</a></div>
@@ -67,61 +69,83 @@
             </div>
         </div>
         </div>
-        <div style = "width:100%; display: flex;justify-content: flex-start;">
-            <button onclick="window.location.replace('Events.html')" style = "font-size:1rem;width:130px" class = "button" role = "button">Back</button>
-        </div>
-    </header>
-
-    <div class = "sec" style = "padding-top: 0;">
         
-        <div class = "layer1 container">
+    </header>
+        
+        <div>
             <div>
-                <div>
-                    <h1>Add an Event</h1>
-                    <label for="name">Event Name</label><br>
-                    <input type="text" id="name" required>
-                    <br><br>
-                    <label for="description">Event Description</label><br>
-                    <input type="text" id="description" required>
-                    <br><br>
-                    <label for="location">Event Location</label><br>
-                    <input type="text" id="location" required>
-                    <br><br>
-                    <label for="size">Event Size</label><br>
-                    <input type="number" id="size" required>
-                    <br><br>
-                    <label for="from">Event Start:</label><br>
-                    <input type="date" id="from" required>
-                    <br><br>
-                    <label for="to">Event End:</label><br>
-                    <input type="date" id="to" required>
-                    <br><br>
-                    <label for="signup">Sign Ups End On:</label><br>
-                    <input type="date" id="signup" required>
-                    <br><br>
-                    <label for="image">Event Poster</label><br>
-                    <input type="file" id="image" required accept=".webp, .png, .jpg, .jpeg" onchange="encodeImageFileAsURL(this)"> 
-                    <br><br>
-                    <button onclick="addEvent()">Register</button>
-                    <div id="errors"></div><br>
+                
+                <div class="mx-auto shadow-lg rounded p-10">
+                    <div>
+                        <h3 class="text-2xl font-bold mb-4">Add an Event</h3>
+                        <div class="mb-4">
+                            <label for="name" class="block text-sm font-medium text-gray-700">Event Name</label>
+                            <input type="text" id="name" required
+                                class="w-full border-2 border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-indigo-200">
+                        </div>
+                        <div class="mb-4">
+                            <label for="description" class="block text-sm font-medium text-gray-700">Event Description</label>
+                            <input type="text" id="description" required
+                                class="w-full border-2 border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-indigo-200">
+                        </div>
+                        <div class="mb-4">
+                            <label for="location" class="block text-sm font-medium text-gray-700">Event Location</label>
+                            <input type="text" id="location" required
+                                class="w-full border-2 border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-indigo-200">
+                        </div>
+                        <div class="mb-4">
+                            <label for="size" class="block text-sm font-medium text-gray-700">Event Size</label>
+                            <input type="number" id="size" required
+                                class="w-full border-2 border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-indigo-200">
+                        </div>
+                        <div class="mb-4">
+                            <label for="from" class="block text-sm font-medium text-gray-700">Event Start:</label>
+                            <input type="date" id="from" required
+                                class="w-full text-xs border-2 border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-indigo-200">
+                        </div>
+                        <div class="mb-4">
+                            <label for="to" class="block text-sm font-medium text-gray-700">Event End:</label>
+                            <input type="date" id="to" required
+                                class="w-full text-xs border-2 border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-indigo-200">
+                        </div>
+                        <div class="mb-4">
+                            <label for="signup" class="block text-sm font-medium text-gray-700">Sign Ups End On:</label>
+                            <input type="date" id="signup" required
+                                class="w-full text-xs border-2 border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-indigo-200">
+                        </div>
+                        <div class="mb-4">
+                            <label for="image" class="block text-xs font-medium text-gray-700">Event Poster</label>
+                            <input type="file" id="image" required accept=".webp, .png, .jpg, .jpeg"
+                            class="w-full h-8 text-sm border-2 border-gray-300 rounded-md  px-4 focus:outline-none focus:ring-2 focus:ring-indigo-200">
+                            <p class="text-xs text-gray-500 mt-2">No file chosen</p>
+                        </div>
+                        
+                        <button onclick="addEvent()"
+                            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Register</button>
+                        <div id="errors" class="text-red-500 mt-4"></div>
+
+                        <div style = "width:100%; display: flex;justify-content: flex-start;">
+                            <button onclick="window.location.replace('Events.html')" style = "font-size:1rem;width:130px" class = "bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" role = "button">Back</button>
+                        </div>
+                    </div>
                 </div>
+            </div>
+            
+        </div>
             </div>
 
         </div>  
 
         <div class = "layer 2">
             
+        </div>
                 
         </div>
 
         <div class = "layer3">
                 
         </div>
-            
-    </div>
-
-  
-    
+                
     <script>
         if (userData !=null && Object.keys(userData).length >0) {
             document.getElementById("welcome").innerHTML += userData.last_name + "!";
