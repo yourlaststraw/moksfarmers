@@ -616,7 +616,7 @@ section #text {
     width: 120px;
     height: 60px;
     background-color: #005270;
-    color: 002431;
+    color: white;
     border-top: 1px solid rgba(255, 255, 255, 0.5);
     border-Left: 1px solid rgba(255, 255, 255, 0.5);
     border-radius: 15px;
@@ -966,8 +966,13 @@ section #text {
 }
 
 .green{
-    background-color: green;
+    background-color: green !important;
 
+}
+
+.white{
+    background-color: white;
+    color:#002431 !important;
 }
 
 
@@ -1028,9 +1033,17 @@ section #text {
     flex-wrap: wrap;
     margin-bottom: 10px;
 }
-.events-btn{
-    background-color:#002431;
+.pop-up{
+    position:fixed;
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #002431;
     color: white;
+    
 }
 
 /* Padding for sign up for events */

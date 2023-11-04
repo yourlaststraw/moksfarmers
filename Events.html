@@ -119,7 +119,7 @@
               <div class = "layer3">
                 <div style = "width:100%;display: flex;justify-content: flex-start;">
 
-                    <button style = "width:150px;font-size:1rem;" class = "button" role = "button"><a style = "text-decoration: none;color:black" href="CreateEvent.html">Create Event</a></button>
+                    <button style = "width:150px;font-size:1rem;" class = "button" role = "button"><a style = "text-decoration: none;" href="CreateEvent.html">Create Event</a></button>
 
                 </div>
                 <br>
@@ -150,8 +150,8 @@
 
 
 
-
-
+        <!-- The button to scroll back to top -->
+    <a id="top" href="#"> <i class="fas fa-arrow-up"></i> </a>
         
     <div v-else>
         <br><h3 class="buy-body">You are not logged in.</h3>
@@ -362,7 +362,6 @@
                     
                     flag = false
                     for (date of this.eventDateList){
-
                         if (date.getDate() == this.date && date.getMonth()+1 == this.month && date.getFullYear() == this.year){
                             this.hasEvent = true
                             flag = true

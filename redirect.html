@@ -13,11 +13,30 @@
 
     <title>Redirecting</title>
     <style>
-        .container {
-            display: flex;
-            justify-content: center;
-            margin-top: 10%;
-            margin-bottom: 10%;
+        @import url(https://fonts.googleapis.com/css?family=Roboto:100);
+        body { margin-top: 100px; background-color: #137b85; color: #fff; text-align:center; }
+
+        h1 {
+        font: 3em 'Roboto', sans-serif;
+        margin-bottom: 40px;
+        }
+
+        #loading {
+        display: inline-block;
+        width: 20vw;
+        height: 20vw;
+        border: 3px solid rgba(255,255,255,.3);
+        border-radius: 50%;
+        border-top-color: #fff;
+        animation: spin 1s ease-in-out infinite;
+        -webkit-animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+        to { -webkit-transform: rotate(360deg); }
+        }
+        @-webkit-keyframes spin {
+        to { -webkit-transform: rotate(360deg); }
         }
     </style>
 </head>
@@ -27,16 +46,15 @@
     stalls the user for 2 seconds to prevent any errors when they are moved to the logged in version of the webpage.
 -->
 <body class="container">
-    <div>
-        Redirecting
-    </div>
+    <h1>Logging in</h1>
+<div id="loading"></div>
     <script>
         dbPlants();
         callPlants();
         // Delay function
         setTimeout(function(){
             window.location.replace("index.html");
-        }, 2000); // 2000 = 2s
+        }, 5000); // 2000 = 2s
         
     </script>
 </body>
