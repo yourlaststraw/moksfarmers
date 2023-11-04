@@ -65,7 +65,7 @@
     
                 <div>
                     <div style = "position:relative; float:right;">
-                        <button v-on:click="toggleCart()" id="miniCartButton" class = "button">View Cart</button>
+                        <button v-on:click="toggleCart()" id="miniCartButton" class = "button" style="color: white">View Cart</button>
                         <div v-if="displayCart" id="miniCart" class = "glass miniCart">
                             <div v-if="isCartEmpty">
                                 <h1>Oh no! Your cart is empty!</h1>
@@ -130,7 +130,7 @@
                     <div class = "btn-box">
                         <button style = "overflow: hidden;" v-on:click = "addItem(key)" class = "button">
                                 <div class = "to-slide">
-                                    <div>Add to Cart</div>
+                                    <div style="color: white;">Add to Cart</div>
 
                                     <div style="font-size:larger;font-weight: bold;color:green" >ADDED!</div>
                                 </div>
