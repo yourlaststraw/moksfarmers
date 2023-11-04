@@ -127,6 +127,7 @@ function checkCountTally(userPlants, myPlantsList) {
             console.log(count, user)
             window.location.replace("plantStall.html");
         }
+        console.log(count, user);
     }
     else {
         localStorage.setItem("userPlantCount", userPlants);
