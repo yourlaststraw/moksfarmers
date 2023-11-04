@@ -279,6 +279,7 @@
                                 cur.setDate(cur.getDate()+1)
                             }
                             this.cal.push(temp)
+                            console.log(this.userEvents.registered.hasOwnProperty(this.cur_date_str))
                         }
                         
                     },
@@ -353,7 +354,7 @@
             
             methods: {
                 refresh(){
-                    
+
                     flag = false
                     for (date of this.eventDateList){
 
