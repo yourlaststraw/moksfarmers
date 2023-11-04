@@ -63,51 +63,37 @@
             Welcome, farmer 
         </div>
         </div>
-        <div style = "width:100%; display: flex;justify-content: flex-start;">
-            <button onclick="window.location.replace('Events.html')" style = "font-size:1rem;width:130px;margin-bottom: 50px;" class = "button" role = "button">Back</button>
-        </div>
-
-        
+    
     </header>
-
-    <div class = "sec" style = "margin-top: 40px;padding-top: 25px;">
-        
-        <div class = "layer1 glass">
-
-                Event details
-
-
-        </div>  
-
-        <div class = "layer 2 glass">
+    
+    <div class="sect">
+        <div class="layer 2 glass p-4">
             <h2>Sign up now!</h2>
-
-            <div class = "sign-up-field">
-                <div>Name:</div>
-                <div><input type = "text"></div>
+    
+            <div class="sign-up-field flex items-center mb-4">
+                <div class="mr-4">Name:</div>
+                <div><input type="text" class="border-2 border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-indigo-200"></div>
             </div>
-
-            <div class = "sign-up-field">
-                <div>Email:</div>
-                <div><input type = "text"></div>
+    
+            <div class="sign-up-field flex items-center mb-4">
+                <div class="mr-4">Email:</div>
+                <div><input type="text" class="border-2 border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-indigo-200"></div>
             </div>
-            
-            <div class = "sign-up-field">
-                <div>Phone:</div>
-                <div><input type = "text"></div>
+    
+            <div class="sign-up-field flex items-center mb-4">
+                <div class="mr-4">Phone:</div>
+                <div><input type="text" class="border-2 border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-indigo-200"></div>
             </div>
-
-            <div style = "width:100%;display:flex;justify-content: flex-end;"><button class = "button" role="button">Sign Up</button></div>
-
-        </div>
-
-        <div class = "layer3">
+    
+            <div class="w-full flex justify-end">
                 
+                    <button onclick="window.location.replace('Events.html')" style = "background-color:rgb(243, 68, 68);color:white;font-size:1rem;width:130px;margin-bottom: 50px;" class = "button" role = "button">Back</button>
+                &nbsp
+                <button class="button" style="color:white" role="button">Sign Up</button>
+            </div>
+    
         </div>
-            
     </div>
-
-  
     
     <script>
         if (userData !=null && Object.keys(userData).length >0) {

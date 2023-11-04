@@ -1032,3 +1032,11 @@ section #text {
     background-color:#002431;
     color: white;
 }
+
+/* Padding for sign up for events */
+.sect {
+    padding: 2%;
+    padding-bottom: 15%;
+    z-index: 50;
+    overflow: hidden;
+}
