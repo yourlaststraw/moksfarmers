@@ -57,13 +57,14 @@
             </div>
         </div>
 
-        <div class = "user-info">
-        <button class="button-5" role="button">
-            <div v-if="isLogged" onclick="clearSession();window.location.replace('index.html')">Logout</div>
-            <div v-else><a href="login.html">Login/Signup</a></div>
-        </button>
-        <div id = "welcome" style ="text-align: right;" v-if="isLogged" >
-            Welcome, farmer 
+        < <div class = "user-info">
+            <button class="button-5" role="button">
+                <div v-if="isLogged" onclick="clearSession();window.location.replace('index.html')">Logout</div>
+                <div v-else><a href="login.html">Login/Signup</a></div>
+            </button>
+            <div id = "welcome" style ="text-align: right;" v-if="isLogged" >
+                Welcome, farmer 
+            </div>
         </div>
         </div>
         <div style = "width:100%; display: flex;justify-content: flex-start;">
@@ -150,6 +151,7 @@
                             registered:{'5/10/2023':{name:'Edible Gardening',location:'Toa Payoh Hub'}},
                             created:{}
                         },
+                        isLogged:false,
                         events: [{
                             name:"EdibleGardening101 @ToaPayoh",
                             desc: "Bring your family down to Toa Payoh for a fun-filled morning learning how to grow, harvest and cook your own vegetables!",
@@ -165,19 +167,23 @@
                 created() {
                     if (userData!=null && Object.keys(userData).length>0) {
                         this.isLogged = true;
-                        
                     }
-  
-                    
+
                 },
-=
                 methods: {
+                    log(str){
+                        console.log(str);
+                        return;
+                    },
+                    clearSession(){
+                        clearSession();
+                    },
 
                 },
                     
                 computed: {
-                }
-        })
+                },
+        });
 
         app.mount("#events")
     </script>
