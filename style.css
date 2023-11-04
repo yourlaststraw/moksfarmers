@@ -7,10 +7,7 @@
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
 }
-.carousel-control-prev-icon,
-        .carousel-control-next-icon {
-            filter: invert(1);
-        }
+
 .text {
     background-color: #fcf7cc;
     color: black;
@@ -18,7 +15,7 @@
 }
 
 .title-box {
-    backdrop-filter: blur(100px);
+    backdrop-filter: blur(10px);
     color: white;
 }
 
