@@ -30,8 +30,9 @@ function displayDefault() {
                           <div class="title-box">
                             <h5 class='title'>` + title + `</h5>
                             <p class='description'>` + description + `</p>
+                            <a href="` + url + `" target="_blank" class='url'>Read more</a>
                           </div>
-                          <a href="` + url + `" target="_blank" class='url'>Read more</a>
+                          
                         </div>
                       </div>`
         }
@@ -42,8 +43,8 @@ function displayDefault() {
                         <div class="title-box">
                         <h5 class='title'>` + title + `</h5>
                         <p class='description'>` + description + `</p>
-                        </div>
                         <a href="` + url + `" target="_blank" class='url'>Read more</a>
+                        </div>  
                         </div>
                       </div>`            
         }

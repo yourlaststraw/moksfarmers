@@ -7,7 +7,10 @@
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
 }
-
+.carousel-control-prev-icon,
+        .carousel-control-next-icon {
+            filter: invert(1);
+        }
 .text {
     background-color: #fcf7cc;
     color: black;
@@ -15,17 +18,16 @@
 }
 
 .title-box {
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(100px);
     color: white;
 }
 
 .description {
     color: white;
-    font-size: 1.5vw;
 }
 
 .title {
-    font-size: 2.5vw;
+    font-size: 40px;
     color: white;
     font-family: 'Poppins', sans-serif;
     ;
@@ -47,15 +49,13 @@ html {
     color: #002431;
     background-color: white;
     border-radius: 15%;
-    padding: 3% 10%;
+    padding: 10px 20px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 1.5vw;
+    font-size: 16px;
     border: none;
     cursor: pointer;
-    width: fit-content;
-    height: fit-content;
 }
 
 .features {
@@ -877,6 +877,33 @@ section #text {
 
 /* carousel caption responsiveness */
 
+@media (max-width: 1068px) {
+    .carousel-caption h5 {
+        font-size: 20px
+    }
+
+    .carousel-caption {
+        font-size: 10px
+    }
+
+    .url {
+        font-size: 10px
+    }
+}
+
+@media (max-width: 740px) {
+    .carousel-caption h5 {
+        font-size: 10px
+    }
+
+    .carousel-caption {
+        font-size: 5px
+    }
+
+    .url {
+        font-size: 5px
+    }
+}
 
 
 /* events page styles */
@@ -939,15 +966,11 @@ section #text {
 }
 
 .green{
-    background-color: green !important;
+    background-color: green;
 
 }
 
-.white{
-    background-color: white;
-    color: #002431 !important;
 
-}
 
 .cal-row-wrapper{
     display: flex;
@@ -997,10 +1020,15 @@ section #text {
     font-size: 150%;
 }
 
+
 .sign-up-field{
     width:250px;
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
     margin-bottom: 10px;
+}
+.events-btn{
+    background-color:#002431;
+    color: white;
 }

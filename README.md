@@ -1,3 +1,6 @@
+# Mok's farmers
+Welcome to Mok's Farmers webpage, to start, Open index.html and click on the login/signup button to register to be a farmer.
+
 # homepage design contribution 
 https://github.com/VineetKumar02/Parallax-Website 
 

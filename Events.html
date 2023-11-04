@@ -7,7 +7,7 @@
     <meta name="description"
         content="text">
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="images/logo.png">
+    <link rel="icon" type="image/png" href="/images/icons/seeds.png">
     <!-- Page Title -->
     <title></title>
     <!-- CSS Files -->
@@ -22,7 +22,6 @@
     <script type="text/javascript" src="Events.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-    
 </head>
 
 <body id="events">
@@ -119,7 +118,9 @@
 
               <div class = "layer3">
                 <div style = "width:100%;display: flex;justify-content: flex-start;">
+
                     <button style = "width:150px;font-size:1rem;" class = "button" role = "button"><a style = "text-decoration: none;color:black" href="CreateEvent.html">Create Event</a></button>
+
                 </div>
                 <br>
                 <div class = "event-list">
@@ -133,7 +134,7 @@
                                 Date(s): {{eventDuration(event.from,event.to)}}
                             </p>
                             <div class = "btn-box">
-                                <learn-btn v-bind:event="event">Learn more</learn-btn>
+                                <learn-btn v-bind:event="event" class="events-btn">Learn more</learn-btn>
                             </div>
                         
                     </div>
@@ -358,7 +359,7 @@
             
             methods: {
                 refresh(){
-
+                    
                     flag = false
                     for (date of this.eventDateList){
 
