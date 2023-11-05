@@ -101,8 +101,14 @@
                     You have no events on this day! Register one now... or create your own!
                 </div>
                 <div v-else class="my-event-list">
-                    <event  v-for="event in userEvents.registered" v-bind:event="event"></event>
-                    <event v-for="event in userEvents.created" v-bind:event="event"></event>
+                    <div v-for="type in userEvents">
+
+                        <div v-for="date,key in type">
+                            <div  v-if="key == cur_date_str" v-for="event in date">
+                                <event v-bind:event="event"></event>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 
@@ -175,67 +181,29 @@
                         pageCounter:0,
                         isLogged:false,
                         userEvents: {
-                            registered:{'11/5/2023':{name:'Edible Gardening',location:'Toa Payoh Hub'}},
+                            registered:{},
                             created:{}
                         },
-                        events: [{
-                            name:"EdibleGardening101 @ToaPayoh",
-                            desc: "Bring your family down to Toa Payoh for a fun-filled morning learning how to grow, harvest and cook your own vegetables!",
-                            size: 5,
-                            from: new Date("10/23/2023"),
-                            to: new Date("10/23/2023"),
-                            signup: new Date("10/23/2023"),
-                            image: "images/crops/tomato.webp",
-                            host:'',
-                            participants:{dum :'dum'},
-                            startTime: "08:00",
-                            endTime: "12:00",
-                            location: "Toa Payoh Hub #03-23",
-                            fee: "15",
-
-                        },{
-                            name:"EdibleGardening101 @ToaPayoh",
-                            desc: "Bring your family down to Toa Payoh for a fun-filled morning learning how to grow, harvest and cook your own vegetables!",
-                            size: 5,
-                            from: new Date("10/23/2023"),
-                            to: new Date("10/23/2023"),
-                            signup: new Date("10/23/2023"),
-                            image: "images/crops/tomato.webp",
-                            host:'',
-                            participants:{dum :'dum'},
-                            startTime: "08:00",
-                            endTime: "12:00",
-                            location: "Toa Payoh Hub #03-23",
-                            fee: "15",
-
-                        },{
-                            name:"EdibleGardening101 @ToaPayoh",
-                            desc: "Bring your family down to Toa Payoh for a fun-filled morning learning how to grow, harvest and cook your own vegetables!",
-                            size: 5,
-                            from: new Date("10/23/2023"),
-                            to: new Date("10/23/2023"),
-                            signup: new Date("10/23/2023"),
-                            image: "images/crops/tomato.webp",
-                            host:'',
-                            participants:{dum :'dum'},
-                            startTime: "08:00",
-                            endTime: "12:00",
-                            location: "Toa Payoh Hub #03-23",
-                            fee: "15",
-
-                        }]
+                        events: []
                     };
                 },
                 created() {
                     if (userData!=null && Object.keys(userData).length>0) {
                         this.isLogged = true;
-                        
+                        // loadEvents().then(a=>{
+                        //     this.events = a[0]
+                        //     this.userEvents = a[1]
+                        // })
+                        data = JSON.parse(localStorage.getItem('events'))
+                        this.events = data[0]
+                        this.userEvents = data[1]
                     }
                     
                 },
                 mounted(){
                     this.populateCal()
                     console.log(this.cal)
+                    console.log(this.userEvents)
                 },
                 methods: {
                     log(str){
@@ -282,6 +250,7 @@
                         this.cur_date.date = date[1]
                         this.cur_date.month = date[2]
                         this.cur_date.year = date[3]
+                        console.log(this.userEvents)
                     },
                     eventDuration(from,to){
                         d = new Date(from)
@@ -294,7 +263,7 @@
                         }else{
                             return start[0] + "/" +start[1] + "/" + start[2] + " - " + end[0] + "/" + end[1] + "/" + end[2]
                         }
-                    }
+                    },
                     
                 },
                 computed: {
@@ -327,7 +296,7 @@
             
             methods: {
                 viewDetails(){
-                    localStorage.setItem("event", JSON.stringify(this.event))
+                    sessionStorage.setItem("event", JSON.stringify(this.event))
                     window.location.replace("EventDetails.html")
                 }
             },
@@ -351,7 +320,6 @@
             
             methods: {
                 refresh(){
-                    
                     flag = false
                     for (date of this.eventDateList){
                         if (date.getDate() == this.date && date.getMonth()+1 == this.month && date.getFullYear() == this.year){

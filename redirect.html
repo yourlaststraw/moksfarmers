@@ -10,6 +10,7 @@
     <script type="text/javascript" src="user.js"></script>
     <script type="text/javascript" src="validate.js"></script>
     <script type="text/javascript" src="plants.js"></script>
+    <script type="text/javascript" src="Events.js"></script>
     <script type="text/javascript" src="maps.js"></script>
 
     <title>Redirecting</title>
@@ -80,6 +81,7 @@
     if (localStorage.length != 0){
         dbPlants();
         callPlants();
+        loadEvents();
         
     }else{
         document.getElementsByTagName('h1')[0].innerHTML = "Logging out..."
