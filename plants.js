@@ -42,13 +42,14 @@ function postPlant(plant) {
 };
 
 function callPlants() {
-    let list = [];
+    
     axios.get(dbUrl)
     .then(response => {
+        let list = [];
         let plants = response.data.plants;
-        let user = response.data.users[session].my_plants;
+        let user = response.data.users[localStorage.getItem('user')].my_plants;
         for (i in user) {
-            if (user[i] !== 'dummy') {
+            if (i != "undefined" && user[i] !== 'dummy') {
                 let userDb = user[i].id;
                 let dayTrack = user[i].day;
                 let userPlantId = user[i].user_plant_id;
@@ -57,8 +58,11 @@ function callPlants() {
                 list.push(plant);
                 // console.log(plant);
             }
-            localStorage.setItem("userPlants", JSON.stringify(list));
+            
         }
+        console.log(list)
+        localStorage.setItem("userPlants", JSON.stringify(list));
+        console.log(localStorage)
     });
 };
 
@@ -141,7 +145,7 @@ function checkCountTally(userPlants, myPlantsList) {
 
 function loadData() {
     storeCurrentLocation();
-    dbPlants();
-    callPlants();
+    // dbPlants();
+    // callPlants();
     checkCountTally(JSON.parse(localStorage.getItem("userPlants")), JSON.parse(localStorage.getItem("userPlantCount")));
 };

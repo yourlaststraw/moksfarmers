@@ -12,7 +12,6 @@ axios.get(dbUserUrl)
 });
 // Once we are out of the axios call, we can reconvert it into an object.
 const userData = JSON.parse(localStorage.getItem("userData"));
-
 // Important to note:
 // localStorage utilises your browser's cookies functionality to indefinitely store data on your client.
 // This is more often used for unique IDs that cannot be cracked that easily.

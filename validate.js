@@ -117,14 +117,28 @@ function createUser() {
 };
 
 function clearSession() {
-    localStorage.removeItem("user");
-    localStorage.removeItem("userPlants");
-    localStorage.removeItem("userPlantCount");
-    localStorage.removeItem("latlon");
-    localStorage.removeItem("nearbyPlants");
-    localStorage.removeItem("userData");
-    sessionStorage.removeItem("checkLocation");
+    sessionStorage.clear()
+    localStorage.clear()
+    console.log(sessionStorage)
+    console.log(localStorage)
 };
+
+function checkLogin() {
+    console.log(userData)
+    if (userData!=null && Object.keys(userData).length>0){
+        console.log(4)
+        document.getElementsByClassName("button-5")[0].innerHTML = `<div>Logout</div>`
+        document.getElementsByClassName("button-5")[0].setAttribute("onclick","clearSession();window.location.replace('redirect.html')")
+        document.getElementById("welcome").innerHTML = "Welcome, farmer " + userData.last_name + "!";
+        
+    }else{
+        console.log(5)
+        document.getElementsByClassName("button-5")[0].innerHTML = `<div>Login/Signup</div>`
+        document.getElementsByClassName("button-5")[0].setAttribute("onclick","clearSession();window.location.replace('login.html')")
+    }
+    
+}
+
 
 function checkSession() {
     alert(localStorage.getItem("user"));
