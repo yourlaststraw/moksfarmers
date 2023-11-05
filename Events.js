@@ -97,10 +97,8 @@ async function loadEvents() {
             }
         }
     }
-    this.events = events
-    this.userEvents = ownEvents
-    console.log(this.userEvents)
-    return [events,ownEvents]
+    localStorage.setItem('events',JSON.stringify([events,ownEvents]))
+    return
 };
 
 async function joinEvent(eventId) {

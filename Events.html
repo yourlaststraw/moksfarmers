@@ -190,10 +190,13 @@
                 created() {
                     if (userData!=null && Object.keys(userData).length>0) {
                         this.isLogged = true;
-                        loadEvents().then(a=>{
-                            this.events = a[0]
-                            this.userEvents = a[1]
-                        })
+                        // loadEvents().then(a=>{
+                        //     this.events = a[0]
+                        //     this.userEvents = a[1]
+                        // })
+                        data = JSON.parse(localStorage.getItem('events'))
+                        this.events = data[0]
+                        this.userEvents = data[1]
                     }
                     
                 },
