@@ -124,15 +124,15 @@ function clearSession() {
 };
 
 function checkLogin() {
-    console.log(userData)
+    //console.log(userData)
     if (userData!=null && Object.keys(userData).length>0){
-        console.log(4)
+        //console.log(4)
         document.getElementsByClassName("button-5")[0].innerHTML = `<div>Logout</div>`
         document.getElementsByClassName("button-5")[0].setAttribute("onclick","clearSession();window.location.replace('redirect.html')")
         document.getElementById("welcome").innerHTML = "Welcome, farmer " + userData.last_name + "!";
         
     }else{
-        console.log(5)
+        //console.log(5)
         document.getElementsByClassName("button-5")[0].innerHTML = `<div>Login/Signup</div>`
         document.getElementsByClassName("button-5")[0].setAttribute("onclick","clearSession();window.location.replace('login.html')")
     }
