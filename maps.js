@@ -42,7 +42,7 @@ function storeCurrentLocation() {
 
 function euclideanDistance() {
     let list = [];
-    let output, plants, euclid, location, plantLoc, postLat, postLon, lonResult, latResult, result;
+    let output, plants, euclid, location, userName, plantLoc, postLat, postLon, lonResult, latResult;
 
     axios.get(dbUrlpt1 + '/users' + dbUrlpt2)
     .then(response => {
@@ -50,6 +50,7 @@ function euclideanDistance() {
             let userLat = response.data[session].current_lat;
             let userLon = response.data[session].current_lon;
             if (i !== session) {
+                userName = response.data[i].first_name + ' ' + response.data[i].last_name;
                 plants = response.data[i].my_plants;
                 for (n in plants) {
                     if (plants[n] !== 'dummy') {
@@ -68,14 +69,16 @@ function euclideanDistance() {
                             latResult = Math.pow(userLat - postLat, 2);
                             euclid = Math.sqrt(lonResult + latResult).toFixed(3);
                             console.log(userLat, userLon, euclid);
-                            if (euclid < 0.03) {
+                            if (euclid < 0.05) {
                                 output = {
+                                    user_name: userName,
                                     user: i,
                                     id: plants[n].id,
                                     location: location,
                                     day: plants[n].day,
                                     loggedDate: plants[n].loggedDate,
-                                    user_plant_id: plants[n].user_plant_id
+                                    user_plant_id: plants[n].user_plant_id,
+                                    image: plants[n].image,
                                 }
                                 list.push(output);
                             }
@@ -92,4 +95,4 @@ function euclideanDistance() {
 function communityLoad() {
     storeCurrentLocation();
     euclideanDistance();
-}
+};
