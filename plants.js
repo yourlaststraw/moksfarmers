@@ -40,6 +40,7 @@ function postPlant(plant) {
         localStorage.setItem("newPlant", select);
         axios.patch(dbUrlpt1 + '/users/' + localStorage.getItem("user") + '/my_plants/' + select + dbUrlpt2, {user_plant_id: select});
     });
+    return true;
 };
 
 function callPlants() {
@@ -55,9 +56,10 @@ function callPlants() {
                 let dayTrack = user[i].day;
                 let userPlantId = user[i].user_plant_id;
                 let loggedDate = user[i].loggedDate;
-                let plant = modifyPlant(plants[userDb], dayTrack, userDb, userPlantId, loggedDate);
+                let image = user[i].image
+                let plant = modifyPlant(plants[userDb], dayTrack, userDb, userPlantId, loggedDate, image);
                 list.push(plant);
-                // console.log(plant);
+                console.log(plant);
             }
             
         }
@@ -80,12 +82,12 @@ function convertProxy(plant) {
     }
 };
 
-function modifyPlant(plant, dayTrack, userDb, userPlantId, loggedDate) {
+function modifyPlant(plant, dayTrack, userDb, userPlantId, loggedDate, image) {
     // dayTrack = String(dayTrack);
     return {
         'db': userDb,
         'dayTrack': dayTrack,
-        'image': plant.image,
+        'image': image,
         'name': plant.name,
         'description': plant.description,
         'maturity': plant.maturity,
@@ -137,7 +139,7 @@ function checkCountTally(userPlants, myPlantsList) {
             myPlantsList = JSON.stringify(myPlantsList);
             window.location.replace("plantStall.html");
         }
-        //console.log(userPLants, myPlantsList);
+        //console.log(userPlants, myPlantsList);
     }
     else {
         localStorage.setItem("userPlantCount", JSON.stringify(userPlants));

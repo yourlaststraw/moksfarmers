@@ -138,8 +138,6 @@
 <script>
     var arrayPlants = JSON.parse(localStorage.getItem("arrayPlants"));
     var userPlants = JSON.parse(localStorage.getItem("userPlants"));
-    console.log(userPlants);
-    console.log(arrayPlants);
 
     checkLogin()
     const PlantCard = {
@@ -180,13 +178,17 @@
                 plant.day = 1;
                 plant = convertProxy(plant);
                 this.myPlantsList.push(plant);
-                console.log(typeof plant, plant);
-                postPlant(plant);
-                localStorage.setItem("userPlantCount", JSON.stringify(this.myPlantsList));
-                callPlants();
-                const userPlants = JSON.parse(localStorage.getItem("userPlants"));
-                // JSON.parse(JSON.strngify(value)) is used to clean out Proxy(array) values, so that it becomes normal.
-                checkCountTally(userPlants, JSON.parse(JSON.stringify(this.myPlantsList))); 
+                
+                if (postPlant(plant)) {
+                        localStorage.setItem("userPlantCount", JSON.stringify(this.myPlantsList));
+                        callPlants();
+                        const userPlants = JSON.parse(localStorage.getItem("userPlants"));
+                        // JSON.parse(JSON.strngify(value)) is used to clean out Proxy(array) values, so that it becomes normal.
+                        checkCountTally(userPlants, JSON.parse(JSON.stringify(this.myPlantsList)));
+                        setTimeout(function(){
+                            window.location.replace("plantStall.html");
+                        },1000);
+                };
             },
             logTracker(plantItem){
                 const matchingPlantItem = this.myPlantsList.find(item => item.userPlantId === plantItem.userPlantId);
@@ -199,16 +201,19 @@
                         loggedDate: convertDateFormat(new Date()),
                         day: matchingPlantItem.dayTrack + 1,
                     }
-                    axios.patch(dbUrlpt1 + '/users/' + localStorage.getItem("user") + '/my_plants/' + userPlantId + dbUrlpt2, data);
-                    console.log('Successfully logged progress');
-                    callPlants();
+                    axios.patch(dbUrlpt1 + '/users/' + localStorage.getItem("user") + '/my_plants/' + userPlantId + dbUrlpt2, data)
+                    .then(() => {
+                        console.log('Successfully logged progress');
+                        window.location.replace("plantStall.html");
+                    })
+
             }
                 else{
                     alert("You have already logged today's progress!");
             }}
         },
         created(){
-            console.log(userData)
+            //console.log(userData)
             if (userData!=null && Object.keys(userData).length>0){
                 this.isLogged = true;
             }

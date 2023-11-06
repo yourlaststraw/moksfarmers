@@ -16,7 +16,7 @@ function showPosition(position) {
 }
 
 function storeCurrentLocation() {
-    console.log(sessionStorage.getItem("checkLocation"))
+    //console.log(sessionStorage.getItem("checkLocation"))
     if (sessionStorage.getItem("checkLocation") !== 'greenlit') {
         sessionStorage.setItem("checkLocation", 'greenlit');
         getLocation();
@@ -24,7 +24,7 @@ function storeCurrentLocation() {
             setTimeout(function(){
                 window.location += '#';
                 window.location.reload();
-            }, 2000); // 2000 = 2s
+            }, 3000); // 2000 = 2s
             
         }
     }
