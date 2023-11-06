@@ -105,7 +105,7 @@
 
                         <div v-for="date,key in type">
                             <div  v-if="key == cur_date_str" v-for="event in date">
-                                <event v-bind:event="event"></event>
+                                <event v-bind:is-own-event="checkIsOwnEvent(event)" v-bind:user-events="userEvents" v-bind:event="event"></event>
                             </div>
                         </div>
                     </div>
@@ -113,29 +113,38 @@
 
                 
                 </div>
-                
+                <span style ="color:red;font-size: 2vw;">* </span><span style="font-size: 2vw;">These are your own events</span>
               </div>
 
               <div class = "layer3">
                 <div style = "width:100%;display: flex;justify-content: flex-start;">
 
-                    <button style = "width:150px;font-size:1rem;" class = "button" role = "button"><a style = "text-decoration: none;" href="CreateEvent.html">Create Event</a></button>
+                    <button onclick = "window.location.replace('CreateEvent.html')" class = "button" role = "button">Create</button>
 
                 </div>
                 <br>
                 <div class = "event-list">
-                    <div class = "glass event" v-for="event,idx in events">
-                        <img style="width: 100%" v-bind:src="event.image">
+                    <div v-for="event,idx in events">
+                    <div class = "glass event" v-if="!isSignupsClosed(event)">
+                        <div style ="display: flex;flex-direction: column;justify-content: flex-start;">
+                        <div style = "overflow:hidden;height:70%" ><img style="overflow: hidden;object-fit: cover;width: 100%;aspect-ratio: 4/3;object-position: 0 0;" v-bind:src="event.image">
+                        </div>
                         
                             <div class ="event-name">{{event.name}}</div>
-                            <p style = "color:grey;" >{{event.desc}}</p>
+                            <div style = "color:grey;font-style: italic;" >{{event.desc}}</div>
+                        </div>
+                        <div style ="display: flex;flex-direction: column;justify-content: flex-end;"></div>
                             <p>
                                 Location: {{event.location}}<br>
                                 Date(s): {{eventDuration(event.from,event.to)}}
                             </p>
                             <div class = "btn-box">
-                                <learn-btn v-bind:event="event" class="events-btn">Learn more</learn-btn>
+                                <span v-if="checkIsOwnEvent(event)" style = "color:red;align-self: flex-start;">*</span>
+                                <learn-btn v-bind:user-events="userEvents" v-bind:event="event" class="events-btn">Learn more</learn-btn>
+                            
                             </div>
+                        </div>
+                    </div>
                         
                     </div>
                 </div>
@@ -144,18 +153,17 @@
                 </div>
             </div>
             
-        </div>
-        </div>
 
 
 
 
-        <!-- The button to scroll back to top -->
-    <a id="top" href="#"> <i class="fas fa-arrow-up"></i> </a>
+        
         
     <div v-else>
         <br><h3 class="buy-body">You are not logged in.</h3>
     </div>   
+    <!-- The button to scroll back to top -->
+    <a id="top" href="#"> <i class="fas fa-arrow-up"></i> </a>
     
     <script>
         
@@ -190,20 +198,16 @@
                 created() {
                     if (userData!=null && Object.keys(userData).length>0) {
                         this.isLogged = true;
-                        // loadEvents().then(a=>{
-                        //     this.events = a[0]
-                        //     this.userEvents = a[1]
-                        // })
-                        data = JSON.parse(localStorage.getItem('events'))
-                        this.events = data[0]
-                        this.userEvents = data[1]
+                        loadEvents().then(a=>{
+                            this.events = a[0]
+                            this.userEvents = a[1]
+                        })
+                        
                     }
                     
                 },
                 mounted(){
                     this.populateCal()
-                    console.log(this.cal)
-                    console.log(this.userEvents)
                 },
                 methods: {
                     log(str){
@@ -251,6 +255,7 @@
                         this.cur_date.month = date[2]
                         this.cur_date.year = date[3]
                         console.log(this.userEvents)
+                        console.log(this.events)
                     },
                     eventDuration(from,to){
                         d = new Date(from)
@@ -263,6 +268,27 @@
                         }else{
                             return start[0] + "/" +start[1] + "/" + start[2] + " - " + end[0] + "/" + end[1] + "/" + end[2]
                         }
+                    },
+                    checkIsOwnEvent(event){
+                        for (date in this.userEvents.created){
+                            for (e of this.userEvents.created[date]){
+                                if (e.name == event.name){
+                                    return true
+                                }
+                            }
+                        }
+                        return false
+                    },
+                    isSignupsClosed(event){
+                        d = event.signup.split("-")
+                        if (this.cur_date.year < d[0]){
+                            return false
+                        }else if (this.cur_date.year == d[0] && this.cur_date.month < d[1]){
+                            return false
+                        }else if (this.cur_date.month == d[1] && this.cur_date.date <= d[3]){
+                            return false
+                        }
+                        return true
                     },
                     
                 },
@@ -291,12 +317,13 @@
    
                 }
             },
-            props: ['event'],
-            template: `<div @click="viewDetails()" class = "my-event"><span>{{event.name}}, {{event.location}}</span></div>`,
+            props: ['event','userEvents','isOwnEvent'],
+            template: `<div @click="viewDetails()" class = "my-event"><span>{{event.name}}, {{event.location}}<span v-if="isOwnEvent"style = "color:red" >*</span></span></div>`,
             
             methods: {
                 viewDetails(){
                     sessionStorage.setItem("event", JSON.stringify(this.event))
+                    sessionStorage.setItem('userEvents',JSON.stringify(this.userEvents))
                     window.location.replace("EventDetails.html")
                 }
             },
@@ -368,6 +395,9 @@
                 },
                 curDate(){
                     this.refresh()
+                },
+                eventDateList(){
+                    this.refresh()
                 }
             }
         })
@@ -377,16 +407,18 @@
                 return {
                 }
             },
-            props: ['event'],
+            props: ['event','userEvents'],
             template: `<button v-on:click="learn()" style = "font-size:1rem;width:130px" class = "button" role = "button">Learn more</button>`,
             
             methods: {
                 learn(){
-                    localStorage.setItem("event", JSON.stringify(this.event))
+                    sessionStorage.setItem("event", JSON.stringify(this.event))
+                    sessionStorage.setItem("userEvents",JSON.stringify(this.userEvents))
                     window.location.replace("EventDetails.html")
                 }
             },
             created(){
+                
                 
             },
             watch:{

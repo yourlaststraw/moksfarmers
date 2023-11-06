@@ -1,4 +1,5 @@
 // Tried out async await on Promise-based
+
 async function loadEvents() {
     const url = dbUrlpt1 + '/events' + dbUrlpt2;
 
@@ -10,14 +11,12 @@ async function loadEvents() {
     // This allows us to receive the data on time, instead of always returning 'undefined' outside the .then().
     // If I have time I will try to incorportate this into Buy and Garden. It streamlines the process alot.
     const response = await axios.get(url);
-
     for (i in response.data) {
         from = new Date(response.data[i].from)
-        console.log(from)
         from = from.getMonth()+1 + "/" + from.getDate() + "/" + from.getFullYear()
-        console.log(from)
         if (i !== 'dummy') {
             events.push({
+                id: i,
                 name: response.data[i].name,
                 desc: response.data[i].description,
                 location: response.data[i].location,
@@ -28,12 +27,12 @@ async function loadEvents() {
                 size: response.data[i].size,
 
             });
-            console.log(response.data[i].from)
             // If it is your own created session. It will tell you.
             if (response.data[i].host == session) {
                 
                 if (ownEvents.created.hasOwnProperty(from)){
                     ownEvents.created[from].push({
+                        id: i,
                         name: response.data[i].name,
                         desc: response.data[i].description,
                         location: response.data[i].location,
@@ -46,6 +45,7 @@ async function loadEvents() {
                 }else{
                     ownEvents.created[from] = [
                         {
+                            id: i,
                             name: response.data[i].name,
                             desc: response.data[i].description,
                             location: response.data[i].location,
@@ -69,7 +69,8 @@ async function loadEvents() {
                 }
                 if (check === false){
                     if (ownEvents.registered.hasOwnProperty(from)){
-                        ownEvents.created[from].push({
+                        ownEvents.registered[from].push({
+                            id: i,
                             name: response.data[i].name,
                             desc: response.data[i].description,
                             location: response.data[i].location,
@@ -82,6 +83,7 @@ async function loadEvents() {
                     }else{
                         ownEvents.registered[from] = [
                             {
+                                id: i,
                                 name: response.data[i].name,
                                 desc: response.data[i].description,
                                 location: response.data[i].location,
@@ -97,25 +99,36 @@ async function loadEvents() {
             }
         }
     }
-    localStorage.setItem('events',JSON.stringify([events,ownEvents]))
-    return
+    return [events,ownEvents]
 };
 
-async function joinEvent(eventId) {
+async function joinEvent(eventId,name,email,phone) {
+    console.log(1)
     const url = dbUrlpt1 + '/events/' + eventId + dbUrlpt2;
     const response = await axios.get(url);
+    console.log(response)
+    if (response.data.hasOwnProperty('participants')){
+        plist = response.data.participants
+        plist[localStorage.getItem('user')] = {name:name,email:email,phone:phone}
+    }else{
+        plist = {[localStorage.getItem('user')]: {name:name,email:email,phone:phone}}
+    }
+    // let participants = response.data.participants;
+    // participants[session] = session;
+    // console.log(participants)
+    // let data = {
+    //     participants: participants
+    // };
     
-    let participants = response.data.participants;
-    participants[session] = session;
-
     let data = {
-        participants: participants
-    };
+        participants: plist
+    }
 
     axios.patch(url, data)
     .then(() => {
-        window.location.reload();
+        console.log('Sign up successful')
     })
+
 }
 
 

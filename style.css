@@ -981,6 +981,7 @@ section #text {
     display: flex;
     width:50%;
     justify-content: space-between;
+    padding-bottom: 5px;
 }
 
 .my-event-list-header{
@@ -1010,15 +1011,16 @@ section #text {
 
 .event-list{
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     flex-wrap: wrap;
 }
 
 .event{
-    width: 47%;
-    min-width: 300px;
+    width: 400px;
     display: flex;
     flex-direction: column;
+    margin:10px 50px;
+    justify-content: space-between;
 }
 
 .event-name{
@@ -1044,6 +1046,15 @@ section #text {
     background-color: #002431;
     color: white;
     
+}
+table, th, td{
+    border-collapse: collapse;
+    border: 2px solid black;
+}
+
+th, td{
+    padding:2px 5px;
+    text-align: center;
 }
 
 /* Padding for sign up for events */

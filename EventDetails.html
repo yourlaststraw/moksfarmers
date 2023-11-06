@@ -22,7 +22,7 @@
     <script type="text/javascript" src="user.js"></script>
     <script type="text/javascript" src="validate.js"></script>
     <script type="text/javascript" src="Events.js"></script>
-    <script type="text/javascript" src="proxyevent.js"></script>
+    <script type="text/javascript" src="CreateEvent.js"></script>
     <style>
         .container {
             display: flex;
@@ -37,7 +37,7 @@
     </style>
 </head>
 
-<body id="events">
+<body id="eventDetails">
     <!-- This is the header/ Nav Bar -->
     <header id="header">
         <div class = "wrapper">
@@ -69,34 +69,57 @@
     
     <div class = "sec">
         <div class = "layer1 glass">
-            event details
+            <img style = "object-fit: contain;" v-bind:src="event.image">
+            <h2>{{event.name}}</h2>
+            <h4 style = "text-decoration: none;font-style: italic;;" >{{event.desc}}</h4>
+
+            <p>
+                Location: {{event.location}}<br>
+                Date(s): {{eventDuration(event.from,event.to)}}<br>
+                Capacity: {{event.size}}<br>
+                Sign-ups close on: {{eventDuration(event.signup,event.signup)}}<br>
+            </p>
             <button v-if="isSignedup" onclick="window.location.replace('Events.html')" style = "background-color:rgb(243, 68, 68);color:white;font-size:1rem;width:130px;margin-bottom: 50px;" class = "button" role = "button">Back</button>
         </div>
-        <div v-if="!isSignedup" class="layer2 glass">
+        <div v-if="!isSignedup && !isOwnEvent" class="layer2 glass">
             <h2>Sign up now!</h2>
     
             <div class="sign-up-field flex items-center mb-4">
                 <div class="mr-4">Name:</div>
-                <div><input type="text" class="border-2 border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-indigo-200"></div>
+                <div><input v-model="signUpName" type="text" class="border-2 border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-indigo-200"></div>
             </div>
     
             <div class="sign-up-field flex items-center mb-4">
                 <div class="mr-4">Email:</div>
-                <div><input type="text" class="border-2 border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-indigo-200"></div>
+                <div><input v-model="signUpEmail" type="text" class="border-2 border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-indigo-200"></div>
             </div>
     
             <div class="sign-up-field flex items-center mb-4">
                 <div class="mr-4">Phone:</div>
-                <div><input type="text" class="border-2 border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-indigo-200"></div>
+                <div><input v-model="signUpPhone" type="text" class="border-2 border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-indigo-200"></div>
             </div>
     
             <div class="w-full flex justify-end">
                 
                     <button onclick="window.location.replace('Events.html')" style = "background-color:rgb(243, 68, 68);color:white;font-size:1rem;width:130px;margin-bottom: 50px;" class = "button" role = "button">Back</button>
                 &nbsp
-                <button @click="displayPopup = true;isSignedup=true" class="button" style="color:white" role="button">Sign Up</button>
+                <button @click="displayPopup = true;isSignedup=true;joinEvent()" class="button" style="color:white" role="button">Sign Up</button>
             </div>
     
+        </div>
+
+        <div v-if="isOwnEvent">
+            <h2>This is your event!</h2>
+            <h5>Participant List:</h5>
+            <table>
+                <tr><th>S/N</th><th>Name</th><th>Email</th><th>Phone</th></tr>
+                <tr v-for="p,key,idx in event.participants">
+                    <div v-if="p != 'dummy'">
+                        <td>{{idx+1}}</td><td>{{p.name}}</td><td>{{p.email}}</td><td>{{p.phone}}</td>
+                    </div>
+                </tr>
+            </table>
+
         </div>
 
         <div v-if="displayPopup" class = "glass pop-up">
@@ -120,28 +143,77 @@
         const app = Vue.createApp({
                 data() {
                     return {
+                        isOwnEvent: false,
                         isSignedup: false,
                         displayPopup: false,
                         isLogged:false,
+                        event: '',
+                        userEvents:'a',
+                        signUpName:'',
+                        signUpEmail:'',
+                        signUpPhone:'',
                         
                     };
                 },
                 created() {
                     if (userData!=null && Object.keys(userData).length>0) {
-                        this.isLogged = true;
-                        
+                        this.isLogged = true
+                        this.event = JSON.parse(sessionStorage.getItem('event'))
+                        this.userEvents = JSON.parse(sessionStorage.getItem('userEvents'))
+                        this.isOwnEvent = this.checkIsOwnEvent(this.event)
+                        console.log(this.userEvents)
+                        if (!this.isOwnEvent){
+                            console.log(this.checkIsSignedup(this.event))
+                            this.isSignedup = this.checkIsSignedup(this.event)
+                        }
+                        console.log(this.isOwnEvent)
                     }
-  
-                    
                 },
                 mounted(){
-                    
+                    console.log(this.userEvents)
                 },
                 methods: {
                     log(str){
                         console.log(str);
                         return;
                     },
+                    eventDuration(from,to){
+                        d = new Date(from)
+                        d2 = new Date(to)
+                        start = [d.getMonth()+1,d.getDate(),d.getFullYear()]
+                        end = [d2.getMonth()+1,d2.getDate(),d2.getFullYear()]
+
+                        if (start[0] == end[0] && start[1] == end[1] && start[2] == end[2]){
+                            return start[0] + "/" + start[1] + "/" + start[2]
+                        }else{
+                            return start[0] + "/" +start[1] + "/" + start[2] + " - " + end[0] + "/" + end[1] + "/" + end[2]
+                        }
+                    },
+                    checkIsSignedup(event){
+                        for (date in this.userEvents.registered){
+                            for (e of this.userEvents.registered[date]){
+                                if (e.name == event.name){
+                                    return true
+                                }
+                            }
+                        }
+                        return false
+                    },
+                    checkIsOwnEvent(event){
+                        for (date in this.userEvents.created){
+                            for (e of this.userEvents.created[date]){
+                                if (e.name == event.name){
+                                    console.log(1)
+                                    return true
+                                }
+                            }
+                        }
+                        return false
+                    },
+                    joinEvent(){
+                        console.log(this.event.id)
+                        joinEvent(this.event.id,this.signUpName,this.signUpEmail,this.signUpPhone)
+                    }
                     
                     
                 },
@@ -151,7 +223,7 @@
         })
 
         
-        app.mount("#events")
+        app.mount("#eventDetails")
     </script>
 </body>
 </html>

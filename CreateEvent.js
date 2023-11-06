@@ -40,11 +40,9 @@ function addEvent(){
     }
     else if (signup > to) {
         output += `<span>Your latest sign up date cannot be after your event.</span><br>`;
-    }
     if (image == '') {
         output += `<span>Please insert an image for this event.</span><br>`;
     }
-
     if (output !== '') {
         document.getElementById('errors').innerHTML = output;
     }
