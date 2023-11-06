@@ -77,4 +77,5 @@ function encodeImageFileAsURL(element) {
       image = reader.result; // The data here is compatible with any img tag src even if it's base64 as it prefixes with 'data:image/jpeg;base64,'
     }
     reader.readAsDataURL(file);
-  }
+    }
+}

@@ -24,14 +24,17 @@
     </style>
 </head>
 <body id = "checkout" class="bg-cover bg-center login-bg">
-    <button onclick="window.location.replace('buy.html')" style = "margin-top: 50px;margin-left: 50px;" class = "button" role = "button">Buy more</button>
+    <button onclick="window.location.replace('Buy.html')" style = "margin-top: 50px;margin-left: 50px;background-color:rgb(243, 68, 68)" class = "button" role = "button">Back</button>
 
         <div class="flex flex-col items-center h-screen">
             <div class = "checkout">
                 <a class="logo"></a>
                 <div class="checkout-box">
-                    <div style = "display:flex;justify-content: center;" v-if="displayQR" id = "QR">
+                    <div v-if="displayQR" style = "display:flex;flex-direction:column; align-items: center;">
+                    <div id = "QR">
                         
+                    </div>
+                    <button onclick="sessionStorage.removeItem('cart');sessionStorage.removeItem('total');window.location.replace('Buy.html')" style = "margin-top: 50px;" class = "button" role = "button">Paid</button>
                     </div>
                     <div v-else>
                         <div v-for="(value, key, index) in cart">
@@ -46,7 +49,7 @@
                         <div style ="display: flex;justify-content: space-between;">
                             <div style="display: flex;flex-wrap: wrap;max-width: 20vw;text-align: left;"class = "logo">Total: ${{total}}</div>
                             <div style = "display: flex;align-items: flex-end;">
-                                <div><button v-on:click="displayQR = true" style ="margin-bottom: 5px;"class="checkout-btn" role="button">Pay</button>
+                                <div><button v-on:click="displayQR = true" style ="margin-bottom: 5px;background-color: #4faa2e;"class="checkout-btn" role="button">Pay</button>
                                 </div>
                             </div>
                         </div>
@@ -57,10 +60,12 @@
 </body>
 
 <script>
+    console.log(sessionStorage)
     document.getElementsByClassName("logo")[0].innerHTML = "Farmer " + userData.last_name + "'s basket"
     cart = JSON.parse(sessionStorage.getItem("cart"))
-    total = JSON.parse(sessionStorage.getItem("total"))
-    processPayment(total)
+    total =JSON.parse(sessionStorage.getItem("total"))
+    console.log(total)
+    processPayment(total);
     // Vue app
     const app = Vue.createApp({
         

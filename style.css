@@ -11,6 +11,10 @@
         .carousel-control-next-icon {
             filter: invert(1);
         }
+.carousel-caption{
+    bottom:0;
+    padding-bottom:0.5rem;
+}
 .text {
     background-color: #fcf7cc;
     color: black;
@@ -24,13 +28,14 @@
 
 .description {
     color: white;
+    font-size: 1vw;
 }
 
 .title {
     font-size: 40px;
     color: white;
     font-family: 'Poppins', sans-serif;
-    ;
+    font-size: 2vw;
 }
 
 html,
@@ -49,13 +54,16 @@ html {
     color: #002431;
     background-color: white;
     border-radius: 15%;
-    padding: 10px 20px;
+    padding: 3% 10%;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;
+    font-size: 1.5vw;
     border: none;
     cursor: pointer;
+    width: fit-content;
+    height: fit-content;
+    margin-bottom: 5%;
 }
 
 .features {
@@ -136,7 +144,7 @@ html {
     height: 80px;
 }
 
-@media(max-width:929px) {
+@media(max-width:917px) {
     .user-info {
         align-items: flex-start;
     }
@@ -480,7 +488,8 @@ section #text {
 
 #buy #header,
 #mygarden #header,
-#events #header {
+#events #header,
+#eventDetails #header {
     position: static;
 }
 
@@ -867,42 +876,6 @@ section #text {
     font-size: 1.8em;
     margin: 2%;
     font-weight: bold;
-}
-
-/* not sure if this is intentional but i commented it out and the page looks fine so */
-/* .login-box {
-    margin: 0 auto;
-    width: 50%;
-} */
-
-/* carousel caption responsiveness */
-
-@media (max-width: 1068px) {
-    .carousel-caption h5 {
-        font-size: 20px
-    }
-
-    .carousel-caption {
-        font-size: 10px
-    }
-
-    .url {
-        font-size: 10px
-    }
-}
-
-@media (max-width: 740px) {
-    .carousel-caption h5 {
-        font-size: 10px
-    }
-
-    .carousel-caption {
-        font-size: 5px
-    }
-
-    .url {
-        font-size: 5px
-    }
 }
 
 

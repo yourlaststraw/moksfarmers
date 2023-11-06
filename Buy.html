@@ -144,7 +144,7 @@
 <a id="top" href="#"> <i class="fas fa-arrow-up"></i> </a>
 <script>
 checkLogin()
-
+console.log(sessionStorage)
 
 
 
@@ -212,6 +212,7 @@ checkLogin()
                 return
             },
             removeAll(item){
+                this.total -= this.cart[item].quantity * this.cart[item].price
                 this.cart[item].quantity = 0;
                 return
             },
@@ -229,9 +230,10 @@ checkLogin()
                 return
             },
             checkout(){
-
                 sessionStorage.setItem("cart", JSON.stringify(this.cart));
                 sessionStorage.setItem("total", JSON.stringify(this.total));
+
+                
                 window.location.replace('checkout.html');
             },
 
@@ -240,7 +242,12 @@ checkLogin()
             
             if (userData!=null && Object.keys(userData).length>0){
                 this.isLogged = true;
+                if (sessionStorage.hasOwnProperty("total")){
+                    this.cart = JSON.parse(sessionStorage.getItem("cart"));
+                    this.total = Number(sessionStorage.getItem("total"));
+                }
             }
+
         }
     }).mount("#buy");
     
