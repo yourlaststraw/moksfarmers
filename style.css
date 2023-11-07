@@ -1036,3 +1036,10 @@ th, td{
     z-index: 50;
     overflow: hidden;
 }
+
+@media only screen and (max-width: 600px) {
+#header {
+    flex-direction: column;
+    align-items: center;
+}
+}
