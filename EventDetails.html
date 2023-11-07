@@ -4,12 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description"
-        content="text">
+    <meta name="description" content="text">
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="images/logo.png">
     <!-- Page Title -->
-    <title></title>
+    <title>My Fancy Page</title>
     <!-- CSS Files -->
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="animation.css">
@@ -27,111 +26,119 @@
         .container {
             display: flex;
             justify-content: center;
-            margin-top: 10%;
             margin-bottom: 10%;
         }
         
         #errors {
             color: red;
         }
+        #header{
+                background-color: #FFF9C1;
+            }
     </style>
 </head>
 
 <body id="eventDetails">
     <!-- This is the header/ Nav Bar -->
-    <header id="header">
-        <div class = "wrapper">
-            <a href="index.html" class="logo">Mok's Farmers</a>
+    <header id="header" class="bg-gray-200 p-4 flex justify-between items-center">
+        <div class="wrapper">
+            <a href="index.html" class="logo text-2xl font-bold">Mok's Farmers</a>
         </div>
 
-        <div class ="links">
-            <div class = "wrapper">
-                <a href="index.html" >Home</a>
-                <a href="MyGarden.html" >MyGarden</a>
+        <div class="links">
+            <div class="wrapper">
+                <a href="index.html" class="text-lg">Home</a>
+                <a href="MyGarden.html" class="text-lg">MyGarden</a>
             </div>
-            <div class = "wrapper">
-                <a href="Events.html" class="active">Events</a>
-                <a href="Buy.html">Buy</a>
+            <div class="wrapper">
+                <a href="Events.html" class="active text-lg">Events</a>
+                <a href="Buy.html" class="text-lg">Buy</a>
             </div>
         </div>
 
-        <div class = "user-info">
-        <button class="button-5" role="button">
-            <div v-if="isLogged" onclick="clearSession();window.location.replace('index.html')">Logout</div>
-            <div v-else><a href="login.html">Login/Signup</a></div>
-        </button>
-        <div id = "welcome" style ="text-align: right;" v-if="isLogged" >
-            Welcome, farmer 
+        <div class="user-info">
+            <button class="button-5" role="button">
+                <div v-if="isLogged" onclick="clearSession();window.location.replace('index.html')" class="text-lg">Logout</div>
+                <div v-else><a href="login.html" class="text-lg">Login/Signup</a></div>
+            </button>
+            <div id="welcome" style="text-align: right;" v-if="isLogged" class="text-lg">
+                Welcome, farmer
+            </div>
         </div>
-        </div>
-    
     </header>
     
-    <div class = "sec">
-        <div class = "layer1 glass">
-            <img style = "object-fit: contain;" v-bind:src="event.image">
-            <h2>{{event.name}}</h2>
-            <h4 style = "text-decoration: none;font-style: italic;;" >{{event.desc}}</h4>
+    <div class="container">
+        <div class="flex justify-center m-4">
+            <div class="bg-white shadow-md rounded-md p-4">
+                <img v-bind:src="event.image" class="object-cover h-48 w-full mb-4 rounded-md" alt="Event Image">
+                <h2 class="text-2xl font-bold mb-2">{{event.name}}</h2>
+                <h4 class="text-base italic mb-4">{{event.desc}}</h4>
 
-            <p>
-                Location: {{event.location}}<br>
-                Date(s): {{eventDuration(event.from,event.to)}}<br>
-                Capacity: {{event.size}}<br>
-                Sign-ups close on: {{eventDuration(event.signup,event.signup)}}<br>
-            </p>
-            <button v-if="isSignedup" onclick="window.location.replace('Events.html')" style = "background-color:rgb(243, 68, 68);color:white;font-size:1rem;width:130px;margin-bottom: 50px;" class = "button" role = "button">Back</button>
+                <p class="text-base">
+                    Location: {{event.location}}<br>
+                    Date(s): {{eventDuration(event.from,event.to)}}<br>
+                    Capacity: {{event.size}}<br>
+                    Sign-ups close on: {{eventDuration(event.signup,event.signup)}}<br>
+                </p>
+                <button v-if="isSignedup" onclick="window.location.replace('Events.html')" class="bg-red-500 text-white text-lg py-2 px-4 rounded-lg mt-4">Back</button>
+            </div>
         </div>
-        <div v-if="!isSignedup && !isOwnEvent" class="layer2 glass">
-            <h2>Sign up now!</h2>
-    
-            <div class="sign-up-field flex items-center mb-4">
-                <div class="mr-4">Name:</div>
-                <div><input v-model="signUpName" type="text" class="border-2 border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-indigo-200"></div>
+        <div v-if="!isSignedup && !isOwnEvent" class="flex justify-center m-4">
+            <div class="bg-white shadow-md rounded-md p-4">
+                <h2 class="text-2xl font-bold mb-4">Sign up now!</h2>
+                <div class="flex items-center mb-4">
+                    <div class="mr-4 text-lg">Name:</div>
+                    <div><input v-model="signUpName" type="text" class="border-2 border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-indigo-200"></div>
+                </div>
+                <div class="flex items-center mb-4">
+                    <div class="mr-4 text-lg">Email:</div>
+                    <div><input v-model="signUpEmail" type="text" class="border-2 border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-indigo-200"></div>
+                </div>
+                <div class="flex items-center mb-4">
+                    <div class="mr-4 text-lg">Phone:</div>
+                    <div><input v-model="signUpPhone" type="text" class="border-2 border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-indigo-200"></div>
+                </div>
+                <div class="w-full flex justify-end">
+                    <button onclick="window.location.replace('Events.html')" class="bg-red-500 text-white text-lg py-2 px-4 rounded-lg mr-4">Back</button>
+                    <button @click="displayPopup = true;isSignedup=true;joinEvent()" class="bg-blue-500 text-white text-lg py-2 px-4 rounded-lg">Sign Up</button>
+                </div>
             </div>
-    
-            <div class="sign-up-field flex items-center mb-4">
-                <div class="mr-4">Email:</div>
-                <div><input v-model="signUpEmail" type="text" class="border-2 border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-indigo-200"></div>
-            </div>
-    
-            <div class="sign-up-field flex items-center mb-4">
-                <div class="mr-4">Phone:</div>
-                <div><input v-model="signUpPhone" type="text" class="border-2 border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-indigo-200"></div>
-            </div>
-    
-            <div class="w-full flex justify-end">
-                
-                    <button onclick="window.location.replace('Events.html')" style = "background-color:rgb(243, 68, 68);color:white;font-size:1rem;width:130px;margin-bottom: 50px;" class = "button" role = "button">Back</button>
-                &nbsp
-                <button @click="displayPopup = true;isSignedup=true;joinEvent()" class="button" style="color:white" role="button">Sign Up</button>
-            </div>
-    
         </div>
 
-        <div v-if="isOwnEvent">
-            <h2>This is your event!</h2>
-            <h5>Participant List:</h5>
-            <table>
-                <tr><th>S/N</th><th>Name</th><th>Email</th><th>Phone</th></tr>
-                <tr v-for="p,key,idx in event.participants">
-                    <div v-if="p != 'dummy'">
-                        <td>{{idx+1}}</td><td>{{p.name}}</td><td>{{p.email}}</td><td>{{p.phone}}</td>
-                    </div>
-                </tr>
-            </table>
-
+        <div v-if="isOwnEvent" class="flex justify-center m-4">
+            <div class="bg-white shadow-md rounded-md p-4">
+                <h2 class="text-2xl font-bold mb-4">This is your event!</h2>
+                <h5 class="text-lg">Participant List:</h5>
+                <table class="table-auto w-full">
+                    <thead>
+                        <tr>
+                            <th class="px-4 py-2">S/N</th>
+                            <th class="px-4 py-2">Name</th>
+                            <th class="px-4 py-2">Email</th>
+                            <th class="px-4 py-2">Phone</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="(p, key, idx) in event.participants" :key="idx">
+                            <td class="border px-4 py-2" v-if="p != 'dummy'">{{idx+1}}</td>
+                            <td class="border px-4 py-2" v-if="p != 'dummy'">{{p.name}}</td>
+                            <td class="border px-4 py-2" v-if="p != 'dummy'">{{p.email}}</td>
+                            <td class="border px-4 py-2" v-if="p != 'dummy'">{{p.phone}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
 
-        <div v-if="displayPopup" class = "glass pop-up">
-            <h2>Congratulations!</h2>
-            <br>
-            You have successfully signed up for this event
-            <br><br><br>
-            <button @click="displayPopup = false" style = "background-color:#4faa2e;font-size:1rem;width:130px;" class = "button" role = "button">Close</button>
+        <div v-if="displayPopup" class="flex justify-center m-4">
+            <div class="bg-white shadow-md rounded-md p-4">
+                <h2 class="text-2xl font-bold mb-4">Congratulations!</h2>
+                <p class="text-lg mb-4">You have successfully signed up for this event</p>
+                <button @click="displayPopup = false" class="bg-green-500 text-white text-lg py-2 px-4 rounded-lg">Close</button>
+            </div>
         </div>
     </div>
 
-    
     <script>
         if (userData !=null && Object.keys(userData).length >0) {
             document.getElementById("welcome").innerHTML += userData.last_name + "!";
