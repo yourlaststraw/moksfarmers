@@ -40,7 +40,7 @@
 
 html,
 body {
-    background-color: #FFF9C1;
+    background-color: #FFF9C1 !important;
     overflow-x: hidden;
     /* To prevent Horizontal scroll */
 }
@@ -113,7 +113,7 @@ html {
     /* To get elements in row */
     justify-content: space-between;
     align-items: baseline;
-    z-index: 99999;
+    z-index: 5;
     flex-wrap: wrap;
 
     /* Header shld be above everything */
@@ -499,7 +499,9 @@ section #text {
     font-weight: inherit;
 }
 
-#buy h3 {
+#buy h3,
+#events h3,
+#mygarden h3 {
     font-size: 1.8em;
     margin: 2%;
     font-weight: bold;
@@ -532,7 +534,7 @@ section #text {
 
 }
 
-#buy .layer2 .sale-box .image-box {
+.image-box {
     /* border: green solid 2px; */
     align-items: center;
     text-align: center;
@@ -542,7 +544,7 @@ section #text {
 
 }
 
-#buy .layer2 .sale-box .text-box {
+.text-box {
     /* border:2px solid orange; */
     padding-left: 15px;
     flex-grow: 1;
@@ -859,6 +861,19 @@ section #text {
     color: #4faa2e;
 }
 
+.plant-card{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+#mygarden .layer1{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 25px;
+}
+
 /* login page styling */
 .login-box {
     backdrop-filter: blur(70px);
@@ -969,9 +984,11 @@ section #text {
     flex-direction: column;
 }
 
+
 .my-event{
     width:fit-content;
     cursor: pointer;
+    text-align: center;
 }
 .my-event:hover span{
     display:none
@@ -1037,9 +1054,9 @@ th, td{
     overflow: hidden;
 }
 
-@media only screen and (max-width: 600px) {
+/* @media only screen and (max-width: 600px) {
 #header {
     flex-direction: column;
     align-items: center;
 }
-}
+} */

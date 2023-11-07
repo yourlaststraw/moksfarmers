@@ -32,39 +32,41 @@
         #errors {
             color: red;
         }
-        #header{
+        /* #header{
                 background-color: #FFF9C1;
-            }
+            } */
     </style>
 </head>
 
 <body id="eventDetails">
     <!-- This is the header/ Nav Bar -->
-    <header id="header" class="bg-gray-200 p-4 flex justify-between items-center">
-        <div class="wrapper">
-            <a href="index.html" class="logo text-2xl font-bold">Mok's Farmers</a>
+    <header id="header">
+        <div class = "wrapper">
+            <a href="index.html" class="logo">Mok's Farmers</a>
         </div>
 
-        <div class="links">
-            <div class="wrapper">
-                <a href="index.html" class="text-lg">Home</a>
-                <a href="MyGarden.html" class="text-lg">MyGarden</a>
+        <div class ="links">
+            <div class = "wrapper">
+                <a href="index.html" >Home</a>
+                <a href="MyGarden.html" >MyGarden</a>
             </div>
-            <div class="wrapper">
-                <a href="Events.html" class="active text-lg">Events</a>
-                <a href="Buy.html" class="text-lg">Buy</a>
+            <div class = "wrapper">
+                <a href="Events.html" class="active">Events</a>
+                <a href="Buy.html">Buy</a>
             </div>
         </div>
 
-        <div class="user-info">
+        <div class = "user-info">
             <button class="button-5" role="button">
-                <div v-if="isLogged" onclick="clearSession();window.location.replace('index.html')" class="text-lg">Logout</div>
-                <div v-else><a href="login.html" class="text-lg">Login/Signup</a></div>
+                <div v-if="isLogged" onclick="clearSession();window.location.replace('index.html')">Logout</div>
+                <div v-else><a href="login.html">Login/Signup</a></div>
             </button>
-            <div id="welcome" style="text-align: right;" v-if="isLogged" class="text-lg">
-                Welcome, farmer
+            <div id = "welcome" style ="text-align: right;" v-if="isLogged" >
+                Welcome, farmer 
             </div>
         </div>
+        </div>
+        
     </header>
     
     <div class="container">

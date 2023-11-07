@@ -29,10 +29,10 @@
         @media only screen and (max-width: 600px) {
             /* CSS rules for screens less than 600px wide */
             /* Update the layout and styling for mobile view here */
-            #header {
+            /* #header {
                 flex-direction: column;
                 align-items: center;
-            }
+            } */
         
             .layer3 button {
                 width: 100%;
@@ -139,7 +139,7 @@
                     <div v-for="type in userEvents">
 
                         <div v-for="date,key in type">
-                            <div  v-if="key == cur_date_str" v-for="event in date">
+                            <div  style = "display: flex;flex-direction: column;align-items: center;" v-if="key == cur_date_str" v-for="event in date">
                                 <event v-bind:is-own-event="checkIsOwnEvent(event)" v-bind:user-events="userEvents" v-bind:event="event"></event>
                             </div>
                         </div>
