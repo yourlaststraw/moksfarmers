@@ -988,13 +988,12 @@ section #text {
     flex-wrap: wrap;
 }
 
-.event{
-    width: 400px;
-    display: flex;
-    flex-direction: column;
-    margin:10px 50px;
-    justify-content: space-between;
+.glass.event {
+    height: 500px; 
+    width: 300px; 
+    margin: 20px;
 }
+
 
 .event-name{
     font-size: 150%;
