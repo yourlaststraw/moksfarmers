@@ -87,10 +87,10 @@
     
     <div v-if="isLogged" class="sec" style = "padding-top: 0;">
         <div>
-            <div class="flex justify-between items-center py-3">
+            <div class="container d-flex justify-between items-center ">
                 <!-- Tab links -->
-                <div class="tab">
-                    <ul class="flex space-x-4 items-center">
+                <!-- <div class="tab">
+                    <ul class="d-flex items-center">
                         <li>
                             <a href="MyGarden.html" aria-current="page" class="tabcontent active text-lg">MyGarden</a>
                         </li>
@@ -98,7 +98,16 @@
                             <a href="CommunityGarden.html" class="tabcontent text-lg">CommunityGarden</a>
                         </li>
                     </ul>
-                </div>
+                </div> -->
+                <header id="header">
+                    <div class ="links">
+                        <div class = "wrapper">
+                            <a href="MyGarden.html" aria-current="page" class="tabcontent active text-lg">MyGarden</a>
+                            <a href="CommunityGarden.html" class="tabcontent text-lg">CommunityGarden</a>
+                        </div>  
+                    </div>
+                </header>
+                
                 <!-- Add Plant button -->
                 <button @click="openModal" id="addPlantButton" class="py-2 px-4 bg-black text-white rounded-lg" >Add Plant</button>
             </div>
