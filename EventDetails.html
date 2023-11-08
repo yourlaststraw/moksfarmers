@@ -103,7 +103,7 @@
                     <div><input v-model="signUpName" type="text" class="border-2 border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-indigo-200"></div>
                 </div>
                 <div class="flex items-center mb-4">
-                    <div class="mr-4 text-lg">Email:</div>
+                    <div class="mr-4 text-lg">Email:&nbsp;</div>
                     <div><input v-model="signUpEmail" type="text" class="border-2 border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-indigo-200"></div>
                 </div>
                 <div class="flex items-center mb-4">
@@ -142,14 +142,16 @@
             </div>
         </div>
 
-        <div v-if="displayPopup" class="flex justify-center m-4">
-            <div class="bg-white shadow-md rounded-md p-4">
-                <h2 class="text-2xl font-bold mb-4">Congratulations!</h2>
-                <p class="text-lg mb-4">You have successfully signed up for this event</p>
-                <button @click="displayPopup = false" class="bg-green-500 text-white text-lg py-2 px-4 rounded-lg">Close</button>
+        <div v-if="displayPopup" class="fixed top-0 left-0 h-screen w-screen flex items-center justify-center bg-black bg-opacity-50">
+            <div class="modal-container bg-white p-8 rounded-lg shadow-lg text-center">
+                <h2 class="text-3xl font-bold mb-4">Congratulations!</h2>
+                <p class="text-xl mb-6">You have successfully signed up for this event!</p>
+                <button @click="displayPopup = false" class="bg-green-500 text-white text-lg py-2 px-4 rounded-lg mt-4">
+                    <a href="Events.html" class="text-white">Close</a>
+                </button>
             </div>
         </div>
-    </div>
+
 
     <script>
         if (userData !=null && Object.keys(userData).length >0) {
@@ -244,5 +246,19 @@
         
         app.mount("#eventDetails")
     </script>
+<style scoped>
+    .modal-container {
+      background-color: white;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      max-width: 80%;
+      width: fit-content;
+      text-align: center;
+      max-height: 80vh; 
+      overflow-y: auto;
+      z-index: 6;
+    }
+</style>
 </body>
 </html>
