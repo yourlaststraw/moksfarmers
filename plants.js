@@ -32,7 +32,8 @@ function postPlant(plant) {
         loggedDate: convertDateFormat(new Date()),
         // loggedDate: "2023-10-30", //to test 
         location: localStorage.getItem("latlon"),
-        image: plant.image
+        image: plant.image,
+        harvest: 'false'
     }
     axios.post(dbUrlpt1 + '/users/' + localStorage.getItem("user") + '/my_plants' + dbUrlpt2, data)
     .then(response => {

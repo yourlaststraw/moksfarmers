@@ -212,14 +212,14 @@
                 this.myPlantsList.push(plant);
                 
                 if (postPlant(plant)) {
-                        localStorage.setItem("userPlantCount", JSON.stringify(this.myPlantsList));
-                        callPlants();
-                        const userPlants = JSON.parse(localStorage.getItem("userPlants"));
-                        // JSON.parse(JSON.strngify(value)) is used to clean out Proxy(array) values, so that it becomes normal.
-                        checkCountTally(userPlants, JSON.parse(JSON.stringify(this.myPlantsList)));
-                        setTimeout(function(){
-                            window.location.replace("plantStall.html");
-                        },1000);
+                    localStorage.setItem("userPlantCount", JSON.stringify(this.myPlantsList));
+                    callPlants();
+                    const userPlants = JSON.parse(localStorage.getItem("userPlants"));
+                    // JSON.parse(JSON.strngify(value)) is used to clean out Proxy(array) values, so that it becomes normal.
+                    checkCountTally(userPlants, JSON.parse(JSON.stringify(this.myPlantsList)));
+                    setTimeout(function(){
+                        window.location.replace("plantStall.html");
+                    }, 100);
                 };
             },
             logTracker(plantItem){
@@ -238,11 +238,37 @@
                         console.log('Successfully logged progress');
                         window.location.replace("plantStall.html");
                     })
-
-            }
+                }
                 else{
                     alert("You have already logged today's progress!");
-            }}
+                }
+            },
+            harvestPlant(plantItem, postName, postText, postImage) { // Use this to add the harvested plant to the posts table.
+                const url1 = dbUrlpt1 + '/users/' + session + '/my_plants/' + plantItem.userPlantId + dbUrlpt2;
+                const url2 = dbUrlpt1 + '/posts' + dbUrlpt2;
+
+                axios.get(dbUserUrl)
+                .then(response => {
+                    let userName = response.data.first_name + ' ' + response.data.last_name;
+                    let data = {
+                        harvest: 'true'
+                    };
+                    let para = {
+                        user_name: userName,
+                        image: postImage,
+                        post_name: postName,
+                        description: postText,
+                        date: plantItem.loggedDate
+                    };
+                    axios.patch(url1, data)
+                    .then(() => {
+                        axios.post(url2, para)
+                        .then(() => {
+                            alert('Plant harvested!')
+                        })
+                    })
+                })
+            },
         },
         created(){
             //console.log(userData)
@@ -250,9 +276,9 @@
                 this.isLogged = true;
             }
         }
-        });
-        app.component('plant-card', PlantCard);
-        app.mount("#mygarden");          
+    });
+    app.component('plant-card', PlantCard);
+    app.mount("#mygarden");          
     
     
 </script>
