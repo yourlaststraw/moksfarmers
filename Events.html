@@ -317,13 +317,11 @@
                     isSignupsClosed(event){
                         d = event.signup.split("-")
                         d_today = new Date()
-                        console.log(d_today.getFullYear(),d_today.getMonth()+1,d_today.getDate())
-                        console.log(d)
                         if (d_today.getFullYear() < d[0]){
                             return false
                         }else if (d_today.getFullYear() == d[0] && d_today.getMonth()+1 < d[1]){
                             return false
-                        }else if (d_today.getFullYear() == d[0] && d_today.getMonth()+1 == d[1] && d_today.getDate() <= d[3]){
+                        }else if (d_today.getFullYear() == d[0] && d_today.getMonth()+1 == d[1] && d_today.getDate() <= d[2]){
                             return false
                         }
                         return true
