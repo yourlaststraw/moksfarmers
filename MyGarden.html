@@ -19,10 +19,10 @@
     <script src="https://unpkg.com/vue@next"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script type="text/javascript" src="commons.js"></script>
+    <script type="text/javascript" src="maps.js"></script>
     <script type="text/javascript" src="plants.js"></script>
     <script type="text/javascript" src="user.js"></script>
     <script type="text/javascript" src="validate.js"></script>
-    <script type="text/javascript" src="maps.js"></script>
     <style>
         
         /* Add responsiveness for smaller screens */
@@ -48,9 +48,7 @@
     
 </head>
 
-<body id="mygarden" onload="loadData()">
-    <script>
-    </script>
+<body id="mygarden" onload="loadData(); euclideanDistance()">
     <!-- This is the header/ Nav Bar -->
     <header id="header">
         <div class = "wrapper">

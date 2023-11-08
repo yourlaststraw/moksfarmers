@@ -137,7 +137,7 @@ function checkCountTally(userPlants, myPlantsList) {
             console.log(count, user)
             userPlants = JSON.stringify(userPlants);
             myPlantsList = JSON.stringify(myPlantsList);
-            window.location.replace("plantStall.html");
+            //window.location.replace("plantStall.html");
         }
         //console.log(userPlants, myPlantsList);
     }
