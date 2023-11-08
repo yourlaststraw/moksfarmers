@@ -41,8 +41,9 @@ function storeCurrentLocation() {
 };
 
 function euclideanDistance() {
-    let list = [];
-    let output, euclid, location, userName, plantLoc, postLat, postLon, lonResult, latResult;
+    let userList = [];
+    let othersList = [];
+    let output, euclid, location, postLat, postLon, lonResult, latResult;
     let userLocation = localStorage.getItem("latlon").split(',');
     let userLat = Number(userLocation[0]);
     let userLon = Number(userLocation[1]);
@@ -50,15 +51,15 @@ function euclideanDistance() {
     axios.get(dbUrlpt1 + '/posts' + dbUrlpt2)
     .then(response => {
         for (i in response.data) {
-            if (response.data[i].user_id !== session) {
-                if (response.data[i].location === undefined) {
+            let post = response.data[i];
+            if (post.user_id !== session) {
+                if (post.location === undefined) {
                     // console.log('test');
                 }
                 else {
-                    // console.log(response.data[i].first_name, location)
+                    // console.log(post.first_name, location)
                     // console.log(userLat, userLon, euclid);
-                    userName = response.data[i].user_name;
-                    location = String(response.data[i].location).split(',');
+                    location = String(post.location).split(',');
                     postLat = Number(location[0]);
                     postLon = Number(location[1]);
 
@@ -68,13 +69,28 @@ function euclideanDistance() {
 
                     if (euclid < 0.05) {
                         output = {
-                            user_name: userName
+                            user_name: post.user_name,
+                            date: post.date,
+                            image: post.image,
+                            post_name: post.post_name,
+                            description: post.description,
                         }
-                        list.push(output);
+                        othersList.push(output);
                     }
                 }
-                localStorage.setItem("nearbyPlants", JSON.stringify(list));
+                localStorage.setItem("nearbyPlants", JSON.stringify(othersList));
             }
+            else {
+                output = {
+                    user_name: post.user_name,
+                    date: post.date,
+                    image: post.image,
+                    post_name: post.post_name,
+                    description: post.description,
+                }
+                userList.push(output);
+            }
+            localStorage.setItem("myOwnPlants", JSON.stringify(userList));
         }
     });
 };

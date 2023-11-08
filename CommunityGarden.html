@@ -81,18 +81,36 @@
             
         </div>
 
+        <div v-if="myOwnPlants === '[]'">
+            <h3>You have not posted anything yet!</h3>
+        </div>
+        <div v-else>
+            <h3>My Own Plants:</h3>
+            <div v-for="mine in myOwnPlants">
+                <div class="glass relative">
+                    <img class="cropPhoto" :src="mine.image" alt="Plant Image" style="display: inline-block; height: 100%; width: 30%;">
+                    <div style="display: inline-block; width: 70%;">
+                        <h3>{{ mine.post_name }}</h3>
+                        <h3>{{ mine.description }}</h3>
+                        <h3>Posted on: {{ mine.date }}</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div v-if="nearbyPlants === '[]'">
             <h3>There are no nearby posts! Be the first in your area!</h3>
         </div>
         <div v-else>
+            <h3>Nearby Plants</h3>
             <div v-for="near in nearbyPlants">
                 <div class="glass relative">
                     <img class="cropPhoto" :src="near.image" alt="Plant Image" style="display: inline-block; height: 100%; width: 30%;">
                     <div style="display: inline-block; width: 70%;">
+                        <h3>{{ near.post_name }}</h3>
+                        <h3>{{ near.description }}</h3>
                         <h3>By: {{ near.user_name }}</h3>
-                        <div class="absolute bottom-10 right-10">
-                            <span class="font-bold">Day {{near.day}}</span>
-                        </div>
+                        <h3>Posted on: {{ near.date }}</h3>
                     </div>
                 </div>
             </div>
@@ -112,6 +130,7 @@
         }
         const nearbyPlants = JSON.parse(localStorage.getItem("nearbyPlants"));
         console.log(JSON.parse(localStorage.getItem("nearbyPlants")));
+        const myOwnPlants = JSON.parse(localStorage.getItem("myOwnPlants"));
         // display name if user is logged in
         if (userData!=null && Object.keys(userData).length>0){
             document.getElementById("welcome").innerHTML += userData.last_name + "!";
@@ -121,7 +140,8 @@
             data() { 
                 return { 
                     isLogged: false,
-                    nearbyPlants: nearbyPlants
+                    nearbyPlants: nearbyPlants,
+                    myOwnPlants: myOwnPlants
                       // key: value
                 };
             }, // data

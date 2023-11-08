@@ -267,26 +267,36 @@
                 this.showUploadDialog = true;
             },
             postPlant(img, caption, postName, plant) { // Use this to add the harvested plant to the posts table.
-                console.log(plant)
-                // this.showUploadDialog = false
-                // const url1 = dbUrlpt1 + '/users/' + session + '/my_plants/' + userPlantId + dbUrlpt2;
-                // const url2 = dbUrlpt1 + '/posts' + dbUrlpt2;
+                this.showUploadDialog = false
 
-                // axios.get(dbUserUrl)
-                // .then(response => {
-                //     let userName = response.data.first_name + ' ' + response.data.last_name;
-                //     let para = {
-                //         user_name: userName,
-                //         image: image,
-                //         post_name: postName,
-                //         description: caption,
-                //         date: plantItem.loggedDate
-                //     };
-                //     axios.post(url2, para)
-                //     .then(() => {
-                //         alert('Plant harvested!')
-                //     })
-                // })
+                plant = JSON.parse(JSON.stringify(plant))
+                userPlantId = plant.userPlantId;
+                
+                const url1 = dbUrlpt1 + '/posts' + dbUrlpt2;
+                const url2 = dbUrlpt1 + '/users/' + session + '/my_plants/' + userPlantId + dbUrlpt2;
+
+                axios.get(dbUserUrl)
+                .then(response => {
+                    let userName = response.data.first_name + ' ' + response.data.last_name;
+                    let para = {
+                        user_id: session,
+                        user_name: userName,
+                        image: img,
+                        post_name: postName,
+                        description: caption,
+                        date: convertDateFormat(new Date()),
+                        location: plant.location
+                    };
+                    axios.post(url1, para)
+                    .then(() => {
+                        axios.delete(url2)
+                        .then(() => {
+                            setTimeout(function(){
+                                window.location.replace("addPlantStall.html");
+                            }, 100);
+                        })
+                    })
+                })
             },
         },
         created(){
@@ -306,7 +316,7 @@
             image: null, 
             caption:"",
             errorMessage:'',
-            postName:'',
+            postName:'Testing the postName',
             };
         },           
         template: `
