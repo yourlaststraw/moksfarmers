@@ -124,7 +124,7 @@
                             <div v-for="ins of plantItem.instructions">{{ins}}</div>
                             <div class="d-flex justify-content-end align-items-center bottom-10 right-10" style = "margin-top: 10px;">
                             <span class="font-bold">Day {{plantItem.dayTrack}}</span>
-                            <button v-if= "plantItem.dayTrack == plantItem.maturity" @click="harvestPlant" style="right:10px;" class="bg-lime-600 text-white py-2 px-4 rounded-lg ml-10" :value="plantItem.userPlantId">Harvest</button>
+                            <harvest-btn @harvest-click="harvestPlant" v-bind:plant-id="plantItem.userPlantId" v-if= "plantItem.dayTrack == plantItem.maturity"></harvest-btn>
                             <button v-else-if= "!plantItem.logToday" @click="logTracker(plantItem)" style="right:10px;" class="bg-lime-600 text-white py-2 px-4 rounded-lg ml-10" :value="plantItem.userPlantId">Complete</button>
                             <div v-else style="right:10px;" class="bg-lime-600 text-white py-2 px-4 rounded-lg ml-10" :value="plantItem.userPlantId">Completed!</div>
                         </div>
@@ -158,7 +158,7 @@
                         <div v-for="plant in plants" :key="plant.id" class="border rounded-lg p-4 new-plant-container">
                             <img :src="plant.image" alt="Plant Image" class="w-full h-40 object-cover rounded-md mb-2">
                             <p class="text-lg">{{ plant.name }}</p>
-                            <button  @click="addToMyPlantsList(plant.id)" class="bg-lime-600 text-white py-2 px-4 rounded-lg w-full">Add to MyGarden</button>
+                            <button @click="addToMyPlantsList(plant.id)" class="bg-lime-600 text-white py-2 px-4 rounded-lg w-full">Add to MyGarden</button>
                         </div>
                     </div>
                 </div>
@@ -166,7 +166,9 @@
              <!-- The button to scroll back to top -->
             <a id="top" href="#"> <i class="fas fa-arrow-up"></i></a>
         </div>
-        <upload-image-dialog :show-dialog="showUploadDialog" @close="showUploadDialog = false" @upload-info="harvestPlant"/></upload-image-dialog>
+
+        <upload-image-dialog v-if= "showUploadDialog" @post="postPlant" :plantId="plant_to_harvest" /></upload-image-dialog>
+
     </div>
     <div v-else>
         <br><h3 class="buy-body">You are not logged in.</h3>
@@ -201,6 +203,7 @@
                 myPlantsList: userPlants,
                 plants: arrayPlants,
                 showUploadDialog: false,
+                plant_to_harvest: '',
                 };
         },
         methods: {
@@ -209,9 +212,6 @@
             },
             closeModal() {
                 this.isModalOpen = false;
-            },
-            closeDialog() {
-                this.showUploadDialog = false;
             },
             addToMyPlantsList(id) {
                 console.log(this.myPlantsList)
@@ -249,7 +249,7 @@
                     // console.log(matchingPlantItem.maturity);
                     if(data.day == matchingPlantItem.maturity){
                         console.log("harvest day")
-                        this.showUploadDialog = true;
+                        // this.showUploadDialog = true;
                     }
                     else{axios.patch(dbUrlpt1 + '/users/' + localStorage.getItem("user") + '/my_plants/' + userPlantId + dbUrlpt2, data)
                     .then(() => {
@@ -262,31 +262,37 @@
                     alert("You have already logged today's progress!");
                 }
             },
-            harvestPlant(plantItem, postName, caption, image) { // Use this to add the harvested plant to the posts table.
-                const url1 = dbUrlpt1 + '/users/' + session + '/my_plants/' + plantItem.userPlantId + dbUrlpt2;
-                const url2 = dbUrlpt1 + '/posts' + dbUrlpt2;
+            harvestPlant(plantId){
+                this.plant_to_harvest = plantId;
+                this.showUploadDialog = true;
+            },
+            postPlant(img, caption, postName, userPlantId) { // Use this to add the harvested plant to the posts table.
+                console.log(1)
+                this.showUploadDialog = false
+                // const url1 = dbUrlpt1 + '/users/' + session + '/my_plants/' + userPlantId + dbUrlpt2;
+                // const url2 = dbUrlpt1 + '/posts' + dbUrlpt2;
 
-                axios.get(dbUserUrl)
-                .then(response => {
-                    let userName = response.data.first_name + ' ' + response.data.last_name;
-                    let data = {
-                        harvest: 'true'
-                    };
-                    let para = {
-                        user_name: userName,
-                        image: image,
-                        post_name: postName,
-                        description: caption,
-                        date: plantItem.loggedDate
-                    };
-                    axios.patch(url1, data)
-                    .then(() => {
-                        axios.post(url2, para)
-                        .then(() => {
-                            alert('Plant harvested!')
-                        })
-                    })
-                })
+                // axios.get(dbUserUrl)
+                // .then(response => {
+                //     let userName = response.data.first_name + ' ' + response.data.last_name;
+                //     let data = {
+                //         harvest: 'true'
+                //     };
+                //     let para = {
+                //         user_name: userName,
+                //         image: image,
+                //         post_name: postName,
+                //         description: caption,
+                //         date: plantItem.loggedDate
+                //     };
+                //     axios.patch(url1, data)
+                //     .then(() => {
+                //         axios.post(url2, para)
+                //         .then(() => {
+                //             alert('Plant harvested!')
+                //         })
+                //     })
+                // })
             },
         },
         created(){
@@ -300,16 +306,17 @@
     // app.mount("#mygarden");   
 
     app.component('upload-image-dialog', {
-        props: ['showDialog'],
+        props: ["plantId"],
         data() {
             return {
             image: null, 
             caption:"",
             errorMessage:'',
+            postName:'',
             };
         },           
         template: `
-            <div class="fixed top-0 left-0 h-screen w-screen flex items-center justify-center bg-black bg-opacity-50" v-if="showDialog">
+            <div class="fixed top-0 left-0 h-screen w-screen flex items-center justify-center bg-black bg-opacity-50">
                 <div class="modal-container bg-white p-8 rounded-lg shadow-lg text-center">
                     <h1 class="text-2xl font-bold mb-4">Congratulations! Now enjoy the fruit of your labour!</h1>
                     <p class="mb-4">To commemorate this day, kindly upload an image and caption of your plant ready for harvest!</p>            
@@ -319,7 +326,7 @@
                     <input type="text" id="caption" placeholder="'Leaf' behind a record of this! 🌱📸🌿 #PlantingMemories" v-model="caption" class="mb-4 w-full p-2 border rounded-lg" />
                     <div class="flex justify-between">
                         <button @click="maybeNextTime" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-lg">Maybe Next Time</button>
-                        <button @click="uploadImage" class="bg-lime-600 hover:bg-green-600 text-white py-2 px-4 rounded-lg">Upload</button>
+                        <button @click="submitPost" class="bg-lime-600 hover:bg-green-600 text-white py-2 px-4 rounded-lg">Upload</button>
                     </div>
                 </div>
             </div>
@@ -342,7 +349,7 @@
 
                 reader.readAsDataURL(file);
             },
-            uploadImage() {
+            submitPost() {
                 let output = '';
 
                 if (this.image == null) {
@@ -357,7 +364,7 @@
                     this.errorMessage = output;
                 } 
                 else {
-                    this.$emit('upload-image', this.image, this.caption);
+                    this.$emit('post', this.image, this.caption, this.postName, this.plantId);
                 // axios.patch(dbUrlpt1 + '/users/' + localStorage.getItem("user") + '/my_plants/' + userPlantId + dbUrlpt2, data)
                 //     .then(() => {
                 //         window.alert('Plant added successfully!');
@@ -368,6 +375,27 @@
                 }
             },
         },
+    })
+    app.component('harvest-btn', {
+        props: ['plantId'],
+        data() {
+            return {
+            image: null, 
+            caption:"",
+            errorMessage:'',
+            };
+        },           
+        template: `<button @click="harvest()" style="right:10px;" class="bg-lime-600 text-white py-2 px-4 rounded-lg ml-10">Harvest</button>
+        `,
+       
+        methods: {
+            harvest(){
+                this.$emit('harvest-click',this.plantId)
+            }
+        },
+        created(){
+            console.log(this.plantId)
+        }
     })
         app.mount("#mygarden");          
     
