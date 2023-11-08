@@ -84,7 +84,6 @@ function euclideanDistance() {
                             }
                         }
                     }
-                    //console.log(euclid, output);
                     localStorage.setItem("nearbyPlants", JSON.stringify(list));
                 }
             }

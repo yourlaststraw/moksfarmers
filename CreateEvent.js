@@ -40,6 +40,7 @@ function addEvent(){
     }
     else if (signup > to) {
         output += `<span>Your latest sign up date cannot be after your event.</span><br>`;
+    }
     if (image == '') {
         output += `<span>Please insert an image for this event.</span><br>`;
     }
@@ -77,5 +78,4 @@ function encodeImageFileAsURL(element) {
       image = reader.result; // The data here is compatible with any img tag src even if it's base64 as it prefixes with 'data:image/jpeg;base64,'
     }
     reader.readAsDataURL(file);
-    }
-}
+};
