@@ -130,7 +130,7 @@
                 
                 <hr style = "margin-top: 10px;opacity: 50%;">
                 <div class = "my-event-list-header">
-                    {{weekdays[cur_date.day]}}, {{cur_date.date}} {{months[cur_date.month]}}
+                    {{weekdays[cur_date.day]}}, {{cur_date.date}} {{months[cur_date.month-1]}}
                 </div>
                 <div v-if="!userEvents.registered.hasOwnProperty(cur_date_str) && !userEvents.created.hasOwnProperty(cur_date_str)" class = "my-event-list">
                     You have no events on this day! Register one now... or create your own!

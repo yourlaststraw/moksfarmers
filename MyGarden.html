@@ -124,8 +124,8 @@
                             <div v-for="ins of plantItem.instructions">{{ins}}</div>
                             <div class="d-flex justify-content-end align-items-center bottom-10 right-10" style = "margin-top: 10px;">
                             <span class="font-bold">Day {{plantItem.dayTrack}}</span>
-
-                            <button v-if= "!plantItem.logToday" @click="logTracker(plantItem)" style="right:10px;" class="bg-lime-600 text-white py-2 px-4 rounded-lg ml-10" :value="plantItem.userPlantId">Complete</button>
+                            <button v-if= "plantItem.dayTrack == plantItem.maturity" @click="harvestPlant" style="right:10px;" class="bg-lime-600 text-white py-2 px-4 rounded-lg ml-10" :value="plantItem.userPlantId">Harvest</button>
+                            <button v-else-if= "!plantItem.logToday" @click="logTracker(plantItem)" style="right:10px;" class="bg-lime-600 text-white py-2 px-4 rounded-lg ml-10" :value="plantItem.userPlantId">Complete</button>
                             <div v-else style="right:10px;" class="bg-lime-600 text-white py-2 px-4 rounded-lg ml-10" :value="plantItem.userPlantId">Completed!</div>
                         </div>
                             <!-- <span>{{ plantItem.description }}<span> <br>
@@ -164,7 +164,7 @@
                 </div>
             </div>
              <!-- The button to scroll back to top -->
-            <a id="top" href="#"> <i class="fas fa-arrow-up"></i> </a>
+            <a id="top" href="#"> <i class="fas fa-arrow-up"></i></a>
         </div>
         <upload-image-dialog :show-dialog="showUploadDialog" @close="showUploadDialog = false" @upload-info="harvestPlant"/></upload-image-dialog>
     </div>
