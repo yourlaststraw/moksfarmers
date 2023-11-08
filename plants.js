@@ -33,9 +33,11 @@ function postPlant(plant) {
         // loggedDate: "2023-10-30", //to test 
         location: localStorage.getItem("latlon"),
         image: plant.image
+
     }
     axios.post(dbUrlpt1 + '/users/' + localStorage.getItem("user") + '/my_plants' + dbUrlpt2, data)
     .then(response => {
+        console.log(response)
         let select = response.data.name;
         localStorage.setItem("newPlant", select);
         axios.patch(dbUrlpt1 + '/users/' + localStorage.getItem("user") + '/my_plants/' + select + dbUrlpt2, {user_plant_id: select});
@@ -56,7 +58,7 @@ function callPlants() {
                 let dayTrack = user[i].day;
                 let userPlantId = user[i].user_plant_id;
                 let loggedDate = user[i].loggedDate;
-                let image = user[i].image
+                let image = user[i].image;
                 let plant = modifyPlant(plants[userDb], dayTrack, userDb, userPlantId, loggedDate, image);
                 list.push(plant);
                 console.log(plant);
@@ -150,5 +152,5 @@ function loadData() {
     storeCurrentLocation();
     // dbPlants();
     // callPlants();
-    checkCountTally(JSON.parse(localStorage.getItem("userPlants")), JSON.parse(localStorage.getItem("userPlantCount")));
+    // checkCountTally(JSON.parse(localStorage.getItem("userPlants")), JSON.parse(localStorage.getItem("userPlantCount")));
 };
