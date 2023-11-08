@@ -24,18 +24,13 @@
     <script type="text/javascript" src="validate.js"></script>
     <script type="text/javascript" src="maps.js"></script>
     <style>
-    
-        #a .b .c a:hover,
-        #a .b .c a.active {
-            background: #002431;
-            color: white;
-        }
-        #a .b .c a {
+        .page-btn {
             text-decoration: none;
-            /* To prevent Underline */
             padding: 6px 15px;
-            color: #002431;
+            color: white;
+            background-color: #002431;
             border-radius: 20px;
+    
         }
     </style>
 </head>
@@ -70,26 +65,20 @@
 
     </header>
     <div v-if="isLogged">
-        <div class="flex justify-between items-center py-3">
+        <div class="container ">
             <!-- Tab links -->
-            <!-- <div class="tab">
-                <ul class="flex space-x-4 items-center">
-                    <li>
-                        <a href="MyGarden.html" aria-current="page" class="tabcontent text-lg">MyGarden</a>
-                    </li>
-                    <li>
-                        <a href="CommunityGarden.html" class="tabcontent active text-lg">CommunityGarden</a>
-                    </li>
-                </ul>
-            </div> -->
-            <header id="a">
-                <div class ="b">
-                    <div class = "c">
-                        <a href="MyGarden.html" aria-current="page" class="tabcontent  text-lg">MyGarden</a>
-                        <a href="CommunityGarden.html" class="tabcontent active text-lg">CommunityGarden</a>
+            <!-- <div class ='d-flex >
+                <a href="MyGarden.html" aria-current="page" class="tabcontent active text-lg">MyGarden</a>
+                <a href="CommunityGarden.html" class="tabcontent text-lg">CommunityGarden</a>
+            </div>  -->
+                    <div class = "container d-flex justify-between py-14">
+                        <a href="MyGarden.html" aria-current="page" class="p-3 active text-lg">MyGarden</a>
+                        <a href="CommunityGarden.html" class="page-btn tabcontent text-lg">CommunityGarden</a>
                     </div>  
-                </div>
-            </header>
+                
+               
+           
+            
         </div>
 
         <div v-if="nearbyPlants === '[]'">
