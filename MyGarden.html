@@ -164,7 +164,7 @@
              <!-- The button to scroll back to top -->
             <a id="top" href="#"> <i class="fas fa-arrow-up"></i> </a>
         </div>
-        <upload-image-dialog :show-dialog="showUploadDialog" @close="showUploadDialog = false" /></upload-image-dialog>
+        <upload-image-dialog :show-dialog="showUploadDialog" @close="showUploadDialog = false" @upload-info="harvestPlant"/></upload-image-dialog>
     </div>
     <div v-else>
         <br><h3 class="buy-body">You are not logged in.</h3>
@@ -257,7 +257,7 @@
                     alert("You have already logged today's progress!");
                 }
             },
-            harvestPlant(plantItem, postName, postText, postImage) { // Use this to add the harvested plant to the posts table.
+            harvestPlant(plantItem, postName, caption, image) { // Use this to add the harvested plant to the posts table.
                 const url1 = dbUrlpt1 + '/users/' + session + '/my_plants/' + plantItem.userPlantId + dbUrlpt2;
                 const url2 = dbUrlpt1 + '/posts' + dbUrlpt2;
 
@@ -269,9 +269,9 @@
                     };
                     let para = {
                         user_name: userName,
-                        image: postImage,
+                        image: image,
                         post_name: postName,
-                        description: postText,
+                        description: caption,
                         date: plantItem.loggedDate
                     };
                     axios.patch(url1, data)
@@ -298,23 +298,29 @@
         props: ['showDialog'],
         data() {
             return {
-            image: null, // Store the selected image here
+            image: null, 
+            caption:"",
+            errorMessage:'',
             };
-        },
-        template: `            
-                <div class="fixed top-0 left-0 h-screen w-screen flex items-center justify-center" v-if="showDialog">
-                <div class="modal-container">
-                <label for="image"></label><br>
-                <input type="file" id="image" required accept=".webp, .png, .jpg, .jpeg" @change="encodeImageFileAsURL" />
-                <button @click="maybeNextTime">Maybe Next Time</button>
-                <button @click="uploadImage">Upload</button>
+        },           
+        template: `
+            <div class="fixed top-0 left-0 h-screen w-screen flex items-center justify-center bg-black bg-opacity-50" v-if="showDialog">
+                <div class="modal-container bg-white p-8 rounded-lg shadow-lg text-center">
+                    <h1 class="text-2xl font-bold mb-4">Congratulations! Now enjoy the fruit of your labour!</h1>
+                    <p class="mb-4">To commemorate this day, kindly upload an image and caption of your plant ready for harvest!</p>            
+                        <input type="file" ref="imageInput" required accept=".webp, .png, .jpg, .jpeg" @change="encodeImageFileAsURL" class="mb-4" />
+                    <p id="error" class="text-red-500">{{ errorMessage }}</p>
+                    <p class="mb-2 text-left">Caption:</p>
+                    <input type="text" id="caption" placeholder="'Leaf' behind a record of this! 🌱📸🌿 #PlantingMemories" v-model="caption" class="mb-4 w-full p-2 border rounded-lg" />
+                    <div class="flex justify-between">
+                        <button @click="maybeNextTime" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-lg">Maybe Next Time</button>
+                        <button @click="uploadImage" class="bg-lime-600 hover:bg-green-600 text-white py-2 px-4 rounded-lg">Upload</button>
+                    </div>
                 </div>
             </div>
         `,
+       
         methods: {
-            closeDialog() {
-                this.$emit('close');
-            },
             maybeNextTime() {
                 this.$emit('close');
             
@@ -325,6 +331,7 @@
                 const reader = new FileReader();
 
                 reader.onloadend = () => {
+                    console.log("reading image")
                     this.image = reader.result;
                 };
 
@@ -332,26 +339,28 @@
             },
             uploadImage() {
                 let output = '';
-                let url = dbUrlpt1 + '/plants' + dbUrlpt2;
 
                 if (this.image == null) {
-                output += `<span>Please insert an image for this plant.</span><br>`;
+                    output += `Please insert an image of your plant.`;
+                }
+
+                if (this.caption == '') {
+                    output += ` Please enter a caption.`;
                 }
 
                 if (output !== '') {
-                document.getElementById('errors').innerHTML = output;
-                } else {
-                let data = {
-                    image: this.image
-                };
-                axios.patch(dbUrlpt1 + '/users/' + localStorage.getItem("user") + '/my_plants/' + userPlantId + dbUrlpt2, data)
-                    .then(() => {
-                        window.alert('Plant added successfully!');
-                    })
-                    .catch(() => {
-                    window.alert('Failed to add plant!');
-                    })
-            }
+                    this.errorMessage = output;
+                } 
+                else {
+                    this.$emit('upload-image', this.image, this.caption);
+                // axios.patch(dbUrlpt1 + '/users/' + localStorage.getItem("user") + '/my_plants/' + userPlantId + dbUrlpt2, data)
+                //     .then(() => {
+                //         window.alert('Plant added successfully!');
+                //     })
+                //     .catch(() => {
+                //     window.alert('Failed to add plant!');
+                //     })
+                }
             },
         },
     })
