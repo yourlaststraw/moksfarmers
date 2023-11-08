@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js" integrity="sha256-/H4YS+7aYb9kJ5OKhFYPUjSJdrtV6AeyJOtTkw6X72o=" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="text/javascript" src="commons.js"></script>
+    <script type="text/javascript" src="user.js"></script> <!--Checks if user has logged in-->
+    <script type="text/javascript" src="plants.js"></script>
+    <link rel="icon" type="image/png" href="/images/icons/seeds.png">
+
+    <title>Redirecting</title>
+    <style>
+        @import url(https://fonts.googleapis.com/css?family=Roboto:100);
+        body {text-align:center; }
+
+        h1 {
+        font: 3em 'Roboto', sans-serif;
+        margin-bottom: 40px;
+        }
+
+        #loading {
+        display: inline-block;
+        width: 200px;
+        height: 200px;
+        border: 3px solid #4faa2e;
+        border-radius: 50%;
+        border-top-color: white;
+        animation: spin 1s ease-in-out infinite;
+        -webkit-animation: spin 1s ease-in-out infinite;
+        }
+
+        .container{
+            position:absolute;
+            top:30%;
+            left:50%;
+            transform: translate(-50%, -50%);
+        }
+
+        @keyframes spin {
+        to { -webkit-transform: rotate(360deg); }
+        }
+        @-webkit-keyframes spin {
+        to { -webkit-transform: rotate(360deg); }
+        }
+    </style>
+
+</head>
+<!--
+    This page solely serves to delay time for the necessary data to be saved correctly. It takes about a second for the 
+    localStorage and sessionStorage data to be parsed and allocaetd to their respective variables. Thus, the redirect page,
+    stalls the user for 2 seconds to prevent any errors when they are moved to the logged in version of the webpage.
+-->
+<body>
+    <section>
+        <img src="images/land/sky.png" id="sky" class="wallpaper">
+        <img src="images/land/mountains.png" id="mountains" class="wallpaper">
+        <img src="images/land/cloud.png" id="cloud">
+        <img src="images/land/forest.png" id="forest">
+        <img src="images/land/bird1.png" id="bird1">
+        <img src="images/land/bird2.png" id="bird2">
+        <img src="images/land/splash.png" id="splash">
+        <img src="images/land/water.png" id="water">
+        <img src="images/land/rocks.png" id="rocks">
+        <img src="sand.png" id="water2">
+    </section>
+    
+    <div class = "container">
+        <h1>Logging your progress...</h1>
+        <div id="loading"></div>
+    
+    </div>
+</body>
+
+<script>
+    dbPlants();
+        callPlants();
+        // Delay function
+        setTimeout(function(){
+            window.location.replace("MyGarden.html");
+        }, 2000); // 2000 = 2s
+    
+</script>
+
+</html>
