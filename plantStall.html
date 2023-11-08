@@ -30,8 +30,11 @@
         Creating your plant... Give us a moment!
     </div>
     <script>
-        dbPlants();
-        callPlants();
+        setTimeout(function(){
+            dbPlants();
+            callPlants();
+        }, 1000); // 2000 = 2s
+
         // Delay function
         setTimeout(function(){
             window.location.replace("MyGarden.html");
