@@ -42,10 +42,10 @@
         <input type="number" id="difficulity" required>
         <br><br>
         <label for="desc">Description</label><br>
-        <input type="text" id="desc" required>
+        <textarea id="desc" rows="3" cols="80"></textarea>
         <br><br>
         <label for="steps">Steps</label><br>
-        <input type="text" id="steps" required>
+        <textarea id="steps" rows="10" cols="80" required></textarea>
         <br><br>
         <label for="image">Image</label><br>
         <input type="file" id="image" required accept=".webp, .png, .jpg, .jpeg" onchange="encodeImageFileAsURL(this)"> 

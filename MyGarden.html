@@ -148,7 +148,7 @@
                     <button @click="closeModal" class="close-button">Close</button>
                   <!-- Modal content and form for adding a plant -->
                   <!-- You can add input fields for plant name, image URL, etc. -->
-                    <div id="newPlantsList">
+                    <div id="newPlantsList" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                         
                     <!-- Plant cards go here -->
                         <div v-for="plant in plants" :key="plant.id" class="border rounded-lg p-4 new-plant-container">
@@ -162,6 +162,7 @@
              <!-- The button to scroll back to top -->
             <a id="top" href="#"> <i class="fas fa-arrow-up"></i> </a>
         </div>
+        <upload-image-dialog :show-dialog="showUploadDialog" @close="showUploadDialog = false" /></upload-image-dialog>
     </div>
     <div v-else>
         <br><h3 class="buy-body">You are not logged in.</h3>
@@ -194,6 +195,7 @@
                 isModalOpen: false,
                 myPlantsList: userPlants,
                 plants: arrayPlants,
+                showUploadDialog: false,
                 };
         },
         methods: {
@@ -202,6 +204,9 @@
             },
             closeModal() {
                 this.isModalOpen = false;
+            },
+            closeDialog() {
+                this.showUploadDialog = false;
             },
             addToMyPlantsList(id) {
                 let plant = this.plants[id];
@@ -233,11 +238,18 @@
                         loggedDate: convertDateFormat(new Date()),
                         day: matchingPlantItem.dayTrack + 1,
                     }
-                    axios.patch(dbUrlpt1 + '/users/' + localStorage.getItem("user") + '/my_plants/' + userPlantId + dbUrlpt2, data)
+                    // console.log(data.day);
+                    // console.log(matchingPlantItem.maturity);
+                    if(data.day == matchingPlantItem.maturity){
+                        console.log("harvest day")
+                        this.showUploadDialog = true;
+                    }
+                    else{axios.patch(dbUrlpt1 + '/users/' + localStorage.getItem("user") + '/my_plants/' + userPlantId + dbUrlpt2, data)
                     .then(() => {
-                        console.log('Successfully logged progress');
+                        alert('Successfully logged progress');
                         window.location.replace("plantStall.html");
-                    })
+                        
+                    })}
                 }
                 else{
                     alert("You have already logged today's progress!");
@@ -277,8 +289,72 @@
             }
         }
     });
-    app.component('plant-card', PlantCard);
-    app.mount("#mygarden");          
+    // app.component('plant-card', PlantCard);
+    // app.mount("#mygarden");   
+
+    app.component('upload-image-dialog', {
+        props: ['showDialog'],
+        data() {
+            return {
+            image: null, // Store the selected image here
+            };
+        },
+        template: `            
+                <div class="fixed top-0 left-0 h-screen w-screen flex items-center justify-center" v-if="showDialog">
+                <div class="modal-container">
+                <label for="image"></label><br>
+                <input type="file" id="image" required accept=".webp, .png, .jpg, .jpeg" @change="encodeImageFileAsURL" />
+                <button @click="maybeNextTime">Maybe Next Time</button>
+                <button @click="uploadImage">Upload</button>
+                </div>
+            </div>
+        `,
+        methods: {
+            closeDialog() {
+                this.$emit('close');
+            },
+            maybeNextTime() {
+                this.$emit('close');
+            
+            },
+            encodeImageFileAsURL() {
+                const element = this.$refs.imageInput;
+                const file = element.files[0];
+                const reader = new FileReader();
+
+                reader.onloadend = () => {
+                    this.image = reader.result;
+                };
+
+                reader.readAsDataURL(file);
+            },
+            uploadImage() {
+                let output = '';
+                let url = dbUrlpt1 + '/plants' + dbUrlpt2;
+
+                if (this.image == null) {
+                output += `<span>Please insert an image for this plant.</span><br>`;
+                }
+
+                if (output !== '') {
+                document.getElementById('errors').innerHTML = output;
+                } else {
+                let data = {
+                    image: this.image
+                };
+                axios.patch(dbUrlpt1 + '/users/' + localStorage.getItem("user") + '/my_plants/' + userPlantId + dbUrlpt2, data)
+                    .then(() => {
+                        window.alert('Plant added successfully!');
+                    })
+                    .catch(() => {
+                    window.alert('Failed to add plant!');
+                    })
+            }
+            },
+        },
+    })
+        app.mount("#mygarden");          
+    
     
     
 </script>
@@ -309,9 +385,9 @@
       color: rgb(239 68 68)
     }
 
-    #newPlantsList{
+    /* #newPlantsList{
         display: flex;
-    }
+    } */
 
     .new-plant-container{
         min-width:224px;
