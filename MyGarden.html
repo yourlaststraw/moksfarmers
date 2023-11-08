@@ -124,7 +124,7 @@
                             <div v-for="ins of plantItem.instructions">{{ins}}</div>
                             <div class="d-flex justify-content-end align-items-center bottom-10 right-10" style = "margin-top: 10px;">
                             <span class="font-bold">Day {{plantItem.dayTrack}}</span>
-                            <button v-if= "plantItem.dayTrack == plantItem.maturity" @click="harvestPlant" style="right:10px;" class="bg-lime-600 text-white py-2 px-4 rounded-lg ml-10" :value="plantItem.userPlantId">Harvest</button>
+                            <button v-if= "plantItem.dayTrack == plantItem.maturity" @click="harvestPlant(plantItem)" style="right:10px;" class="bg-lime-600 text-white py-2 px-4 rounded-lg ml-10" :value="plantItem.userPlantId">Harvest</button>
                             <button v-else-if= "!plantItem.logToday" @click="logTracker(plantItem)" style="right:10px;" class="bg-lime-600 text-white py-2 px-4 rounded-lg ml-10" :value="plantItem.userPlantId">Complete</button>
                             <div v-else style="right:10px;" class="bg-lime-600 text-white py-2 px-4 rounded-lg ml-10" :value="plantItem.userPlantId">Completed!</div>
                         </div>
@@ -266,6 +266,7 @@
                 const url1 = dbUrlpt1 + '/users/' + session + '/my_plants/' + plantItem.userPlantId + dbUrlpt2;
                 const url2 = dbUrlpt1 + '/posts' + dbUrlpt2;
 
+                plantItem = JSON.parse(JSON.stringify(plantItem));
                 axios.get(dbUserUrl)
                 .then(response => {
                     let userName = response.data.first_name + ' ' + response.data.last_name;
@@ -277,7 +278,9 @@
                         image: image,
                         post_name: postName,
                         description: caption,
-                        date: plantItem.loggedDate
+                        user_id: session,
+                        date: convertDateFormat(new Date()),
+                        location: plantItem.location
                     };
                     axios.patch(url1, data)
                     .then(() => {
