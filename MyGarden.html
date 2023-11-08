@@ -272,27 +272,21 @@
                 // const url1 = dbUrlpt1 + '/users/' + session + '/my_plants/' + userPlantId + dbUrlpt2;
                 // const url2 = dbUrlpt1 + '/posts' + dbUrlpt2;
 
-                axios.get(dbUserUrl)
-                .then(response => {
-                    let userName = response.data.first_name + ' ' + response.data.last_name;
-                    let data = {
-                        harvest: 'true'
-                    };
-                    let para = {
-                        user_name: userName,
-                        image: image,
-                        post_name: postName,
-                        description: caption,
-                        date: plantItem.loggedDate
-                    };
-                    axios.patch(url1, data)
-                    .then(() => {
-                        axios.post(url2, para)
-                        .then(() => {
-                            alert('Plant harvested!')
-                        })
-                    })
-                })
+                // axios.get(dbUserUrl)
+                // .then(response => {
+                //     let userName = response.data.first_name + ' ' + response.data.last_name;
+                //     let para = {
+                //         user_name: userName,
+                //         image: image,
+                //         post_name: postName,
+                //         description: caption,
+                //         date: plantItem.loggedDate
+                //     };
+                //     axios.post(url2, para)
+                //     .then(() => {
+                //         alert('Plant harvested!')
+                //     })
+                // })
             },
         },
         created(){
