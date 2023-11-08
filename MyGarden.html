@@ -231,7 +231,7 @@
                     // JSON.parse(JSON.strngify(value)) is used to clean out Proxy(array) values, so that it becomes normal.
                     // checkCountTally(userPlants, JSON.parse(JSON.stringify(this.myPlantsList)));
                     setTimeout(function(){
-                        window.location.replace("plantStall.html");
+                        window.location.replace("addPlantStall.html");
                     }, 100);
                 };
             },
@@ -254,7 +254,7 @@
                     else{axios.patch(dbUrlpt1 + '/users/' + localStorage.getItem("user") + '/my_plants/' + userPlantId + dbUrlpt2, data)
                     .then(() => {
                         alert('Successfully logged progress');
-                        window.location.replace("plantStall.html");
+                        window.location.replace("logPlantStall.html");
                         
                     })}
                 }

@@ -42,50 +42,38 @@ function storeCurrentLocation() {
 
 function euclideanDistance() {
     let list = [];
-    let output, plants, euclid, location, userName, plantLoc, postLat, postLon, lonResult, latResult;
+    let output, euclid, location, userName, plantLoc, postLat, postLon, lonResult, latResult;
+    let userLocation = localStorage.getItem("latlon").split(',');
+    let userLat = Number(userLocation[0]);
+    let userLon = Number(userLocation[1]);
 
-    axios.get(dbUrlpt1 + '/users' + dbUrlpt2)
+    axios.get(dbUrlpt1 + '/posts' + dbUrlpt2)
     .then(response => {
         for (i in response.data) {
-            let userLat = response.data[session].current_lat;
-            let userLon = response.data[session].current_lon;
-            if (i !== session) {
-                userName = response.data[i].first_name + ' ' + response.data[i].last_name;
-                plants = response.data[i].my_plants;
-                for (n in plants) {
-                    if (plants[n] !== 'dummy') {
-                        location = plants[n].location;
-                        if (location === undefined) {
-                            console.log('test');
-                        }
-                        else {
-                            console.log(response.data[i].first_name, location)
-                            plantLoc = location.split(",");
-                            userLat = Number(userLat);
-                            userLon = Number(userLon);
-                            postLat = Number(plantLoc[0]);
-                            postLon = Number(plantLoc[1]);
-                            lonResult = Math.pow(userLon - postLon, 2);
-                            latResult = Math.pow(userLat - postLat, 2);
-                            euclid = Math.sqrt(lonResult + latResult).toFixed(3);
-                            console.log(userLat, userLon, euclid);
-                            if (euclid < 0.05) {
-                                output = {
-                                    user_name: userName,
-                                    user: i,
-                                    id: plants[n].id,
-                                    location: location,
-                                    day: plants[n].day,
-                                    loggedDate: plants[n].loggedDate,
-                                    user_plant_id: plants[n].user_plant_id,
-                                    image: plants[n].image,
-                                }
-                                list.push(output);
-                            }
-                        }
-                    }
-                    localStorage.setItem("nearbyPlants", JSON.stringify(list));
+            if (response.data[i].user_id !== session) {
+                if (response.data[i].location === undefined) {
+                    // console.log('test');
                 }
+                else {
+                    // console.log(response.data[i].first_name, location)
+                    // console.log(userLat, userLon, euclid);
+                    userName = response.data[i].user_name;
+                    location = String(response.data[i].location).split(',');
+                    postLat = Number(location[0]);
+                    postLon = Number(location[1]);
+
+                    lonResult = Math.pow(userLon - postLon, 2);
+                    latResult = Math.pow(userLat - postLat, 2);
+                    euclid = Math.sqrt(lonResult + latResult).toFixed(3);
+
+                    if (euclid < 0.05) {
+                        output = {
+                            user_name: userName
+                        }
+                        list.push(output);
+                    }
+                }
+                localStorage.setItem("nearbyPlants", JSON.stringify(list));
             }
         }
     });

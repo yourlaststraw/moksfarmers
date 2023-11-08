@@ -61,8 +61,9 @@ function callPlants() {
                 let userPlantId = user[i].user_plant_id;
                 let loggedDate = user[i].loggedDate;
                 let image = user[i].image;
+                let location = user[i].location;
                 
-                let plant = modifyPlant(plants[userDb], dayTrack, userDb, userPlantId, loggedDate, image, creation_date);
+                let plant = modifyPlant(plants[userDb], dayTrack, userDb, userPlantId, loggedDate, image, location, creation_date);
                 list.push(plant);
                 console.log(plant);
             }
@@ -87,7 +88,7 @@ function convertProxy(plant) {
     }
 };
 
-function modifyPlant(plant, dayTrack, userDb, userPlantId, loggedDate, image, creation_date) {
+function modifyPlant(plant, dayTrack, userDb, userPlantId, loggedDate, image, location, creation_date) {
     // dayTrack = String(dayTrack);
     return {
         'db': userDb,
@@ -101,7 +102,8 @@ function modifyPlant(plant, dayTrack, userDb, userPlantId, loggedDate, image, cr
         'userPlantId': userPlantId,
         'instructions':getInstructions(plant.steps[`Step ${dayTrack}`].instruction),
         'logToday': statusLog(loggedDate),
-        'creation_date': creation_date,
+        'location': location,
+        'creation_date': creation_date
     }
 };
 
