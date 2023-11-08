@@ -72,8 +72,10 @@
             <div v-else><a href="login.html">Login/Signup</a></div>
         </button>
         <div id = "welcome" style ="text-align: right;">
+            
         </div>
         </div>
+        <!-- <div>{{myPlantsList}}</div> -->
 
     </header>
     
@@ -170,6 +172,7 @@
         <br><h3 class="buy-body">You are not logged in.</h3>
     </div>
 <script>
+    console.log(localStorage.getItem("userPlants"))
     var arrayPlants = JSON.parse(localStorage.getItem("arrayPlants"));
     var userPlants = JSON.parse(localStorage.getItem("userPlants"));
 
@@ -211,19 +214,22 @@
                 this.showUploadDialog = false;
             },
             addToMyPlantsList(id) {
+                console.log(this.myPlantsList)
                 let plant = this.plants[id];
                 this.isModalOpen = false;
                 //set day to 1 when plant added so instructions for day1 shows
-                plant.day = 1;
+                console.log(plant)
                 plant = convertProxy(plant);
-                this.myPlantsList.push(plant);
+                // this.myPlantsList.push(plant);
+                console.log(this.myPlantsList)
                 
                 if (postPlant(plant)) {
+                    console.log(this.myPlantsList)
                     localStorage.setItem("userPlantCount", JSON.stringify(this.myPlantsList));
                     callPlants();
                     const userPlants = JSON.parse(localStorage.getItem("userPlants"));
                     // JSON.parse(JSON.strngify(value)) is used to clean out Proxy(array) values, so that it becomes normal.
-                    checkCountTally(userPlants, JSON.parse(JSON.stringify(this.myPlantsList)));
+                    // checkCountTally(userPlants, JSON.parse(JSON.stringify(this.myPlantsList)));
                     setTimeout(function(){
                         window.location.replace("plantStall.html");
                     }, 100);
@@ -238,7 +244,6 @@
                     let data = {
                         // loggedDate: String(new Date())
                         loggedDate: convertDateFormat(new Date()),
-                        day: matchingPlantItem.dayTrack + 1,
                     }
                     // console.log(data.day);
                     // console.log(matchingPlantItem.maturity);

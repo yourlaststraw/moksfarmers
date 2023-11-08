@@ -28,12 +28,12 @@ function postPlant(plant) {
     let id = plant.db;
     let data = {
         id: id,
-        day: plant.day,
-        loggedDate: convertDateFormat(new Date()),
+        day: 1,
+        loggedDate: '2023-10-1',
         // loggedDate: "2023-10-30", //to test 
         location: localStorage.getItem("latlon"),
         image: plant.image,
-        harvest: 'false'
+        creation_date: new Date(),
     }
     axios.post(dbUrlpt1 + '/users/' + localStorage.getItem("user") + '/my_plants' + dbUrlpt2, data)
     .then(response => {
@@ -52,14 +52,17 @@ function callPlants() {
         let list = [];
         let plants = response.data.plants;
         let user = response.data.users[localStorage.getItem('user')].my_plants;
+        
         for (i in user) {
             if (i != "undefined" && user[i] !== 'dummy') {
+                let creation_date = new Date(user[i].creation_date);
                 let userDb = user[i].id;
-                let dayTrack = user[i].day;
+                let dayTrack = Math.ceil((new Date().getTime() - creation_date.getTime())/(1000*60*60*24));
                 let userPlantId = user[i].user_plant_id;
                 let loggedDate = user[i].loggedDate;
                 let image = user[i].image;
-                let plant = modifyPlant(plants[userDb], dayTrack, userDb, userPlantId, loggedDate, image);
+                
+                let plant = modifyPlant(plants[userDb], dayTrack, userDb, userPlantId, loggedDate, image, creation_date);
                 list.push(plant);
                 console.log(plant);
             }
@@ -84,7 +87,7 @@ function convertProxy(plant) {
     }
 };
 
-function modifyPlant(plant, dayTrack, userDb, userPlantId, loggedDate, image) {
+function modifyPlant(plant, dayTrack, userDb, userPlantId, loggedDate, image, creation_date) {
     // dayTrack = String(dayTrack);
     return {
         'db': userDb,
@@ -98,6 +101,7 @@ function modifyPlant(plant, dayTrack, userDb, userPlantId, loggedDate, image) {
         'userPlantId': userPlantId,
         'instructions':getInstructions(plant.steps[`Step ${dayTrack}`].instruction),
         'logToday': statusLog(loggedDate),
+        'creation_date': creation_date,
     }
 };
 
@@ -124,16 +128,22 @@ function getInstructions(instructions) {
 
 
 function checkCountTally(userPlants, myPlantsList) {
+    console.log(localStorage.getItem("userPlantCount"))
+    console.log(typeof localStorage.getItem("userPlantCount"))
+    console.log(myPlantsList)
+    console.log(userPlants)
     if (localStorage.getItem("userPlantCount") !== null && localStorage.getItem("userPlantCount") !== 'null') {
         let count = 0;
 
         // JSON.parse(JSON.strngify(value)) is used to clean out Proxy(array) values, so that it becomes normal.
         userPlants = JSON.parse(JSON.stringify(userPlants));
         myPlantsList = JSON.parse(JSON.stringify(myPlantsList));
+        console.log(myPlantsList)
+        console.log(userPlants)
         if (myPlantsList !== '') {
             count = myPlantsList.length;
         }
-
+        
         let user = userPlants.length;
         if (count !== user) {
             console.log(count, user)
@@ -141,7 +151,7 @@ function checkCountTally(userPlants, myPlantsList) {
             myPlantsList = JSON.stringify(myPlantsList);
             //window.location.replace("plantStall.html");
         }
-        //console.log(userPlants, myPlantsList);
+        console.log(userPlants, myPlantsList);
     }
     else {
         localStorage.setItem("userPlantCount", JSON.stringify(userPlants));
