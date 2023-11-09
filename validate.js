@@ -108,7 +108,7 @@ function createUser() {
                 }
                 axios.post(url, data)
                 .then(() => {
-                    document.getElementById('errors').innerHTML = `<span>Account created successfully.</span>`;
+                    document.getElementById('errors').innerHTML = `<span style="color: green;">Account created successfully.</span>`;
                 });
             }
         })
