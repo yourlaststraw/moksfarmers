@@ -28,7 +28,7 @@
 
         <div class="flex flex-col items-center h-screen">
             <div class = "checkout">
-                <a class="logo"></a>
+                <a class="logoFarmerName"></a>
                 <div class="checkout-box">
                     <div v-if="displayQR" style = "display:flex;flex-direction:column; align-items: center;">
                     <div id = "QR">
@@ -61,7 +61,7 @@
 
 <script>
     console.log(sessionStorage)
-    document.getElementsByClassName("logo")[0].innerHTML = "Farmer " + userData.last_name + "'s basket"
+    document.getElementsByClassName("logoFarmerName")[0].innerHTML = "Farmer " + userData.last_name + "'s basket"
     cart = JSON.parse(sessionStorage.getItem("cart"))
     total =JSON.parse(sessionStorage.getItem("total"))
     console.log(total)
