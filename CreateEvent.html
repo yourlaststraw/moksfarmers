@@ -42,40 +42,39 @@
     </style>
 </head>
 
-<body id="events">
-    <!-- This is the header/ Nav Bar -->
-    <header id="header">
-        <div class = "wrapper">
-            <a href="index.html" class="logo">Mok's Farmers</a>
-        </div>
-
-        <div class ="links">
+<body>
+    <div id="events">
+        <!-- This is the header/ Nav Bar -->
+        <header id="header">
             <div class = "wrapper">
-                <a href="index.html" >Home</a>
-                <a href="MyGarden.html" >MyGarden</a>
+                <a href="index.html" class="logo">Mok's Farmers</a>
             </div>
-            <div class = "wrapper">
-                <a href="Events.html" class="active">Events</a>
-                <a href="Buy.html">Buy</a>
-            </div>
-        </div>
 
-        <div class = "user-info">
-            <button class="button-5" role="button">
-                <div v-if="isLogged" onclick="clearSession();window.location.replace('index.html')">Logout</div>
-                <div v-else><a href="login.html">Login/Signup</a></div>
-            </button>
-            <div id = "welcome" style ="text-align: right;" v-if="isLogged" >
-                Welcome, farmer 
+            <div class ="links">
+                <div class = "wrapper">
+                    <a href="index.html" >Home</a>
+                    <a href="MyGarden.html" >MyGarden</a>
+                </div>
+                <div class = "wrapper">
+                    <a href="Events.html" class="active">Events</a>
+                    <a href="Buy.html">Buy</a>
+                </div>
             </div>
-        </div>
-        </div>
-        
-    </header>
-        
+
+            <div class = "user-info">
+                <button class="button-5" role="button">
+                    <div v-if="isLogged" onclick="clearSession();window.location.replace('index.html')">Logout</div>
+                    <div v-else><a href="login.html">Login/Signup</a></div>
+                </button>
+                <div id = "welcome" style ="text-align: right;" v-if="isLogged" >
+                    Welcome, farmer 
+                </div>
+            </div>
+            </div>
+        </header>
+            
         <div>
             <div>
-                
                 <div class="mx-auto shadow-lg rounded p-10">
                     <div>
                         <h3 class="text-2xl font-bold mb-4">Add an Event</h3>
@@ -128,24 +127,13 @@
                             <button onclick="window.location.replace('Events.html')" style = "font-size:1rem;width:130px" class = "bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" role = "button">Back</button>
                         </div>
                     </div>
+                    </div>
                 </div>
             </div>
-            
         </div>
-            </div>
-
-        </div>  
-
-        <div class = "layer 2">
-            
-        </div>
-                
-        </div>
-
-        <div class = "layer3">
-                
-        </div>
-                
+        <div class = "layer 2"> </div>        
+        <div class = "layer3">       </div>
+    </div>              
     <script>
         if (userData !=null && Object.keys(userData).length >0) {
             document.getElementById("welcome").innerHTML += userData.last_name + "!";

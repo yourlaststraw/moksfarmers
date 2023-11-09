@@ -60,147 +60,148 @@
         </style>
 </head>
 
-<body id="events">
-    <!-- This is the header/ Nav Bar -->
-    <header id="header">
-        <div class = "wrapper">
-            <a href="index.html" class="logo">Mok's Farmers</a>
-        </div>
-
-        <div class ="links">
+<body>
+    <div id="events">
+        <!-- This is the header/ Nav Bar -->
+        <header id="header">
             <div class = "wrapper">
-                <a href="index.html" >Home</a>
-                <a href="MyGarden.html" >MyGarden</a>
+                <a href="index.html" class="logo">Mok's Farmers</a>
             </div>
-            <div class = "wrapper">
-                <a href="Events.html" class="active">Events</a>
-                <a href="Buy.html">Buy</a>
-            </div>
-        </div>
 
-        <div class = "user-info">
-            <button class="button-5" role="button"></button>
-            <div id = "welcome" style ="text-align: right;"> 
-            </div>
-        </div>
-
-    </header>
-
-    <div v-if="isLogged" class = "sec" style = "padding-top: 0;">
-        <br>
-        <div class = "layer 2">
-            <div style = "background-color:#002431" class="glass cal-container">
-                
-                <div class="cal-header">
-                  <h3 style ="color:white">UPCOMING EVENTS</h3>
+            <div class ="links">
+                <div class = "wrapper">
+                    <a href="index.html" >Home</a>
+                    <a href="MyGarden.html" >MyGarden</a>
                 </div>
-
-                <div class = "month-year-box">
-                    <button style = "cursor:pointer" v-on:click = "monthPrev()"><</button>
-                    <div style = "min-width:40%;text-align: center;">{{months[displayMonth]}} {{displayYear}}</div>
-                    <button style = "cursor:pointer" v-on:click = "monthNext()">></button>
+                <div class = "wrapper">
+                    <a href="Events.html" class="active">Events</a>
+                    <a href="Buy.html">Buy</a>
                 </div>
+            </div>
 
-                <div class = "cal-row">
-                    <div class = "cal-row-wrapper">
-                    <div v-for="weekday in weekdays" class = "date-box">{{weekday[0]}}</div>
+            <div class = "user-info">
+                <button class="button-5" role="button"></button>
+                <div id = "welcome" style ="text-align: right;"> 
+                </div>
+            </div>
+
+        </header>
+
+        <div v-if="isLogged" class = "sec" style = "padding-top: 0;">
+            <br>
+            <div class = "layer 2">
+                <div style = "background-color:#002431" class="glass cal-container">
+                    
+                    <div class="cal-header">
+                    <h3 style ="color:white">UPCOMING EVENTS</h3>
                     </div>
-                </div>
-                
-                <div v-for="row,rowNum in cal" class = "cal-row">
-                    <div class = "cal-row-wrapper">
-                    <date-btn 
-                        v-on:select="onSelect"
-                        ref = "dateBtn"
-                        v-for="date,idx in row"
-                        v-bind:event-date-list="eventDates"
-                        v-bind:cur-date="cur_date.date"
-                        v-bind:cur-month="cur_date.month"
-                        v-bind:cur-year="cur_date.year"
-                        v-bind:month = "date[2]"
-                        v-bind:year = "date[3]"
-                        v-bind:date = "date[1]"
-                        v-bind:cal-len = "cal.length"
-                        v-bind:row-num="rowNum"
-                        v-bind:row="row"
-                        v-bind:idx = "idx"
-                        >{{date[1]}}</date-btn>
-                    </div>
-                </div>
-                
-                <hr style = "margin-top: 10px;opacity: 50%;">
-                <div class = "my-event-list-header">
-                    {{weekdays[cur_date.day]}}, {{cur_date.date}} {{months[cur_date.month-1]}}
-                </div>
-                <div v-if="!userEvents.registered.hasOwnProperty(cur_date_str) && !userEvents.created.hasOwnProperty(cur_date_str)" class = "my-event-list">
-                    You have no events on this day! Register one now... or create your own!
-                </div>
-                <div v-else class="my-event-list">
-                    <div v-for="type in userEvents">
 
-                        <div v-for="date,key in type">
-                            <div  style = "display: flex;flex-direction: column;align-items: center;" v-if="key == cur_date_str" v-for="event in date">
-                                <event v-bind:is-own-event="checkIsOwnEvent(event)" v-bind:user-events="userEvents" v-bind:event="event"></event>
+                    <div class = "month-year-box">
+                        <button style = "cursor:pointer" v-on:click = "monthPrev()"><</button>
+                        <div style = "min-width:40%;text-align: center;">{{months[displayMonth]}} {{displayYear}}</div>
+                        <button style = "cursor:pointer" v-on:click = "monthNext()">></button>
+                    </div>
+
+                    <div class = "cal-row">
+                        <div class = "cal-row-wrapper">
+                        <div v-for="weekday in weekdays" class = "date-box">{{weekday[0]}}</div>
+                        </div>
+                    </div>
+                    
+                    <div v-for="row,rowNum in cal" class = "cal-row">
+                        <div class = "cal-row-wrapper">
+                        <date-btn 
+                            v-on:select="onSelect"
+                            ref = "dateBtn"
+                            v-for="date,idx in row"
+                            v-bind:event-date-list="eventDates"
+                            v-bind:cur-date="cur_date.date"
+                            v-bind:cur-month="cur_date.month"
+                            v-bind:cur-year="cur_date.year"
+                            v-bind:month = "date[2]"
+                            v-bind:year = "date[3]"
+                            v-bind:date = "date[1]"
+                            v-bind:cal-len = "cal.length"
+                            v-bind:row-num="rowNum"
+                            v-bind:row="row"
+                            v-bind:idx = "idx"
+                            >{{date[1]}}</date-btn>
+                        </div>
+                    </div>
+                    
+                    <hr style = "margin-top: 10px;opacity: 50%;">
+                    <div class = "my-event-list-header">
+                        {{weekdays[cur_date.day]}}, {{cur_date.date}} {{months[cur_date.month-1]}}
+                    </div>
+                    <div v-if="!userEvents.registered.hasOwnProperty(cur_date_str) && !userEvents.created.hasOwnProperty(cur_date_str)" class = "my-event-list">
+                        You have no events on this day! Register one now... or create your own!
+                    </div>
+                    <div v-else class="my-event-list">
+                        <div v-for="type in userEvents">
+
+                            <div v-for="date,key in type">
+                                <div  style = "display: flex;flex-direction: column;align-items: center;" v-if="key == cur_date_str" v-for="event in date">
+                                    <event v-bind:is-own-event="checkIsOwnEvent(event)" v-bind:user-events="userEvents" v-bind:event="event"></event>
+                                </div>
                             </div>
                         </div>
                     </div>
+
+                    
+                    </div>
+                    <span style ="color:red;font-size: 2vw;">* </span><span style="font-size: 2vw;">These are your own events</span>
                 </div>
 
-                
-                </div>
-                <span style ="color:red;font-size: 2vw;">* </span><span style="font-size: 2vw;">These are your own events</span>
-              </div>
+                <div class = "layer3">
+                    <div style = "width:100%;display: flex;justify-content: flex-start;">
 
-              <div class = "layer3">
-                <div style = "width:100%;display: flex;justify-content: flex-start;">
+                        <button onclick = "window.location.replace('CreateEvent.html')" class = "button" role = "button">Create</button>
 
-                    <button onclick = "window.location.replace('CreateEvent.html')" class = "button" role = "button">Create</button>
-
-                </div>
-                <br>
-                <div class = "event-list">
-                    <div v-for="event,idx in events">
-                    <div class = "glass event" v-if="!isSignupsClosed(event)">
-                        <div style ="display: flex;flex-direction: column;justify-content: flex-start;">
-                        <div style = "overflow:hidden;height:70%" ><img style="overflow: hidden;object-fit: cover;width: 100%;aspect-ratio: 4/3;object-position: 0 0;" v-bind:src="event.image">
-                        </div>
-                        
-                            <div class ="event-name">{{event.name}}</div>
-                            <div style = "color:grey;font-style: italic;" >{{event.desc}}</div>
-                        </div>
-                        <div style ="display: flex;flex-direction: column;justify-content: space-between;flex-grow: 1;">
-                            <p>
-                                Location: {{event.location}}<br>
-                                Date(s): {{eventDuration(event.from,event.to)}}
-                            </p>
-                            <div class = "btn-box">
-                                <span v-if="checkIsOwnEvent(event)" style = "color:red;align-self: flex-start;">*</span>
-                                <learn-btn v-bind:user-events="userEvents" v-bind:event="event" class="events-btn">Learn more</learn-btn>
+                    </div>
+                    <br>
+                    <div class = "event-list">
+                        <div v-for="event,idx in events">
+                        <div class = "glass event" v-if="!isSignupsClosed(event)">
+                            <div style ="display: flex;flex-direction: column;justify-content: flex-start;">
+                            <div style = "overflow:hidden;height:70%" ><img style="overflow: hidden;object-fit: cover;width: 100%;aspect-ratio: 4/3;object-position: 0 0;" v-bind:src="event.image">
+                            </div>
                             
+                                <div class ="event-name">{{event.name}}</div>
+                                <div style = "color:grey;font-style: italic;" >{{event.desc}}</div>
+                            </div>
+                            <div style ="display: flex;flex-direction: column;justify-content: space-between;flex-grow: 1;">
+                                <p>
+                                    Location: {{event.location}}<br>
+                                    Date(s): {{eventDuration(event.from,event.to)}}
+                                </p>
+                                <div class = "btn-box">
+                                    <span v-if="checkIsOwnEvent(event)" style = "color:red;align-self: flex-start;">*</span>
+                                    <learn-btn v-bind:user-events="userEvents" v-bind:event="event" class="events-btn">Learn more</learn-btn>
+                                
+                                </div>
+                            </div>
                             </div>
                         </div>
+                            
                         </div>
                     </div>
-                        
+                    <div class = "event-tracker">
+        
                     </div>
                 </div>
-                <div class = "event-tracker">
-    
-                </div>
-            </div>
+                
+
+
+
+                <!-- Is there a need for such a huge gap? -->
             
-
-
-
-
-        
-        
-    <div v-else>
-        <br><h3 class="buy-body">You are not logged in.</h3>
-    </div>   
-    <!-- The button to scroll back to top -->
-    <a id="top" href="#"> <i class="fas fa-arrow-up"></i> </a>
-    
+            
+        <div v-else>
+            <br><h3 class="buy-body">You are not logged in.</h3>
+        </div>   
+        <!-- The button to scroll back to top -->
+        <a id="top" href="#"> <i class="fas fa-arrow-up"></i> </a>
+    </div>    
     <script>
         
         checkLogin()

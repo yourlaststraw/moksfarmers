@@ -27,110 +27,112 @@
     <script type="text/javascript" src="maps.js"></script>
 </head>
 
-<body id="home" onload="displayDefault()" class="bg-gray-100">
-    <!-- This is the header/ Nav Bar -->
-    <header id="header">
-        <div class = "wrapper">
-            <a href="index.html" class="logo">Mok's Farmers</a>
-        </div>
-        <div class ="links">
+<body onload="displayDefault()" class="bg-gray-100">
+    <div id="home">
+        <!-- This is the header/ Nav Bar -->
+        <header id="header">
             <div class = "wrapper">
-                <a href="index.html" class="active">Home</a>
-                <a href="MyGarden.html">MyGarden</a>
+                <a href="index.html" class="logo">Mok's Farmers</a>
             </div>
-            <div class = "wrapper">
-                <a href="Events.html">Events</a>
-                <a href="Buy.html">Buy</a>
+            <div class ="links">
+                <div class = "wrapper">
+                    <a href="index.html" class="active">Home</a>
+                    <a href="MyGarden.html">MyGarden</a>
+                </div>
+                <div class = "wrapper">
+                    <a href="Events.html">Events</a>
+                    <a href="Buy.html">Buy</a>
+                </div>
             </div>
-        </div>
 
-        <div class = "user-info">
-        <button class="button-5" role="button"></button>
-        <div id = "welcome" style ="text-align: right;">
-             
-        </div>
-        </div>
-    </header>
-
-    <!-- This is the Top Section (Above Sand) -->
-    <section>
-        <img src="images/land/sky.png" id="sky" class="wallpaper">
-        <img src="images/land/sun.png" id="sun">
-        <img src="images/land/mountains.png" id="mountains" class="wallpaper">
-        <img src="images/land/cloud.png" id="cloud">
-        <h2 id="text"><span>Savor the Taste of</span><br>Freshness</h2>
-        <img src="images/land/forest.png" id="forest">
-        <img src="images/land/bird1.png" id="bird1">
-        <img src="images/land/bird2.png" id="bird2">
-        <a href="#sec" id="explore">Explore</a>
-        <img src="images/land/splash.png" id="splash">
-        <img src="images/land/water.png" id="water">
-        <img src="images/land/rocks.png" id="rocks">
-        <img src="sand.png" id="water2">
-    </section>
-
-    
-    <div class="sec" id="sec">
-        <!-- Text Content here -->
-        <h2>Gardening News</h2>
-        <br>
-        <div style="display: flex; align-items: center; aspect-ratio: 8/5;" class="glass">
-            <!--  carousel: start --> 
-            <div style="width: 80%; display: flex; align-items: center; margin: auto;" id="carouselExample" class="carousel slide" data-bs-ride="carousel">
-                <div style="display: flex; align-items: center;" class="carousel-inner" id="news"></div>
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev" style="position: absolute; top: 35%; left: 1em; height: 30%;">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next" style="position: absolute; top: 35%; right: 1em; height: 30%;">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
-            <!-- carousel: end -->
-        </div>
-        <br>
-        
-        <div class="glass">
-            <h3>About The Team</h3>
-                <p>This website is developed by students of Singapore Management University as part of IS216 Web Application Development module</p>
-            </div>
-        <br>
-
-        <div class="glass">
-            <h3>What We Do</h3>
-            <div class="icon-container">
-                <p >Discover the world of gardening with Mok's Farmers, your ultimate destination for premium seeds and expert guidance. Explore our handpicked selection of top-grade seeds, cultivate your garden with our 'My Garden' page, and connect with a vibrant community of like-minded gardeners on our 'Community Garden' page. Stay updated on exclusive events and workshops by signing up on our user-friendly platform. Let your gardening dreams flourish with Mok's Farmers today.
-                    
-                </p>
-                <div class = 'features'>Features</div>
+            <div class = "user-info">
+            <button class="button-5" role="button"></button>
+            <div id = "welcome" style ="text-align: right;">
                 
-                <div style = "cursor: pointer;" onclick = "window.location.replace('MyGarden.html')" class="icon">
-                    <img src="images/icons/garden.png">
-                    <span style="display: block; text-align: center;"> My garden</span>
+            </div>
+            </div>
+        </header>
+
+        <!-- This is the Top Section (Above Sand) -->
+        <section>
+            <img src="images/land/sky.png" id="sky" class="wallpaper">
+            <img src="images/land/sun.png" id="sun">
+            <img src="images/land/mountains.png" id="mountains" class="wallpaper">
+            <img src="images/land/cloud.png" id="cloud">
+            <h2 id="text"><span>Savor the Taste of</span><br>Freshness</h2>
+            <img src="images/land/forest.png" id="forest">
+            <img src="images/land/bird1.png" id="bird1">
+            <img src="images/land/bird2.png" id="bird2">
+            <a href="#sec" id="explore">Explore</a>
+            <img src="images/land/splash.png" id="splash">
+            <img src="images/land/water.png" id="water">
+            <img src="images/land/rocks.png" id="rocks">
+            <img src="sand.png" id="water2">
+        </section>
+
+        
+        <div class="sec" id="sec">
+            <!-- Text Content here -->
+            <h2>Gardening News</h2>
+            <br>
+            <div style="display: flex; align-items: center; aspect-ratio: 8/5;" class="glass">
+                <!--  carousel: start --> 
+                <div style="width: 80%; display: flex; align-items: center; margin: auto;" id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+                    <div style="display: flex; align-items: center;" class="carousel-inner" id="news"></div>
                 </div>
-                <div style = "cursor: pointer;" onclick = "window.location.replace('Events.html')" class="icon1">
-                    <img src="images/icons/calendar.png">
-                    <span style="display: block; text-align: center;"> Events </span>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev" style="position: absolute; top: 35%; left: 1em; height: 30%;">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next" style="position: absolute; top: 35%; right: 1em; height: 30%;">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+                <!-- carousel: end -->
+            </div>
+            <br>
+            
+            <div class="glass">
+                <h3>About The Team</h3>
+                    <p>This website is developed by students of Singapore Management University as part of IS216 Web Application Development module</p>
                 </div>
-                <div style = "cursor: pointer;" onclick = "window.location.replace('Buy.html')" class="icon2">
-                    <img src="images/icons/seeds.png">
-                    <span style="display: block; text-align: center;"> Buy seeds</span>
+            <br>
+
+            <div class="glass">
+                <h3>What We Do</h3>
+                <div class="icon-container">
+                    <p >Discover the world of gardening with Mok's Farmers, your ultimate destination for premium seeds and expert guidance. Explore our handpicked selection of top-grade seeds, cultivate your garden with our 'My Garden' page, and connect with a vibrant community of like-minded gardeners on our 'Community Garden' page. Stay updated on exclusive events and workshops by signing up on our user-friendly platform. Let your gardening dreams flourish with Mok's Farmers today.
+                        
+                    </p>
+                    <div class = 'features'>Features</div>
+                    
+                    <div style = "cursor: pointer;" onclick = "window.location.replace('MyGarden.html')" class="icon">
+                        <img src="images/icons/garden.png">
+                        <span style="display: block; text-align: center;"> My garden</span>
+                    </div>
+                    <div style = "cursor: pointer;" onclick = "window.location.replace('Events.html')" class="icon1">
+                        <img src="images/icons/calendar.png">
+                        <span style="display: block; text-align: center;"> Events </span>
+                    </div>
+                    <div style = "cursor: pointer;" onclick = "window.location.replace('Buy.html')" class="icon2">
+                        <img src="images/icons/seeds.png">
+                        <span style="display: block; text-align: center;"> Buy seeds</span>
+                    </div>
                 </div>
             </div>
         </div>
+
+        <!-- Code for the footer -->
+        <div class="footer" id="footer">
+            © 2023 Mok's Farmers. All rights reserved.
+        </div>
+
+        <!-- The button to scroll back to top -->
+        <a id="top" href="#"> <i class="fas fa-arrow-up"></i> </a>
+
     </div>
-
-    <!-- Code for the footer -->
-    <div class="footer" id="footer">
-        © 2023 Mok's Farmers. All rights reserved.
-    </div>
-
-    <!-- The button to scroll back to top -->
-    <a id="top" href="#"> <i class="fas fa-arrow-up"></i> </a>
-
     <script>
-    console.log(window)
+    // console.log(window)
     checkLogin()
     if (session !== null) {
         storeCurrentLocation();
@@ -146,11 +148,11 @@
                     if (userData!=null && Object.keys(userData).length>0) {
                         this.isLogged = true;
                     }
-                    console.log(this.isLogged)
+                    // console.log(this.isLogged)
                 },
                 methods: {
                     log(str){
-                        console.log(str);
+                        // console.log(str);
                         return;
                     },
                 },

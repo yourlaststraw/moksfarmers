@@ -24,8 +24,6 @@
     <script type="text/javascript" src="user.js"></script>
     <script type="text/javascript" src="validate.js"></script>
     <script type="text/javascript" src="maps.js"></script>
-    
-    
     <style>
         /* .page-btn {
             text-decoration: none;
@@ -38,116 +36,107 @@
     </style>
 </head>
 
-<body id="communitygarden" onload="eucledianDistance()">
-    <!-- This is the header/ Nav Bar -->
-    <header id="header">
-        <div class = "wrapper">
-            <a href="index.html" class="logo">Mok's Farmers</a>
-        </div>
-
-        <div class ="links">
+<body onload="euclideanDistance()">
+    <div id="communitygarden">
+        <!-- This is the header/ Nav Bar -->
+        <header id="header">
             <div class = "wrapper">
-                <a href="index.html">Home</a>
-                <a href="MyGarden.html" class="active">MyGarden</a>
+                <a href="index.html" class="logo">Mok's Farmers</a>
             </div>
-            <div class = "wrapper">
-                <a href="Events.html">Events</a>
-                <a href="Buy.html">Buy</a>
-            </div>
-        </div>
 
-        <div class = "user-info">
-        <button class="button-5" role="button">
-            <div v-if="isLogged" onclick="clearSession();window.location.replace('index.html')">Logout</div>
-            <div v-else><a href="login.html">Login/Signup</a></div>
-        </button>
-        <div id = "welcome" style ="text-align: right;" v-if="isLogged" >
-            Welcome, farmer 
-        </div>
-        </div>
-
-    </header>
-
-    <div class="container d-flex justify-between items-center">
-        <!-- Tab links -->
-        <!-- <div class="tab">
-            <ul class="d-flex items-center">
-                <li>
-                    <a href="MyGarden.html" aria-current="page" class="tabcontent active text-lg">MyGarden</a>
-                </li>
-                <li>
-                    <a href="CommunityGarden.html" class="tabcontent text-lg">CommunityGarden</a>
-                </li>
-            </ul>
-        </div> -->
-        <header id="header" class = "layer1" style = "min-height: 0;">
             <div class ="links">
                 <div class = "wrapper">
-                    <a href="MyGarden.html" aria-current="page" class="tabcontent text-lg">MyGarden</a>
-                    <a href="CommunityGarden.html" class="tabcontent active text-lg">CommunityGarden</a>
-                </div>  
+                    <a href="index.html">Home</a>
+                    <a href="MyGarden.html" class="active">MyGarden</a>
+                </div>
+                <div class = "wrapper">
+                    <a href="Events.html">Events</a>
+                    <a href="Buy.html">Buy</a>
+                </div>
             </div>
-            <button @click="openModal" id="addPlantButton" class="py-2 px-4 bg-black text-white rounded-lg" >Add Plant</button>
+
+            <div class = "user-info">
+                <button class="button-5" role="button">
+                    <div v-if="isLogged" onclick="clearSession();window.location.replace('index.html')">Logout</div>
+                    <div v-else><a href="login.html">Login/Signup</a></div>
+                </button>
+                <div id = "welcome" style ="text-align: right;" v-if="isLogged" >
+                    Welcome, farmer 
+                </div>
+            </div>
         </header>
-        
-        <!-- Add Plant button -->
-        
-    </div>
-    <div class="sec" style = "padding-top: 50px; " v-if="isLogged">
-        <h3>View others' harvest and see how they match up to yours!</h3>
-        <div v-if="myOwnPlants === '[]'">
-            <h3>You have not posted anything yet!</h3>
+
+        <div class="container d-flex justify-between items-center">
+            <!-- Tab links -->
+            <!-- <div class="tab">
+                <ul class="d-flex items-center">
+                    <li>
+                        <a href="MyGarden.html" aria-current="page" class="tabcontent active text-lg">MyGarden</a>
+                    </li>
+                    <li>
+                        <a href="CommunityGarden.html" class="tabcontent text-lg">CommunityGarden</a>
+                    </li>
+                </ul>
+            </div> -->
+            <header id="header" class = "layer1" style = "min-height: 0;">
+                <div class ="links">
+                    <div class = "wrapper">
+                        <a href="MyGarden.html" aria-current="page" class="tabcontent text-lg">MyGarden</a>
+                        <a href="CommunityGarden.html" class="tabcontent active text-lg">CommunityGarden</a>
+                    </div>  
+                </div>
+                <!-- <button @click="openModal" id="addPlantButton" class="py-2 px-4 bg-black text-white rounded-lg" >Add Plant</button> -->
+            </header>
         </div>
-        <div v-else>
-            <h3>Your harvests:</h3>
-            <div v-for="mine in myOwnPlants">
-                <div class="glass harvest-card">
-                    <div class = "image-box">
-                    <img class="cropPhoto" :src="mine.image" alt="Plant Image">
+
+        <div class="sec" style = "padding-top: 50px; " v-if="isLogged">
+            <h3>View others' harvest and see how they match up to yours!</h3>
+            <div v-if="myOwnPlants === '[]'">
+                <h3>You have not posted anything yet!</h3>
+            </div>
+            <div v-else>
+                <h3>Your harvests:</h3>
+                <div v-for="mine in myOwnPlants">
+                    <div class="glass harvest-card">
+                        <div class = "image-box">
+                        <img class="cropPhoto" :src="mine.image" alt="Plant Image">
+                        </div>
+                        <div class= "text-box" style="padding-left: 10px;justify-content: flex-start;">
+                            <h3>{{ mine.post_name }}</h3>
+                            <div style = "font-style: italic;">"{{ mine.description }}"</div>
+                            <div>Harvested on: {{ mine.date }}</div>
+                        </div>
                     </div>
-                    <div class= "text-box" style="padding-left: 10px;justify-content: flex-start;">
-                        <h3>{{ mine.post_name }}</h3>
-                        <div style = "font-style: italic;">"{{ mine.description }}"</div>
-                        <div>Harvested on: {{ mine.date }}</div>
+                </div>
+            </div>
+
+            <div v-if="nearbyPlants === '[]'">
+                <h3>There are no nearby posts! Be the first in your area!</h3>
+            </div>
+            <div v-else>
+                <h3>Other harvests nearby:</h3>
+                <div v-for="near in nearbyPlants">
+                    <div class="glass harvest-card">
+                        <div class = "image-box">
+                        <img class="cropPhoto" :src="near.image" alt="Plant Image">
+                        </div>
+                        <div class ="text-box" style="padding-left: 10px;justify-content: flex-start;">
+                            <h3>{{ near.post_name }}</h3>
+                            <div style = "font-style: italic;">"{{ near.description }}"</div>
+                            <div>Harvested on: {{ near.date }}</div>
+                            <div>Owner: {{ near.user_name }}</div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-
-        <div v-if="nearbyPlants === '[]'">
-            <h3>There are no nearby posts! Be the first in your area!</h3>
-        </div>
         <div v-else>
-            <h3>Other harvests nearby:</h3>
-            <div v-for="near in nearbyPlants">
-                <div class="glass harvest-card">
-                    <div class = "image-box">
-                    <img class="cropPhoto" :src="near.image" alt="Plant Image">
-                    </div>
-                    <div class ="text-box" style="padding-left: 10px;justify-content: flex-start;">
-                        <h3>{{ near.post_name }}</h3>
-                        <div style = "font-style: italic;">"{{ near.description }}"</div>
-                        <div>Harvested on: {{ near.date }}</div>
-                        <div>Owner: {{ near.user_name }}</div>
-                    </div>
-                </div>
-            </div>
+            <br><h3 class="buy-body">You are not logged in.</h3>
         </div>
     </div>
-    <div v-else>
-        <br><h3 class="buy-body">You are not logged in.</h3>
-    </div>
-
-
     <script>
-        window.onload = function() {
-            if(!window.location.hash) {
-                window.location = window.location + '#loaded';
-                window.location.reload();
-            }
-        }
         const nearbyPlants = JSON.parse(localStorage.getItem("nearbyPlants"));
-        console.log(JSON.parse(localStorage.getItem("nearbyPlants")));
+        // console.log(JSON.parse(localStorage.getItem("nearbyPlants")));
         const myOwnPlants = JSON.parse(localStorage.getItem("myOwnPlants"));
         // display name if user is logged in
         if (userData!=null && Object.keys(userData).length>0){
@@ -174,19 +163,15 @@
             // },
             methods: {
                 methodName() {
-                    
                 }
             },
             created() {
                 if (userData!=null && Object.keys(userData).length>0){
                 this.isLogged = true;
-            }
+                }
             }
         });
         const vm = app.mount('#communitygarden'); 
     </script>
-
-    
 </body>
-<!-- Always include javascript at the end of the file, just above the html tag -->
 </html>

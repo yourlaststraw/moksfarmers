@@ -184,16 +184,16 @@
                         this.event = JSON.parse(sessionStorage.getItem('event'))
                         this.userEvents = JSON.parse(sessionStorage.getItem('userEvents'))
                         this.isOwnEvent = this.checkIsOwnEvent(this.event)
-                        console.log(this.userEvents)
+                        // console.log(this.userEvents)
                         if (!this.isOwnEvent){
-                            console.log(this.checkIsSignedup(this.event))
+                            // console.log(this.checkIsSignedup(this.event))
                             this.isSignedup = this.checkIsSignedup(this.event)
                         }
-                        console.log(this.isOwnEvent)
+                        // console.log(this.isOwnEvent)
                     }
                 },
                 mounted(){
-                    console.log(this.userEvents)
+                    // console.log(this.userEvents)
                 },
                 methods: {
                     log(str){

@@ -50,136 +50,138 @@
     
 </head>
 
-<body id="mygarden" onload="loadData(); euclideanDistance()">
-    <!-- This is the header/ Nav Bar -->
-    <header id="header">
-        <div class = "wrapper">
-            <a href="index.html" class="logo">Mok's Farmers</a>
-        </div>
-
-        <div class ="links">
+<body onload="loadData(); euclideanDistance()">
+    <div id="mygarden">
+        <!-- This is the header/ Nav Bar -->
+        <header id="header">
             <div class = "wrapper">
-                <a href="index.html" >Home</a>
-                <a href="MyGarden.html" class="active">MyGarden</a>
+                <a href="index.html" class="logo">Mok's Farmers</a>
             </div>
-            <div class = "wrapper">
-                <a href="Events.html">Events</a>
-                <a href="Buy.html">Buy</a>
-            </div>
-        </div>
 
-        <div class = "user-info">
-        <button class="button-5" role="button">
-            <div v-if="isLogged" onclick="clearSession();window.location.replace('index.html')">Logout</div>
-            <div v-else><a href="login.html">Login/Signup</a></div>
-        </button>
-        <div id = "welcome" style ="text-align: right;">
-            
-        </div>
-        </div>
-        <!-- <div>{{myPlantsList}}</div> -->
-
-    </header>
-    
-    
-    <div class="container d-flex justify-between items-center ">
-        <!-- Tab links -->
-        <!-- <div class="tab">
-            <ul class="d-flex items-center">
-                <li>
-                    <a href="MyGarden.html" aria-current="page" class="tabcontent active text-lg">MyGarden</a>
-                </li>
-                <li>
-                    <a href="CommunityGarden.html" class="tabcontent text-lg">CommunityGarden</a>
-                </li>
-            </ul>
-        </div> -->
-        <header id="header" class = "layer1" style = "min-height: 0;">
             <div class ="links">
                 <div class = "wrapper">
-                    <a href="MyGarden.html" aria-current="page" class="tabcontent active text-lg">MyGarden</a>
-                    <a href="CommunityGarden.html" class="tabcontent text-lg">CommunityGarden</a>
-                </div>  
+                    <a href="index.html" >Home</a>
+                    <a href="MyGarden.html" class="active">MyGarden</a>
+                </div>
+                <div class = "wrapper">
+                    <a href="Events.html">Events</a>
+                    <a href="Buy.html">Buy</a>
+                </div>
             </div>
-            <button @click="openModal" id="addPlantButton" class="py-2 px-4 bg-black text-white rounded-lg" >Add Plant</button>
+
+            <div class = "user-info">
+            <button class="button-5" role="button">
+                <div v-if="isLogged" onclick="clearSession();window.location.replace('index.html')">Logout</div>
+                <div v-else><a href="login.html">Login/Signup</a></div>
+            </button>
+            <div id = "welcome" style ="text-align: right;">
+                
+            </div>
+            </div>
+            <!-- <div>{{myPlantsList}}</div> -->
+
         </header>
         
-        <!-- Add Plant button -->
         
-    </div>
-
-    <div v-if="isLogged" class="sec" style ="padding-top: 50px;">
-        <h3>Add plants to grow in your garden, and we'll keep track of your progress!</h3>
-        <div>
+        <div class="container d-flex justify-between items-center ">
+            <!-- Tab links -->
+            <!-- <div class="tab">
+                <ul class="d-flex items-center">
+                    <li>
+                        <a href="MyGarden.html" aria-current="page" class="tabcontent active text-lg">MyGarden</a>
+                    </li>
+                    <li>
+                        <a href="CommunityGarden.html" class="tabcontent text-lg">CommunityGarden</a>
+                    </li>
+                </ul>
+            </div> -->
+            <header id="header" class = "layer1" style = "min-height: 0;">
+                <div class ="links">
+                    <div class = "wrapper">
+                        <a href="MyGarden.html" aria-current="page" class="tabcontent active text-lg">MyGarden</a>
+                        <a href="CommunityGarden.html" class="tabcontent text-lg">CommunityGarden</a>
+                    </div>  
+                </div>
+                <button @click="openModal" id="addPlantButton" class="py-2 px-4 bg-black text-white rounded-lg" >Add Plant</button>
+            </header>
             
-            <div v-if="myPlantsList.length === 0">
-                <h1 class="text-center text-lg" id="noPlantMsg">You have no plants currently. Grow a new one today!</h1>
-            </div>
-            <div v-else>
-                <div v-for="plantItem in myPlantsList">
-                    <div class="glass plant-card">
-                        <div class = "image-box">
-                        <img class="cropPhoto" :src="plantItem.image" alt="Plant Image">
-                        </div>
-                        <div class = "text-box">
-                            <h3 class>{{ plantItem.name }}</h3>
-                            <div>Instructions:</div>
-                            <div v-for="ins of plantItem.instructions">{{ins}}</div>
-                            <div class="d-flex justify-content-end align-items-center bottom-10 right-10" style = "margin-top: 10px;">
-                            <span class="font-bold">Day {{plantItem.dayTrack}}</span>
-                            <!-- <div style="display:flex;justify-content: flex-end;width:155px"> -->
-                            <harvest-btn @harvest-click="harvestPlant" v-bind:plant="plantItem" v-if= "plantItem.dayTrack == plantItem.maturity"></harvest-btn>
-                            <button v-else-if= "!plantItem.logToday" @click="logTracker(plantItem)" style="right:10px;width:144px" class="bg-lime-600 text-white py-2 px-4 rounded-lg ml-10" :value="plantItem.userPlantId">Complete</button>
-                            <div v-else style="right:10px;" class="bg-lime-600 text-white py-2 px-4 rounded-lg ml-10" :value="plantItem.userPlantId">Completed!</div>
-                            <!-- </div> -->
-                        </div>
-
-                            <!-- <span>{{ plantItem.description }}<span> <br>
-                            <span>Days to Maturity: {{ plantItem.maturity }}<span> <br>
-                            <span>Size: {{ plantItem.size }}</span> <br>
-                            <span>Difficulity Level: {{ plantItem.difficulity }}<span> <br> -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--
-                <plant-card
-                    v-for="(plantItem, index) in myPlantsList"
-                    :key="index"
-                    :plant="plantItem.plant"
-                    :description="plantItem.description"
-                >
-                </plant-card>
-            -->
-                
-              <!-- Plant Modal -->
-            <div  v-if="isModalOpen" class="fixed top-0 left-0 h-screen w-screen flex items-center justify-center">
-                <div class="modal-container">
-                    <button @click="closeModal" class="close-button">Close</button>
-                  <!-- Modal content and form for adding a plant -->
-                    <div id="newPlantsList" style = "display: flex;flex-wrap: wrap;justify-content: center;">
-                        
-                    <!-- Plant cards go here -->
-                        <div v-for="plant in plants" :key="plant.id" class="rounded-lg p-4 new-plant-container">
-                            <img :src="plant.image" alt="Plant Image" class="w-full h-40 object-cover rounded-md mb-2">
-                            <p class="text-lg">{{ plant.name }}</p>
-                            <button @click="addToMyPlantsList(plant.id)" class="bg-lime-600 text-white py-2 px-4 rounded-lg w-full">Add to MyGarden</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-             <!-- The button to scroll back to top -->
-            <a id="top" href="#"> <i class="fas fa-arrow-up"></i></a>
+            <!-- Add Plant button -->
+            
         </div>
 
-        <upload-image-dialog v-if= "showUploadDialog" @close="this.showUploadDialog = false" @post="postPlant" :plant="plant_to_harvest" /></upload-image-dialog>
+        <div v-if="isLogged" class="sec" style ="padding-top: 50px;">
+            <h3>Add plants to grow in your garden, and we'll keep track of your progress!</h3>
+            <div>
+                
+                <div v-if="myPlantsList.length === 0">
+                    <h1 class="text-center text-lg" id="noPlantMsg">You have no plants currently. Grow a new one today!</h1>
+                </div>
+                <div v-else>
+                    <div v-for="plantItem in myPlantsList">
+                        <div class="glass plant-card">
+                            <div class = "image-box">
+                            <img class="cropPhoto" :src="plantItem.image" alt="Plant Image">
+                            </div>
+                            <div class = "text-box">
+                                <h3 class>{{ plantItem.name }}</h3>
+                                <div>Instructions:</div>
+                                <div v-for="ins of plantItem.instructions">{{ins}}</div>
+                                <div class="d-flex justify-content-end align-items-center bottom-10 right-10" style = "margin-top: 10px;">
+                                <span class="font-bold">Day {{plantItem.dayTrack}}</span>
+                                <!-- <div style="display:flex;justify-content: flex-end;width:155px"> -->
+                                <harvest-btn @harvest-click="harvestPlant" v-bind:plant="plantItem" v-if= "plantItem.dayTrack == plantItem.maturity"></harvest-btn>
+                                <button v-else-if= "!plantItem.logToday" @click="logTracker(plantItem)" style="right:10px;width:144px" class="bg-lime-600 text-white py-2 px-4 rounded-lg ml-10" :value="plantItem.userPlantId">Complete</button>
+                                <div v-else style="right:10px;" class="bg-lime-600 text-white py-2 px-4 rounded-lg ml-10" :value="plantItem.userPlantId">Completed!</div>
+                                <!-- </div> -->
+                            </div>
 
-    </div>
-    <div v-else>
-        <br><h3 class="buy-body">You are not logged in.</h3>
+                                <!-- <span>{{ plantItem.description }}<span> <br>
+                                <span>Days to Maturity: {{ plantItem.maturity }}<span> <br>
+                                <span>Size: {{ plantItem.size }}</span> <br>
+                                <span>Difficulity Level: {{ plantItem.difficulity }}<span> <br> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--
+                    <plant-card
+                        v-for="(plantItem, index) in myPlantsList"
+                        :key="index"
+                        :plant="plantItem.plant"
+                        :description="plantItem.description"
+                    >
+                    </plant-card>
+                -->
+                    
+                <!-- Plant Modal -->
+                <div  v-if="isModalOpen" class="fixed top-0 left-0 h-screen w-screen flex items-center justify-center">
+                    <div class="modal-container">
+                        <button @click="closeModal" class="close-button">Close</button>
+                    <!-- Modal content and form for adding a plant -->
+                        <div id="newPlantsList" style = "display: flex;flex-wrap: wrap;justify-content: center;">
+                            
+                        <!-- Plant cards go here -->
+                            <div v-for="plant in plants" :key="plant.id" class="rounded-lg p-4 new-plant-container">
+                                <img :src="plant.image" alt="Plant Image" class="w-full h-40 object-cover rounded-md mb-2">
+                                <p class="text-lg">{{ plant.name }}</p>
+                                <button @click="addToMyPlantsList(plant.id)" class="bg-lime-600 text-white py-2 px-4 rounded-lg w-full">Add to MyGarden</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- The button to scroll back to top -->
+                <a id="top" href="#"> <i class="fas fa-arrow-up"></i></a>
+            </div>
+
+            <upload-image-dialog v-if= "showUploadDialog" @close="this.showUploadDialog = false" @post="postPlant" :plant="plant_to_harvest" /></upload-image-dialog>
+
+        </div>
+        <div v-else>
+            <br><h3 class="buy-body">You are not logged in.</h3>
+        </div>
     </div>
 <script>
-    console.log(localStorage.getItem("userPlants"))
+    // console.log(JSON.parse(localStorage.getItem("userPlants")))
     var arrayPlants = JSON.parse(localStorage.getItem("arrayPlants"));
     var userPlants = JSON.parse(localStorage.getItem("userPlants"));
 
