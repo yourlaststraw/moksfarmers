@@ -122,17 +122,18 @@
                             Harvest in: {{value.harvest}}
                                 
                         </p> 
+                        <div class = "btn-box">
+                            <button style = "overflow: hidden;" v-on:click = "addItem(key)" class = "button">
+                                    <div class = "to-slide">
+                                        <div>Add to Cart</div>
+    
+                                        <div style="font-size:larger;font-weight: bold;color:green" >ADDED!</div>
+                                    </div>
+                            
+                            </button>
+                        </div>
                     </div>
-                    <div class = "btn-box">
-                        <button style = "overflow: hidden;" v-on:click = "addItem(key)" class = "button">
-                                <div class = "to-slide">
-                                    <div>Add to Cart</div>
-
-                                    <div style="font-size:larger;font-weight: bold;color:green" >ADDED!</div>
-                                </div>
-                        
-                        </button>
-                    </div>
+                    
                 </div>
             </div>
         </div>  

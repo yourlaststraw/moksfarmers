@@ -168,7 +168,7 @@
                             <div class ="event-name">{{event.name}}</div>
                             <div style = "color:grey;font-style: italic;" >{{event.desc}}</div>
                         </div>
-                        <div style ="display: flex;flex-direction: column;justify-content: flex-end;"></div>
+                        <div style ="display: flex;flex-direction: column;justify-content: space-between;flex-grow: 1;">
                             <p>
                                 Location: {{event.location}}<br>
                                 Date(s): {{eventDuration(event.from,event.to)}}
@@ -178,6 +178,7 @@
                                 <learn-btn v-bind:user-events="userEvents" v-bind:event="event" class="events-btn">Learn more</learn-btn>
                             
                             </div>
+                        </div>
                         </div>
                     </div>
                         

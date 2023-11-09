@@ -92,6 +92,8 @@
                     Capacity: {{event.size}}<br>
                     Sign-ups close on: {{eventDuration(event.signup,event.signup)}}<br>
                 </p>
+                <br>
+                <p v-if="isSignedup" style="color:#4faa2e">You have signed up for this event</p>
                 <button v-if="isSignedup" onclick="window.location.replace('Events.html')" class="bg-red-500 text-white text-lg py-2 px-4 rounded-lg mt-4">Back</button>
             </div>
         </div>
@@ -143,7 +145,7 @@
         </div>
 
         <div v-if="displayPopup" class="fixed top-0 left-0 h-screen w-screen flex items-center justify-center bg-black bg-opacity-50">
-            <div class="modal-container bg-white p-8 rounded-lg shadow-lg text-center">
+            <div class="modal-container p-8 rounded-lg shadow-lg text-center">
                 <h2 class="text-3xl font-bold mb-4">Congratulations!</h2>
                 <p class="text-xl mb-6">You have successfully signed up for this event!</p>
                 <button @click="displayPopup = false" class="bg-green-500 text-white text-lg py-2 px-4 rounded-lg mt-4">
@@ -246,19 +248,5 @@
         
         app.mount("#eventDetails")
     </script>
-<style scoped>
-    .modal-container {
-      background-color: white;
-      padding: 2rem;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-      max-width: 80%;
-      width: fit-content;
-      text-align: center;
-      max-height: 80vh; 
-      overflow-y: auto;
-      z-index: 6;
-    }
-</style>
 </body>
 </html>
