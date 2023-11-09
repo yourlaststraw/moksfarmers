@@ -30,21 +30,25 @@ function storeCurrentLocation() {
     }
     let current;
     current = localStorage.getItem("latlon");
-    arr = current.split(",");
+    if(current !=null)
+    {arr = current.split(",");
     lat = arr[0];
     lon = arr[1];
     data = {
         current_lat: lat,
         current_lon: lon
     }
-    axios.patch(dbUserUrl, data);
+    axios.patch(dbUserUrl, data);}
 };
 
 function euclideanDistance() {
     let userList = [];
     let othersList = [];
     let output, euclid, location, postLat, postLon, lonResult, latResult;
-    let userLocation = localStorage.getItem("latlon").split(',');
+    let userLocation = '';
+    if(localStorage.getItem("latlon") !=null){
+        userLocation = localStorage.getItem("latlon").split(',');
+    }
     let userLat = Number(userLocation[0]);
     let userLon = Number(userLocation[1]);
 

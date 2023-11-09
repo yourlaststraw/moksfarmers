@@ -137,8 +137,8 @@ html {
 
 .logoFarmerName {
     backdrop-filter: blur(30px);
-    /* color: #002431; */
-    color: rgb(233, 231, 192);
+    color: #002431;
+    /* color: rgb(233, 231, 192); */
     font-weight: 800;
     font-size: 2.5em;
     text-decoration: none;
