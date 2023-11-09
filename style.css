@@ -409,8 +409,10 @@ section #text {
 /* Buy Page Styles */
 
 .checkout {
-    position: relative;
-    top: 250px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     min-width: 300px;
     width: 30%;
     display: flex;
@@ -513,7 +515,8 @@ section #text {
 
 #buy h3,
 #events h3,
-#mygarden h3 {
+#mygarden h3,
+#communitygarden h3 {
     font-size: 1.8em;
     margin: 2%;
     font-weight: bold;
