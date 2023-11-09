@@ -141,6 +141,7 @@
 
                             <div v-for="date,key in type">
                                 <div  style = "display: flex;flex-direction: column;align-items: center;" v-if="key == cur_date_str" v-for="event in date">
+                                    {{event.from}}
                                     <event v-bind:is-own-event="checkIsOwnEvent(event)" v-bind:user-events="userEvents" v-bind:event="event"></event>
                                 </div>
                             </div>
@@ -236,6 +237,7 @@
                     if (userData!=null && Object.keys(userData).length>0) {
                         this.isLogged = true;
                         loadEvents().then(a=>{
+                            console.log(a[1])
                             this.events = a[0]
                             this.userEvents = a[1]
                         })
@@ -360,9 +362,10 @@
             
             methods: {
                 viewDetails(){
+                    console.log(this.event)
                     sessionStorage.setItem("event", JSON.stringify(this.event))
                     sessionStorage.setItem('userEvents',JSON.stringify(this.userEvents))
-                    window.location.replace("EventDetails.html")
+                    // window.location.replace("EventDetails.html")
                 }
             },
             created(){
