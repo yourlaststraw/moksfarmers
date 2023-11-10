@@ -236,10 +236,11 @@
                     if (userData!=null && Object.keys(userData).length>0) {
                         this.isLogged = true;
                         loadEvents().then(a=>{
-                            console.log(a[1])
                             this.events = a[0]
                             this.userEvents = a[1]
                         })
+
+                        
                         
                     }
                     
@@ -292,7 +293,6 @@
                         this.cur_date.date = date[1]
                         this.cur_date.month = date[2]
                         this.cur_date.year = date[3]
-                        console.log(this.userEvents)
                         console.log(this.events)
                     },
                     eventDuration(from,to){
@@ -452,6 +452,7 @@
             
             methods: {
                 learn(){
+                    console.log(this.event)
                     sessionStorage.setItem("event", JSON.stringify(this.event))
                     sessionStorage.setItem("userEvents",JSON.stringify(this.userEvents))
                     window.location.replace("EventDetails.html")

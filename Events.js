@@ -25,6 +25,7 @@ async function loadEvents() {
                 signup: response.data[i].signup,
                 image: response.data[i].image,
                 size: response.data[i].size,
+                participants: response.data[i].participants,
 
             });
             // If it is your own created session. It will tell you.
