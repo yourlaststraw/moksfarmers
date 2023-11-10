@@ -87,7 +87,6 @@
                 <h4 class="text-base italic mb-4">{{event.desc}}</h4>
 
                 <p class="text-base">
-                    {{event.from}}
                     Location: {{event.location}}<br>
                     Date(s): {{eventDuration(event.from,event.to)}}<br>
                     Capacity: {{event.size}}<br>
@@ -140,8 +139,6 @@
                     </thead>
                     <tbody>
                         <tr v-for="(p, key, idx) in event.participants" :key="idx">
-                            {{event.participants}}
-                            {{event.name}}
                             <td class="border px-4 py-2" v-if="p != 'dummy'">{{idx+1}}</td>
                             <td class="border px-4 py-2" v-if="p != 'dummy'">{{p.name}}</td>
                             <td class="border px-4 py-2" v-if="p != 'dummy'">{{p.email}}</td>
