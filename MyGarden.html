@@ -178,6 +178,7 @@
             closeModal() {
                 this.isModalOpen = false;
             },
+            // Appending of new plant information to User's account. Also creation of new Plant for Users in the Database.
             addToMyPlantsList(id) {
                 let plant = this.plants[id];
                 this.isModalOpen = false;
@@ -195,6 +196,7 @@
                     }, 100);
                 };
             },
+            // Daily Instructions Logging. Also updates Database on the logged date.
             logTracker(plantItem){
                 const matchingPlantItem = this.myPlantsList.find(item => item.userPlantId === plantItem.userPlantId);
                 const logToday = matchingPlantItem.logToday;
@@ -222,6 +224,7 @@
                 this.plant_to_harvest = plant;
                 this.showUploadDialog = true;
             },
+            // Removal of fully matured plant from User's account and creation of post from User.
             postPlant(img, caption, postName, plant) { 
                 this.showUploadDialog = false
 
