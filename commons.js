@@ -1,3 +1,4 @@
+// Adding permissions to access Firebase Realtime Database.
 const relay = `// Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-analytics.js";
@@ -22,6 +23,7 @@ const analytics = getAnalytics(app);`;
 
 document.getElementsByTagName('script')[0].innerHTML = relay;
 
+// Various Links that can access the Firebase API.
 const dbUrl = 'https://moksfarmers-default-rtdb.asia-southeast1.firebasedatabase.app/.json?auth=WeVoR13Scj5QXT9M16uBsXxq48YOdELozmMA50ny';
 
 const dbUrlpt1 = 'https://moksfarmers-default-rtdb.asia-southeast1.firebasedatabase.app';

@@ -1,11 +1,14 @@
+// Password Encryption. Uses Crypto.js
 function encryptPassword(password, email) {
-    return CryptoJS.AES.encrypt(password, email).toString();
+    return CryptoJS.AES.encrypt(password, email).toString(); // Binds password to an identifier, the user's email
 };
 
+// Password Decryption. Uses Crypto.js
 function decryptPassword(password, email) {
-    return CryptoJS.AES.decrypt(password, email).toString(CryptoJS.enc.Utf8);
+    return CryptoJS.AES.decrypt(password, email).toString(CryptoJS.enc.Utf8); // Verifies identifier, the user's email to unlock password.
 }
 
+// Login Validation
 function verifyUser() {
     let email = document.getElementById('email').value;
     let password = document.getElementById('password').value;
@@ -47,6 +50,7 @@ function verifyUser() {
     }
 };
 
+// Registration
 function createUser() {
     let output = '';
     let firstName = document.getElementById('firstName').value;
@@ -129,6 +133,7 @@ function createUser() {
     
 };
 
+// Logout Storage Clearance
 function clearSession() {
     sessionStorage.clear()
     localStorage.clear()
@@ -136,6 +141,7 @@ function clearSession() {
     console.log(localStorage)
 };
 
+// Debugging Functions
 function checkLogin() {
     //console.log(userData)
     if (userData!=null && Object.keys(userData).length>0){
@@ -151,7 +157,6 @@ function checkLogin() {
     }
     
 }
-
 
 function checkSession() {
     alert(localStorage.getItem("user"));

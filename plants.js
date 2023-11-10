@@ -1,3 +1,4 @@
+// Calls for Plant Repository from Database
 function dbPlants() {
     let counter = 0;
     axios.get(dbUrlpt1 + '/plants' + dbUrlpt2)
@@ -15,6 +16,7 @@ function dbPlants() {
     });
 };
 
+// Date Format Conversion
 function convertDateFormat(date) {
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, '0');
@@ -22,6 +24,7 @@ function convertDateFormat(date) {
     return `${year}-${month}-${day}`;
   }
 
+// Creation of user's new plants to the Database
 function postPlant(plant) {
     let id = plant.db;
     let data = {
@@ -42,6 +45,7 @@ function postPlant(plant) {
     return true;
 };
 
+// Retrieval of User's Plants from Database.
 function callPlants() {
     
     axios.get(dbUrl)
@@ -69,6 +73,7 @@ function callPlants() {
     });
 };
 
+// Re-construction of object to use outside of Proxy or Promise.
 function convertProxy(plant) {
     return {
         'db': plant.db,
@@ -82,6 +87,7 @@ function convertProxy(plant) {
     }
 };
 
+// Object Reformatting to sync with general format.
 function modifyPlant(plant, dayTrack, userDb, userPlantId, loggedDate, image, location, creation_date) {
     return {
         'db': userDb,
@@ -109,6 +115,7 @@ function statusLog(loggedDate){
     return logToday;
 }
 
+// Retrieval of Daily Instructions based on Day of User's plant's life
 function getInstructions(instructions) {
     let output = [];
     let arrInstruction = instructions.split(';');
@@ -121,7 +128,7 @@ function getInstructions(instructions) {
     return output;
 } 
 
-
+// Debugging for incomplete information retrieval. Also used to check if Application Storage is synced with Database.
 function checkCountTally(userPlants, myPlantsList) {
     if (localStorage.getItem("userPlantCount") !== null && localStorage.getItem("userPlantCount") !== 'null') {
         let count = 0;

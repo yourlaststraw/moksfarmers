@@ -1,3 +1,4 @@
+// Google Maps API Location Retrieval
 function getLocation() {
     if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(showPosition);
@@ -15,6 +16,7 @@ function showPosition(position) {
     localStorage.setItem("latlon", lat + ',' + lon);
 }
 
+// Verification and update of obtained location from Google Maps API into Database.
 function storeCurrentLocation() {
     //console.log(sessionStorage.getItem("checkLocation"))
     if (sessionStorage.getItem("checkLocation") !== 'greenlit') {
@@ -41,6 +43,7 @@ function storeCurrentLocation() {
     axios.patch(dbUserUrl, data);}
 };
 
+// Calculation of Euclidean Distance between User and nearby posts. Also the retrieval of posts from Database.
 function euclideanDistance() {
     let userList = [];
     let othersList = [];
