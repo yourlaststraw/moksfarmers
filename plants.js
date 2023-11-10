@@ -16,7 +16,6 @@ function dbPlants() {
 };
 
 function convertDateFormat(date) {
-    // const today = new Date();
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, '0');
     const day = String(date.getDate()).padStart(2, '0');
@@ -24,13 +23,11 @@ function convertDateFormat(date) {
   }
 
 function postPlant(plant) {
-    // console.log(plant);
     let id = plant.db;
     let data = {
         id: id,
-        day: 1,
-        loggedDate: '2023-10-1',
-        // loggedDate: "2023-10-30", //to test 
+        day: 1, //set day to 1 when plant added so instructions for day1 shows
+        loggedDate: '',
         location: localStorage.getItem("latlon"),
         image: plant.image,
         creation_date: new Date(),
@@ -65,13 +62,10 @@ function callPlants() {
                 
                 let plant = modifyPlant(plants[userDb], dayTrack, userDb, userPlantId, loggedDate, image, location, creation_date);
                 list.push(plant);
-                // console.log(plant);
             }
             
         }
-        // console.log(list)
         localStorage.setItem("userPlants", JSON.stringify(list));
-        // console.log(localStorage)
     });
 };
 
@@ -89,7 +83,6 @@ function convertProxy(plant) {
 };
 
 function modifyPlant(plant, dayTrack, userDb, userPlantId, loggedDate, image, location, creation_date) {
-    // dayTrack = String(dayTrack);
     return {
         'db': userDb,
         'dayTrack': dayTrack,
@@ -124,36 +117,27 @@ function getInstructions(instructions) {
         if(ins!==""){
         output.push(ins);
     }}
-    // console.log(output);
+
     return output;
 } 
 
 
 function checkCountTally(userPlants, myPlantsList) {
-    // console.log(localStorage.getItem("userPlantCount"))
-    // console.log(typeof localStorage.getItem("userPlantCount"))
-    // console.log(myPlantsList)
-    // console.log(userPlants)
     if (localStorage.getItem("userPlantCount") !== null && localStorage.getItem("userPlantCount") !== 'null') {
         let count = 0;
 
         // JSON.parse(JSON.strngify(value)) is used to clean out Proxy(array) values, so that it becomes normal.
         userPlants = JSON.parse(JSON.stringify(userPlants));
         myPlantsList = JSON.parse(JSON.stringify(myPlantsList));
-        // console.log(myPlantsList)
-        // console.log(userPlants)
         if (myPlantsList !== '') {
             count = myPlantsList.length;
         }
         
         let user = userPlants.length;
         if (count !== user) {
-            // console.log(count, user)
             userPlants = JSON.stringify(userPlants);
             myPlantsList = JSON.stringify(myPlantsList);
-            //window.location.replace("plantStall.html");
         }
-        // console.log(userPlants, myPlantsList);
     }
     else {
         localStorage.setItem("userPlantCount", JSON.stringify(userPlants));
@@ -162,7 +146,4 @@ function checkCountTally(userPlants, myPlantsList) {
 
 function loadData() {
     storeCurrentLocation();
-    // dbPlants();
-    // callPlants();
-    // checkCountTally(JSON.parse(localStorage.getItem("userPlants")), JSON.parse(localStorage.getItem("userPlantCount")));
 };

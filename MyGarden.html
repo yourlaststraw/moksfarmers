@@ -78,23 +78,11 @@
                 
             </div>
             </div>
-            <!-- <div>{{myPlantsList}}</div> -->
 
         </header>
         
-        
+        <!-- tabs for myGarden and communityGarden -->
         <div class="container d-flex justify-between items-center ">
-            <!-- Tab links -->
-            <!-- <div class="tab">
-                <ul class="d-flex items-center">
-                    <li>
-                        <a href="MyGarden.html" aria-current="page" class="tabcontent active text-lg">MyGarden</a>
-                    </li>
-                    <li>
-                        <a href="CommunityGarden.html" class="tabcontent text-lg">CommunityGarden</a>
-                    </li>
-                </ul>
-            </div> -->
             <header id="header" class = "layer1" style = "min-height: 0;">
                 <div class ="links">
                     <div class = "wrapper">
@@ -103,11 +91,9 @@
                     </div>  
                 </div>
                 <button @click="openModal" id="addPlantButton" class="py-2 px-4 bg-black text-white rounded-lg" >Add Plant</button>
-            </header>
-            
-            <!-- Add Plant button -->
-            
+            </header>        
         </div>
+
 
         <div v-if="isLogged" class="sec" style ="padding-top: 50px;">
             <h3>Add plants to grow in your garden, and we'll keep track of your progress!</h3>
@@ -116,6 +102,7 @@
                 <div v-if="myPlantsList.length === 0">
                     <h1 class="text-center text-lg" id="noPlantMsg">You have no plants currently. Grow a new one today!</h1>
                 </div>
+                <!-- list of user's own plants that he/she is growing -->
                 <div v-else>
                     <div v-for="plantItem in myPlantsList">
                         <div class="glass plant-card">
@@ -128,39 +115,24 @@
                                 <div v-for="ins of plantItem.instructions">{{ins}}</div>
                                 <div class="d-flex justify-content-end align-items-center bottom-10 right-10" style = "margin-top: 10px;">
                                 <span class="font-bold">Day {{plantItem.dayTrack}}</span>
-                                <!-- <div style="display:flex;justify-content: flex-end;width:155px"> -->
+                                <!-- harvest button appears when day count matches number of days to maturity of plant -->
                                 <harvest-btn @harvest-click="harvestPlant" v-bind:plant="plantItem" v-if= "plantItem.dayTrack == plantItem.maturity"></harvest-btn>
+                                <!-- complete button when user has not logged progress for that day, after which it will be changed to completed! till the next day 12am where it will switch back to complete and day count increases and instructions changes accordingly -->
                                 <button v-else-if= "!plantItem.logToday" @click="logTracker(plantItem)" style="right:10px;width:144px" class="bg-lime-600 text-white py-2 px-4 rounded-lg ml-10" :value="plantItem.userPlantId">Complete</button>
-                                <div v-else style="right:10px;" class="bg-lime-600 text-white py-2 px-4 rounded-lg ml-10" :value="plantItem.userPlantId">Completed!</div>
-                                <!-- </div> -->
+                                <div v-else style="right:10px;" class="bg-lime-600 text-white py-2 px-4 rounded-lg ml-10" :value="plantItem.userPlantId">Completed!</div>                               
                             </div>
-
-                                <!-- <span>{{ plantItem.description }}<span> <br>
-                                <span>Days to Maturity: {{ plantItem.maturity }}<span> <br>
-                                <span>Size: {{ plantItem.size }}</span> <br>
-                                <span>Difficulity Level: {{ plantItem.difficulity }}<span> <br> -->
                             </div>
                         </div>
                     </div>
                 </div>
-                <!--
-                    <plant-card
-                        v-for="(plantItem, index) in myPlantsList"
-                        :key="index"
-                        :plant="plantItem.plant"
-                        :description="plantItem.description"
-                    >
-                    </plant-card>
-                -->
-                    
-                <!-- Plant Modal -->
+                
+                <!-- add plants button that leads to pop up -->
                 <div  v-if="isModalOpen" class="fixed top-0 left-0 h-screen w-screen flex items-center justify-center">
                     <div class="modal-container">
                         <button @click="closeModal" class="close-button">Close</button>
-                    <!-- Modal content and form for adding a plant -->
                         <div id="newPlantsList" style = "display: flex;flex-wrap: wrap;justify-content: center;">
                             
-                        <!-- Plant cards go here -->
+                        <!-- plants array from database that shows up in pop up -->
                             <div v-for="plant in plants" :key="plant.id" class="rounded-lg p-4 new-plant-container">
                                 <img :src="plant.image" alt="Plant Image" class="w-full h-40 object-cover rounded-md mb-2">
                                 <p class="text-lg">{{ plant.name }}</p>
@@ -173,6 +145,7 @@
                 <a id="top" href="#"> <i class="fas fa-arrow-up"></i></a>
             </div>
 
+            <!-- pop up that appears when user clicks on harvest button that appears when day count matches number of days to maturity of plant  -->
             <upload-image-dialog v-if= "showUploadDialog" @close="this.showUploadDialog = false" @post="postPlant" :plant="plant_to_harvest" /></upload-image-dialog>
 
         </div>
@@ -181,27 +154,11 @@
         </div>
     </div>
 <script>
-    // console.log(JSON.parse(localStorage.getItem("userPlants")))
     var arrayPlants = JSON.parse(localStorage.getItem("arrayPlants"));
     var userPlants = JSON.parse(localStorage.getItem("userPlants"));
 
     checkLogin()
-    const PlantCard = {
-        props: ['plant'],
-        template: `
-            <div class="glass">
-                
-                <img class="cropPhoto" :src="plant.image" alt="Plant Image" style="display: inline-block; height: 100%; width: 30%;">
-                <div style="display: inline-block; width: 70%;">
-                    <h3>{{ plant.name }}</h3>
-                    <span>{{ plant.description }}<span> <br>
-                    <span>Days to Maturity: {{ plant.maturity }}<span> <br>
-                    <span>Size: {{ plant.size }}</span> <br>
-                    <span>Difficulity Level: {{ plant.difficulity }}<span> <br>
-                </div>
-            </div>
-        `,
-        };
+    
     const app = Vue.createApp({
         data() {
             return {
@@ -214,6 +171,7 @@
                 };
         },
         methods: {
+            // add plants pop up 
             openModal() {
                 this.isModalOpen = true;
             },
@@ -221,21 +179,16 @@
                 this.isModalOpen = false;
             },
             addToMyPlantsList(id) {
-                console.log(this.myPlantsList)
                 let plant = this.plants[id];
                 this.isModalOpen = false;
-                //set day to 1 when plant added so instructions for day1 shows
-                console.log(plant)
                 plant = convertProxy(plant);
-                // this.myPlantsList.push(plant);
                 console.log(this.myPlantsList)
                 
                 if (postPlant(plant)) {
                     console.log(this.myPlantsList)
                     localStorage.setItem("userPlantCount", JSON.stringify(this.myPlantsList));
                     callPlants();
-                    const userPlants = JSON.parse(localStorage.getItem("userPlants"));
-                    // JSON.parse(JSON.strngify(value)) is used to clean out Proxy(array) values, so that it becomes normal.
+                    const userPlants = JSON.parse(localStorage.getItem("userPlants")); // JSON.parse(JSON.strngify(value)) is used to clean out Proxy(array) values, so that it becomes normal
                     // checkCountTally(userPlants, JSON.parse(JSON.stringify(this.myPlantsList)));
                     setTimeout(function(){
                         window.location.replace("addPlantStall.html");
@@ -249,14 +202,10 @@
                 if(!logToday){
                     let userPlantId = plantItem.userPlantId;
                     let data = {
-                        // loggedDate: String(new Date())
                         loggedDate: convertDateFormat(new Date()),
                     }
-                    // console.log(data.day);
-                    // console.log(matchingPlantItem.maturity);
                     if(data.day == matchingPlantItem.maturity){
                         console.log("harvest day")
-                        // this.showUploadDialog = true;
                     }
                     else{axios.patch(dbUrlpt1 + '/users/' + localStorage.getItem("user") + '/my_plants/' + userPlantId + dbUrlpt2, data)
                     .then(() => {
@@ -273,7 +222,7 @@
                 this.plant_to_harvest = plant;
                 this.showUploadDialog = true;
             },
-            postPlant(img, caption, postName, plant) { // Use this to add the harvested plant to the posts table.
+            postPlant(img, caption, postName, plant) { 
                 this.showUploadDialog = false
 
                 plant = JSON.parse(JSON.stringify(plant))
@@ -282,6 +231,7 @@
                 const url1 = dbUrlpt1 + '/posts' + dbUrlpt2;
                 const url2 = dbUrlpt1 + '/users/' + session + '/my_plants/' + userPlantId + dbUrlpt2;
 
+                // get user info and add the harvested plant to the posts database
                 axios.get(dbUserUrl)
                 .then(response => {
                     let userName = response.data.first_name + ' ' + response.data.last_name;
@@ -296,7 +246,7 @@
                     };
                     axios.post(url1, para)
                     .then(() => {
-                        axios.delete(url2)
+                        axios.delete(url2) //remove harvest plant from my_plants database
                         .then(() => {
                             setTimeout(function(){
                                 window.location.replace("uploadPlantStall.html");
@@ -312,10 +262,9 @@
                 this.isLogged = true;
             }
         }
-    });
-    // app.component('plant-card', PlantCard);
-    // app.mount("#mygarden");   
+    }); 
 
+    //component for pop up on harvest day to create post for harvested plant
     app.component('upload-image-dialog', {
         props: ["plant"],
         data() {
@@ -349,6 +298,7 @@
         `,
        
         methods: {
+            //convert image to base64 string 
             encodeImageFileAsURL() {
                 const element = this.$refs.imageInput;
                 const file = element.files[0];
@@ -361,6 +311,7 @@
 
                 reader.readAsDataURL(file);
             },
+            //post field validation 
             submitPost() {
                 let output = '';
 
@@ -383,6 +334,7 @@
                     this.$emit('post', this.image, this.caption, this.postName, this.plant);
                 }
             },
+            //if harvest day comes but user feels plant could wait another day or two and chooses to harvest after supposed harvest day
             maybeNextTime(){
                 this.$emit('close')
             }
@@ -413,7 +365,7 @@
     
     
 </script>
-<!-- Tailwind CSS styles -->
+<!-- Tailwind CSS styles used for pop up modals-->
 <style scoped>
  .close-button {
       position: relative;
@@ -428,9 +380,6 @@
       color: rgb(239 68 68)
     }
 
-    /* #newPlantsList{
-        display: flex;
-    } */
 
     .new-plant-container{
         width:250px;

@@ -6,8 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
         content="text">
-    <!-- Favicon -->
-    <!-- <link rel="icon" type="image/png" href="images/logo.png"> -->
     <!-- Page Title -->
     <title>MyGarden</title>
     <!-- CSS Files -->
@@ -24,16 +22,7 @@
     <script type="text/javascript" src="user.js"></script>
     <script type="text/javascript" src="validate.js"></script>
     <script type="text/javascript" src="maps.js"></script>
-    <style>
-        /* .page-btn {
-            text-decoration: none;
-            padding: 6px 15px;
-            color: white;
-            background-color: #002431;
-            border-radius: 20px;
-    
-        } */
-    </style>
+
 </head>
 
 <body onload="euclideanDistance()">
@@ -66,18 +55,8 @@
             </div>
         </header>
 
+        <!-- Tab links -->
         <div class="container d-flex justify-between items-center">
-            <!-- Tab links -->
-            <!-- <div class="tab">
-                <ul class="d-flex items-center">
-                    <li>
-                        <a href="MyGarden.html" aria-current="page" class="tabcontent active text-lg">MyGarden</a>
-                    </li>
-                    <li>
-                        <a href="CommunityGarden.html" class="tabcontent text-lg">CommunityGarden</a>
-                    </li>
-                </ul>
-            </div> -->
             <header id="header" class = "layer1" style = "min-height: 0;">
                 <div class ="links">
                     <div class = "wrapper">
@@ -85,7 +64,6 @@
                         <a href="CommunityGarden.html" class="tabcontent active text-lg">CommunityGarden</a>
                     </div>  
                 </div>
-                <!-- <button @click="openModal" id="addPlantButton" class="py-2 px-4 bg-black text-white rounded-lg" >Add Plant</button> -->
             </header>
         </div>
 
@@ -97,6 +75,7 @@
             <div v-else>
                 <h3>Your harvests:</h3>
                 <div v-for="mine in myOwnPlants">
+                    <!-- my harvest plants -->
                     <div class="glass harvest-card">
                         <div class = "image-box">
                         <img class="cropPhoto" :src="mine.image" alt="Plant Image">
@@ -115,6 +94,7 @@
             </div>
             <div v-else>
                 <h3>Other harvests nearby:</h3>
+                <!-- harvested plants from people around you (using maps api) -->
                 <div v-for="near in nearbyPlants">
                     <div class="glass harvest-card">
                         <div class = "image-box">
@@ -136,8 +116,8 @@
     </div>
     <script>
         const nearbyPlants = JSON.parse(localStorage.getItem("nearbyPlants"));
-        // console.log(JSON.parse(localStorage.getItem("nearbyPlants")));
         const myOwnPlants = JSON.parse(localStorage.getItem("myOwnPlants"));
+
         // display name if user is logged in
         if (userData!=null && Object.keys(userData).length>0){
             document.getElementById("welcome").innerHTML += userData.last_name + "!";
@@ -148,19 +128,9 @@
                 return { 
                     isLogged: false,
                     nearbyPlants: nearbyPlants,
-                    myOwnPlants: myOwnPlants
-                      // key: value
+                    myOwnPlants: myOwnPlants,
                 };
-            }, // data
-            // computed: { 
-            //     derivedProperty() {
-            //         return false;
-            //     }  
-            // }, // computed
-            // created() { 
-            // },
-            // mounted() { 
-            // },
+            }, 
             methods: {
                 methodName() {
                 }
