@@ -448,7 +448,7 @@
                 }
             },
             props: ['event','userEvents'],
-            template: `<button v-on:click="learn()" style = "font-size:1rem;width:130px" class = "button" role = "button">Learn more</button>`,
+            template: `<button @click="learn" style = "font-size:1rem;width:130px" class = "button" role = "button">Learn more</button>`,
             
             methods: {
                 learn(){

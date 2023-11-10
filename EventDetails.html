@@ -79,7 +79,7 @@
         
     </header>
     
-    <div class="container">
+    <div class="container flex flex-col md:flex-row md:justify-between md:space-8">
         <div class="flex justify-center m-4">
             <div class="bg-color rounded-md p-4">
                 <img v-bind:src="event.image" class="object-cover h-48 w-full mb-4 rounded-md " alt="Event Image">
@@ -95,10 +95,15 @@
                 </p>
                 <br>
                 <p v-if="isSignedup" style="color:#4faa2e">You have signed up for this event</p>
-                <button v-if="isSignedup" onclick="window.location.replace('Events.html')" class="bg-red-500 text-white text-lg py-2 px-4 rounded-lg mt-4">Back</button>
+                <div class="flex justify-content: space-between;">
+                    <button onclick="window.location.replace('Events.html')" class="bg-red-500 text-white text-lg py-2 px-4 rounded-lg mt-4 w-28 h-10">Back</button>
+                    <span v-if="!isSignedup && !isOwnEvent" class="flex justify-center m-4">
+                        <button @click="displayPopup = true;isSignedup=true;joinEvent()" class="bg-blue-500 text-white text-lg py-2 px-4 rounded-lg w-28 h-10" >Sign Up</button>
+                    </span>
+                </div>
             </div>
         </div>
-        <div v-if="!isSignedup && !isOwnEvent" class="flex justify-center m-4">
+        <!-- <div v-if="!isSignedup && !isOwnEvent" class="flex justify-center m-4">
             <div class="bg-color shadow-md rounded-md p-4">
                 <h2 class="text-2xl font-bold mb-4">Sign up now!</h2>
                 <div class="flex items-center mb-4">
@@ -118,7 +123,7 @@
                     <button @click="displayPopup = true;isSignedup=true;joinEvent()" class="bg-blue-500 text-white text-lg py-2 px-4 rounded-lg">Sign Up</button>
                 </div>
             </div>
-        </div>
+        </div> -->
 
         <div v-if="isOwnEvent" class="bg-color flex justify-center m-4">
             <div class=" shadow-md rounded-md p-4">
@@ -135,6 +140,8 @@
                     </thead>
                     <tbody>
                         <tr v-for="(p, key, idx) in event.participants" :key="idx">
+                            {{event.participants}}
+                            {{event.name}}
                             <td class="border px-4 py-2" v-if="p != 'dummy'">{{idx+1}}</td>
                             <td class="border px-4 py-2" v-if="p != 'dummy'">{{p.name}}</td>
                             <td class="border px-4 py-2" v-if="p != 'dummy'">{{p.email}}</td>
@@ -144,7 +151,7 @@
                 </table>
             </div>
         </div>
-
+    </div>
         <div v-if="displayPopup" class="fixed top-0 left-0 h-screen w-screen flex items-center justify-center bg-black bg-opacity-50">
             <div class="modal-container p-8 rounded-lg shadow-lg text-center">
                 <h2 class="text-3xl font-bold mb-4">Congratulations!</h2>
@@ -154,11 +161,12 @@
                 </button>
             </div>
         </div>
-    </div>
+    <!-- </div> -->
 
     <script>
         if (userData !=null && Object.keys(userData).length >0) {
             document.getElementById("welcome").innerHTML += userData.last_name + "!";
+            // console.log(userData);
         }else{
             window.location.replace("index.html")
         }
@@ -185,6 +193,9 @@
                         this.event = JSON.parse(sessionStorage.getItem('event'))
                         this.userEvents = JSON.parse(sessionStorage.getItem('userEvents'))
                         this.isOwnEvent = this.checkIsOwnEvent(this.event)
+                        this.signUpName = userData.first_name + " " + userData.last_name;
+                        this.signUpEmail = userData.email;
+                        this.signUpPhone = userData.phoneNumber;
                         // console.log(this.userEvents)
                         if (!this.isOwnEvent){
                             // console.log(this.checkIsSignedup(this.event))
@@ -235,7 +246,6 @@
                         return false
                     },
                     joinEvent(){
-                        console.log(this.event.id)
                         joinEvent(this.event.id,this.signUpName,this.signUpEmail,this.signUpPhone)
                     }
                     
