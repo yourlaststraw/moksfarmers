@@ -75,8 +75,9 @@
         </div>
         
     </header>
-    <!-- This is the details of selected event -->
-    <div class="container flex flex-col md:flex-row md:justify-between md:space-8">
+     <!-- This is the details of selected event -->
+    
+    <div class="container flex flex-col lg:flex-row lg:justify-center lg:items-center md:space-8">
         <div class="flex justify-center m-4">
             <div class="bg-color rounded-md p-4">
                 <img v-bind:src="event.image" class="object-cover h-48 w-full mb-4 rounded-md " alt="Event Image">
@@ -99,7 +100,9 @@
                 </div>
             </div>
         </div>
+
 <!-- This is the participant list if the selected event is user's own event -->
+
         <div v-if="isOwnEvent" class="bg-color flex justify-center m-4">
             <div class=" shadow-md rounded-md p-4">
                 <h2 class="text-2xl font-bold mb-4">This is your event!</h2>
@@ -135,12 +138,10 @@
                 </button>
             </div>
         </div>
-    <!-- </div> -->
 
     <script>
         if (userData !=null && Object.keys(userData).length >0) {
             document.getElementById("welcome").innerHTML += userData.last_name + "!";
-            // console.log(userData);
         }else{
             window.location.replace("index.html")
         }
@@ -170,16 +171,13 @@
                         this.signUpName = userData.first_name + " " + userData.last_name;
                         this.signUpEmail = userData.email;
                         this.signUpPhone = userData.phoneNumber;
-                        // console.log(this.userEvents)
                         if (!this.isOwnEvent){
-                            // console.log(this.checkIsSignedup(this.event))
                             this.isSignedup = this.checkIsSignedup(this.event)
                         }
                         console.log(this.event)
                     }
                 },
                 mounted(){
-                    // console.log(this.userEvents)
                 },
                 methods: {
                     log(str){
