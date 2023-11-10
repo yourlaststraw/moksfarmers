@@ -1,6 +1,7 @@
 var image = '';
 
 function addEvent(){
+    // This function validates the form for event creation and posts the information to the database
     let url = dbUrlpt1 + '/events' + dbUrlpt2;
     let name = document.getElementById('name').value;
     let description = document.getElementById('description').value;

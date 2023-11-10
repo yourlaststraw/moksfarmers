@@ -118,12 +118,6 @@ async function joinEvent(eventId,name,email,phone) {
     }else{
         plist = {[localStorage.getItem('user')]: {name:name,email:email,phone:phone}}
     }
-    // let participants = response.data.participants;
-    // participants[session] = session;
-    // console.log(participants)
-    // let data = {
-    //     participants: participants
-    // };
     
     let data = {
         participants: plist
