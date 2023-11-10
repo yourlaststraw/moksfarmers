@@ -52,6 +52,7 @@ function createUser() {
     let firstName = document.getElementById('firstName').value;
     let lastName = document.getElementById('lastName').value;
     let email = document.getElementById('email').value;
+    let phoneNumber = document.getElementById('phoneNumber').value;
     let password = document.getElementById('password').value;
     let confirmPassword = document.getElementById('confirmPassword').value;
     let url = dbUrlpt1 + '/users' +  dbUrlpt2;
@@ -66,6 +67,9 @@ function createUser() {
     if (email == '' || !email.includes('@')) {
         output += `<span>Please enter your email address.</span><br>`;
     }
+    if (phoneNumber == '' || phoneNumber.length!=8 || (!(phoneNumber[0]== 8 || phoneNumber[0]==9))) {
+        output += `<span>Please enter your phone number correctly.</span><br>`;
+    }
     if (password == '') {
         output += `<span>Please enter a password.</span><br>`;
     }
@@ -79,16 +83,24 @@ function createUser() {
     else {
         axios.get(url)
         .then(response => {
-            let dbEmail, dbPass;
+            let dbEmail, dbPass, dbPhone;
             for (i in response.data) {
                 dbEmail = response.data[i].email;
                 dbPass = response.data[i].password;
+                dbPhone = response.data[i].phoneNumber;
 
                 if (dbEmail == email) {
-                    output = `<span>Email address already exists.</span><br>`;
+                    output = `<span>Email address already in use.</span><br>`;
                     document.getElementById('errors').innerHTML = output;
                     counter++;
                 }
+
+                else if (dbPhone == phoneNumber) {
+                    output = `<span>Phone Number already in use.</span><br>`;
+                    document.getElementById('errors').innerHTML = output;
+                    counter++;
+                }
+
                 
             }
 
@@ -98,6 +110,7 @@ function createUser() {
                     first_name: firstName,
                     last_name: lastName,
                     email: email,
+                    phoneNumber: phoneNumber,
                     password: encrypted,
                     user_type: 'common',
                     my_plants: {
