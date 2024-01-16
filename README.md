@@ -5,6 +5,8 @@ OR
 
 Click here to go into the website: https://moksfarmers.vercel.app/index.html
 
+Note: Gardening news on home page only works for free on localhost!!
+
 # Admin account login details
 Email: moksfarmers@gmail.com
 
