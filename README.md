@@ -3,18 +3,18 @@ Welcome to Mok's Farmers webpage, to start, Open index.html and click on the log
 
 Click here to go into the website: https://moksfarmers.vercel.app/index.html
 
-# admin account login details
+# Admin account login details
 email: moksfarmers@gmail.com
 password: WAD2
 
-# homepage design contribution 
+# Homepage design contribution 
 https://github.com/VineetKumar02/Parallax-Website 
 
-# icons for the home page
+# Icons for the home page
 https://www.istockphoto.com/vector/gardening-tools-and-plants-in-the-garden-gm1268196717-372195303 -- garden icon
 >>>>>>> 3114de13e6162fed79d67ce0dd8e640af8990d89
 
-# Buy page crop images
+# Crop images
 https://www.vecteezy.com/png/27130575-red-ripe-fleshy-tomato-digital-isolated-illustration-applicable-for-packaging-design-postcards-prints-textiles
 
 https://www.google.com/url?sa=i&url=https%3A%2F%2Fpngtree.com%2Fso%2Fcucumber-drawing&psig=AOvVaw138Y__NEwVKhcW0GZY2ZBW&ust=1697881648876000&source=images&cd=vfe&opi=89978449&ved=0CA8QjRxqFwoTCKis5Z2thIIDFQAAAAAdAAAAABAD
